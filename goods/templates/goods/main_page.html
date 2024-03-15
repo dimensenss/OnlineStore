@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load goods_tags %}
 
 {% block content %}
-    <h1>main page</h1>
+    {% for product in products_qs %}
+        {{ product.title }}
+        {{ product.price }}
+        <img src="{% get_media_prefix %}{{ product.preview }}" alt="">
+    {% endfor %}
 {% endblock content %}
+
+{% block paginator %}
+    {% show_paginator paginator page_obj %}
+{% endblock paginator %}
