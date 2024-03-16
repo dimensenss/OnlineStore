@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <!-- end nav line1 -->
-    
+
                     <!-- start nav line2 -->
                     <div class="nav_line2 d-flex flex-wrap align-items-center justify-content-between">
                         <div class="burger-menu d-flex align-items-center ms-5">
@@ -80,7 +80,7 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- end nav line2 -->
                 </nav>
@@ -88,15 +88,16 @@
             </header>
             <!-- end header -->
         {% endblock nav %}
-    
+
 
         {% include "includes/notifications.html" %}
-    
+
         {% block content %}
         {% endblock %}
 
 
-        {#    {% show_paginator paginator.page_range page_obj %}#}
+        {% block paginator %}
+        {% endblock %}
 
         {% block footer %}
             <footer class="py-5 bg-dark navbar-fixed-bottom">
@@ -127,8 +128,8 @@
 
             </footer>
         {% endblock footer %}
-    
-    
+
+
         <script src="https://kit.fontawesome.com/cf0855bc15.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
