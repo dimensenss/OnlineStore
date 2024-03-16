@@ -4,6 +4,7 @@ body{
     font-weight: 400;
     font-size: 16px;
     color: #FFF;
+    min-width: 320px;
 }
 
 a{
@@ -15,6 +16,9 @@ button{
 .header a {
     color: #FFF;
 }
+.header{
+    background-color: chocolate;
+}
 .nav_line1{
     height: 70px;
     background-color: #1D1D1D;
@@ -24,7 +28,7 @@ button{
     background: rgb(92,39,254);
     background: linear-gradient(90deg, rgba(92,39,254,1) 0%, rgba(193,101,221,1) 100%);
 }
-.search{
+.search-input{
     background-color: #D9D9D9;
     border-radius: 10px;
 }
@@ -32,7 +36,7 @@ button{
     height: 40px;
     line-height: 40px;
 }
-.search-input input, .search-bth button{
+.search-input input, #btn-search{
     border: 0px;
     background-color: transparent;
 }
@@ -40,7 +44,7 @@ button{
     color: #1D1D1D;
 }
 .brands{
-    background-color: blueviolet;
+    background-color: rgb(255, 0, 0);
 }
 .brand{
     height: 80px;
@@ -54,12 +58,13 @@ button{
     background-color: aqua;
 }
 
-.container{
+.container-fluid{
     background-color: greenyellow;
 }
+
 @media (max-width:1200px){
 .brand{
-    height: 70px;
+    height: 60px;
 }
 }
 @media (max-width:991px){
