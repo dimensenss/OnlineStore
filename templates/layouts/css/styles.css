@@ -13,7 +13,7 @@ a{
 button{
     
 }
-.header a {
+.header a, .footer a{
     color: #FFF;
 }
 .header{
@@ -43,25 +43,31 @@ button{
 .search-input input::placeholder{
     color: #1D1D1D;
 }
-.brands{
-    background-color: rgb(255, 0, 0);
-}
 .brand{
     height: 80px;
     background-color: rgba(0,0,0,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 15px;
 }
-.slider{
+/* .slider{
     background-color: aqua;
 }
-
+.brands{
+    background-color: rgb(255, 0, 0);
+}
 .container-fluid{
     background-color: greenyellow;
-}
+} */
 
+.footer{
+    background-color: #262626;
+}
+.footer-title{
+    font-size: 20px;
+    color: #CF2EFF;
+}
 @media (max-width:1200px){
 .brand{
     height: 60px;
