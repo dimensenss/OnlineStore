@@ -2,58 +2,74 @@ body{
     background-color: #1D1D1D;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
+    font-size: 16px;
     color: #FFF;
 }
+
 a{
     text-decoration: none;
+}
+button{
+    
 }
 .header a {
     color: #FFF;
 }
-.header{
-    font-size: 16px;
-}
 .nav_line1{
     height: 70px;
+    background-color: #1D1D1D;
 }
 .nav_line2{
     height: 60px;
     background: rgb(92,39,254);
     background: linear-gradient(90deg, rgba(92,39,254,1) 0%, rgba(193,101,221,1) 100%);
 }
+.search{
+    background-color: #D9D9D9;
+    border-radius: 10px;
+}
 .search-input, .search-input input{
-    width: 300px;
     height: 40px;
     line-height: 40px;
-    background-color: #D9D9D9;
-    border-radius: 10px 0px 0px 10px;
 }
-.search-input input{
+.search-input input, .search-bth button{
     border: 0px;
-}
-.search-bth button{
-    background-color: #D9D9D9;
-    border: 0px;
+    background-color: transparent;
 }
 .search-input input::placeholder{
     color: #1D1D1D;
 }
-.search-bth{
-    height: 40px;
-    width: 40px;
-    line-height: 40px;
-    background-color: #D9D9D9;
-    border-radius: 0px 10px 10px 0px;
+.brands{
+    background-color: blueviolet;
 }
 .brand{
+    height: 80px;
+    background-color: rgba(0,0,0,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;
-    width: 275px;
-    background-color: rgba(0,0,0,0.4);
+    padding: 10px;
 }
 .slider{
+    background-color: aqua;
 }
 
+.container{
+    background-color: greenyellow;
+}
+@media (max-width:1200px){
+.brand{
+    height: 70px;
+}
+}
+@media (max-width:991px){
+    .brand{
+        height: 50px;
+    }
+}
+@media (max-width:767px){
+    .brand{
+        height: 36px;
+    }
+}
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
