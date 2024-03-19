@@ -1,0 +1,129 @@
+{% load static %}
+<div class="row">
+    <h3 class="text-center mb-4">Мої замовлення</h3>
+    <!-- Разметка заказов -->
+    <div class="accordion" id="accordionExample">
+        {% for order in orders %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ order.id }}">
+                    <button class="accordion-button {% if order != orders.0 %}collapsed{% endif %}"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ order.id }}" aria-expanded="false"
+                            aria-controls="collapse{{ order.id }}"
+                            aria-controls="collapse{{ order.id }}"
+                            aria-expanded="{% if order == orders.0 %}true{% else %}false{% endif %}">
+                        <div class="d-flex flex-column">
+                            <small class="text-secondary">Замовлення № {{ order.id }} </small>
+                            <small class="text-secondary">Від {{ order.created_timestamp }}</small>
+                            {% if order.status != 'Скасовано' %}
+                                <strong class="text-success">{{ order.status }}</strong>
+                            {% else %}
+                                <strong class="text-danger">{{ order.status }}</strong>
+                            {% endif %}
+
+                        </div>
+
+                    </button>
+                </h2>
+                <div id="collapse{{ order.id }}"
+                     class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %} shadow p-3 mb-5"
+                     aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="order-tile__label">Інформація про замовлення</p>
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>{{ order.user }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>{{ order.user.last_name }}{{ order.user.first_name }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>{{ order.email }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>{{ order.phone_number }}</p>
+                                    </div>
+                                    <h2>Графік роботи:</h2>
+                                    <p>Пн-Пт: 08:00-19:00</p>
+                                    <p>Сб-Нд: 09:00-18:00</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="order-tile__label">Номер замовлення: {{ order.id }}</p>
+
+
+                                {% for item in order.orderitem_set.all %}
+
+                                    <dt class="order-tile__label">Товар</dt>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <a href="{% url 'goods:product' item.sneakers_slug %}"
+                                           class="order-tile__picture">
+                                            <img src="{% get_media_prefix %}{{ item.sneakers_first_image }}"
+                                                 alt="{{ item.product.title }}">
+                                        </a>
+                                        <a href="{% url 'goods:product' item.sneakers_slug %}"
+                                           class="a-blue">
+                                            {{ item.product.sneakers.title }}
+                                        </a>
+                                    </div>
+
+                                    <dl class="order-tile__options justify-content-between">
+                                        <div class="order-tile__option--left">
+                                            <dt class="order-tile__label">Ціна</dt>
+                                            <dd class="order-tile__digit">{{ item.price }}<span
+                                                    class=" currency">₴</span></dd>
+                                        </div>
+
+                                        <div class="order-tile__option order-tile__option--quantity">
+                                            <dt class="order-tile__label">Кількість</dt>
+                                            <dd class="order-tile__digit">{{ item.quantity }}</dd>
+                                        </div>
+                                        <div class="order-tile__option--right">
+                                            <dt class="order-tile__label">Сума</dt>
+                                            <dd class="order-tile__digit"><span
+                                                    class="order-tile__price">{{ item.products_price }}<span
+                                                    class=" currency">₴</span></span><!----></dd>
+                                        </div>
+                                    </dl>
+                                {% endfor %}
+                                <hr class="separator">
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="order-tile__label">Спосіб оплати</p>
+                                        {% if order.payment_on_get %}
+                                            <p>Готівкою/картою при отриманні</p>
+                                        {% else %}
+                                            <p>Оплата картою</p>
+                                        {% endif %}
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="order-tile__label">Статус</p>
+                                        <p>{{ order.status }}</p>
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="order-tile__label">Доставка</p>
+                                        {% if order.requires_delivery %}
+                                            <p>На адресу: {{ order.delivery_address }}</p>
+                                        {% else %}
+                                            <p>Самовивіз</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="order-tile__label">Разом:</p>
+                                        <h4>{{ order.orderitem_set.total_price }} ₴</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

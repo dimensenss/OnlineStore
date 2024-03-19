@@ -8,26 +8,26 @@ from goods.utils import DataMixin
 
 
 # Create your views here.
-def main_page(request):
-
-    first_image_subquery = ProductImage.objects.filter(
-        product_id=OuterRef('pk')
-    ).order_by('id').values('image')[:1]
-
-    products_qs = Product.objects.filter(is_published=True).annotate(
-        preview=Subquery(first_image_subquery)
-    )
-
-    mixin_context = DataMixin().get_user_context()
-
-    context = {
-        'title': 'Головна сторінка',
-        'products_qs': products_qs,
-    }
-
-    context = dict(list(context.items()) + list(mixin_context.items()))
-
-    return render(request, 'goods/main_page.html', context)
+# def main_page(request):
+#
+#     first_image_subquery = ProductImage.objects.filter(
+#         product_id=OuterRef('pk')
+#     ).order_by('id').values('image')[:1]
+#
+#     products_qs = Product.objects.filter(is_published=True).annotate(
+#         preview=Subquery(first_image_subquery)
+#     )
+#
+#     mixin_context = DataMixin().get_user_context()
+#
+#     context = {
+#         'title': 'Головна сторінка',
+#         'products_qs': products_qs,
+#     }
+#
+#     context = dict(list(context.items()) + list(mixin_context.items()))
+#
+#     return render(request, 'goods/main_page.html', context)
 
 
 class MainPage(DataMixin, ListView):

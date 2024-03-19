@@ -3,12 +3,16 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
+import users.views
 from OnlineStore import settings
 from goods.views import page_not_found
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('goods.urls', namespace='goods')),
+    path('user/', include('users.urls', namespace='user')),
+    path('accounts/', include('allauth.urls')),
+
 ]
 
 
