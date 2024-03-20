@@ -153,6 +153,8 @@ AUTHENTICATION_BACKENDS = [
     'users.authentication.EmailAuthBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 #
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = os.getenv('EMAIL_HOST')

@@ -5,6 +5,7 @@ from mptt.models import MPTTModel
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='Назва')
     sku = models.CharField(max_length=255, verbose_name='Артикул', blank=True, null=True, unique=True)
@@ -24,8 +25,8 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
+    def get_absolute_url(self):
+        return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
 
     def display_id(self):
         return self.sku if self.sku else f"{self.id:05}"
@@ -59,10 +60,10 @@ class Category(MPTTModel):
     def __str__(self):
         return ''.join([ancestor.title + ' > ' for ancestor in self.get_ancestors(include_self=True)])[:-3]
 
-    # def get_absolute_url(self):
-    #     # return '/category/'+'/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
-    #     slug = '/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
-    #     return reverse_lazy('goods:show_cat', kwargs={'cat_slug': slug})
+    def get_absolute_url(self):
+        # return '/category/'+'/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
+        slug = '/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
+        return reverse_lazy('goods:category', kwargs={'cat_slug': slug})
 
 
 class ProductImage(models.Model):
