@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% endblock header %}
+
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5">
+                <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
+                    <h2 class="text-center">{{ title }}</h2>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {% if form.image.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.image.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        {% if user.image %}
+                            <div class="text-center mb-3">
+                                <img src="{{ user.image.url }}" alt="Фото користувача" class="img-fluid rounded-3"
+                                     style="max-width: 150px">
+                            </div>
+                        {% endif %}
+
+                        <label for="file" class="feedback__label">
+                            <input type="file" id="file" class="form-control feedback__file" name="image"
+                                   value="{{ form.image.value }}"
+                                   accept="image/*" onchange="displayFileName()">
+
+                        </label>
+                        <p id="fileName"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Нік або email</label>
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.username.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" class="form-control" name="username" value="{{ form.username.value }}"
+                               id="id_username"
+                               placeholder="Введіть ваш нік">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_first_name" class="form-label">Ім'я</label>
+                        {% if form.first_name.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" class="form-control" name="first_name" value="{{ form.first_name.value }}"
+                               id="id_first_name"
+                               placeholder="Введіть ваше ім'я">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="id_last_name" class="form-label">Прізвище</label>
+                        {% if form.last_name.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" class="form-control" name="last_name" value="{{ form.last_name.value }}"
+                               id="id_last_name"
+                               placeholder="Введіть ваше прізвище">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Пошта</label>
+                        {% if form.email.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <div class="form-error-1 text-center">{{ form.email.errors }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="email" class="form-control" name="email" value="{{ form.email.value }}"
+                               id="id_email"
+                               placeholder="Введіть вашу пошту">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_phone_number" class="form-label">Номер телефону</label>
+                        {% if form.phone_number.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.phone_number.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" class="form-control" name="phone_number"
+                               value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
+                               id="id_phone_number"
+                               placeholder="Введіть ваш номер телефону">
+                    </div>
+
+
+
+                    <div class="d-flex justify-content-around align-items-baseline">
+                        <button type="submit" class="custom-btn btn-1 ">Зберегти</button>
+                        <div class="mb-3">
+                        <a href="{% url 'users:password_change' %}" class="a-blue">Змінити пароль</a>
+                    </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="col-md-7">
+                <div class="container cart-items-container">
+                    {% include 'carts/includes/included_cart.html' %}
+                </div>
+            </div>
+
+            {% if orders %}
+                 {% include 'includes/orders_list.html' %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
