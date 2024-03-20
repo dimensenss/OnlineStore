@@ -72,10 +72,17 @@ button{
 .brand{
     height: 60px;
 }
+
 }
 @media (max-width:991px){
+    body{
+        font-size: 14px;
+    }
     .brand{
         height: 50px;
+    }
+    .footer-title{
+        font-size: 16px;
     }
 }
 @media (max-width:767px){
