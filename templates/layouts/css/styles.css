@@ -103,9 +103,16 @@ button{
     font-size: 20px;
     color: #CF2EFF;
 }
-
-
-
+.carousel-indicators img{
+    max-width: 100px;
+    display: block;
+}
+.carousel-indicators button{
+    width: max-content!important;
+}
+.carousel-indicators{
+    position: unset;
+}
 @media (max-width:1200px){
 .brand{
     height: 60px;
