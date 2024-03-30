@@ -7,7 +7,7 @@ app_name = 'goods'
 urlpatterns = [
     path('', MainPage.as_view(), name='main'),
     path('product/<slug:product_slug>/', ProductView.as_view(), name='product'),
-    re_path(r'^(?P<cat_slug>[-\w/]+)/$', CategoriesPage.as_view(), name='category'),
+    re_path(r'^category/(?P<cat_slug>[-\w/]+)/$', CategoriesPage.as_view(), name='category'),
 
     # redirect social auth
     path('accounts/social/signup/', signup_redirect, name='signup_redirect'),

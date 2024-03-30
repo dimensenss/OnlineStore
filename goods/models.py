@@ -19,6 +19,7 @@ class Product(models.Model):
     cat = models.ForeignKey('Category', models.SET_DEFAULT, default=0, related_name='products',
                             verbose_name='Категорія')
 
+
     def calculate_sell_price(self):
         return self.discount if self.discount else self.price
 
@@ -62,7 +63,7 @@ class Category(MPTTModel):
 
     def get_absolute_url(self):
         # return '/category/'+'/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
-        slug = '/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
+        slug = '/category/'+'/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
         return reverse_lazy('goods:category', kwargs={'cat_slug': slug})
 
 
