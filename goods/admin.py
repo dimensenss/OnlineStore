@@ -19,6 +19,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create', )
 
+    fieldsets = [
+        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'brand', 'cat', 'is_published']}),
+        ('Додаткові атрибути', {'fields': ['extra_attributes'], 'classes': ['collapse']}),
+    ]
+
 
 class CategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'title', 'slug', 'count_products')
