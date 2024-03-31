@@ -64,4 +64,24 @@
 </header>
 <!-- end header -->
 
+<div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title " id="exampleModalLabel2">Кошик</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container cart-items-container">
+                    {% include 'carts/includes/included_cart.html' %}
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
