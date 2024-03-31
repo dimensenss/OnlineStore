@@ -19,53 +19,56 @@
             <!-- start nav -->
             <nav class="d-flex flex-wrap flex-column">
                 <!-- start nav line1 -->
-                <div class="nav_line1  row d-flex flex-wrap align-items-center justify-content-between">
-                    <a href="" class="col-6 header-logo d-flex align-items-center ">
-                        <img class="me-4" src="img/logo.svg" alt="logo">
-                        <div>
-                            gaming<br>shop
+                <div class="nav_line1 d-flex align-items-center">
+                    <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
+                       <a href="" class="col-6 header-logo d-flex align-items-center ">
+                            <img class="me-4" src="img/logo.svg" alt="logo">
+                            <div>
+                                gaming<br>shop
+                            </div>
+                        </a>
+                        <div class="d-flex flex-wrap col-6 justify-content-between">
+                            <a href="" >Про нас</a>
+                            <a href="" >Доставка та оплата</a>
+                            <a href="" >Контакти</a>
+                            <a href="" >Графік роботи</a>
                         </div>
-                    </a>
-                    <div class="d-flex flex-wrap col-6 justify-content-between">
-                        <a href="" >Про нас</a>
-                        <a href="" >Доставка та оплата</a>
-                        <a href="" >Контакти</a>
-                        <a href="" >Графік роботи</a>
-                    </div>
+                    </div> 
                 </div>
                 <!-- end nav line1 -->
 
                 <!-- start nav line2 -->
-                <div class="nav_line2  row d-flex flex-wrap align-items-center justify-content-between">
-                    <div class="burger-menu d-flex align-items-center col-6">
-                        <img class="me-4" src="img/burger.svg" alt="menu">
-                        <div class="text-uppercase">
-                            Каталог товарів
-                        </div>
-                    </div>
-                    <div class="d-flex col-5 align-items-center">
-                        <div class="search-input w-100">
-                            <div class="d-flex">
-                                <input type="text" placeholder="Пошук" class="col-10 col-xl-11 ms-2">
-                                <button id="btn-search" class="col-2 col-xl-1">
-                                    <img src="img/search-btn.svg" alt="search">
-                                </button>
+                <div class="nav_line2 d-flex align-items-center">
+                    <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="burger-menu d-flex align-items-center col-6">
+                            <img class="me-4" src="img/burger.svg" alt="menu">
+                            <div class="text-uppercase">
+                                Каталог товарів
                             </div>
                         </div>
-                        
-                    </div>
-                    <div class="d-flex col-1 ">
-                        <div class="d-flex justify-content-between col-12">
-                            <a href="" class="">
-                                <img src="img/user-profile.svg" alt="profile">
-                            </a>
-                            <a href="" class="">
-                                <img src="img/cart-fill.svg" alt="cart">                          
-                            </a>
+                        <div class="d-flex col-5 align-items-center">
+                            <div class="search-input w-100">
+                                <div class="d-flex">
+                                    <input type="text" placeholder="Пошук" class="col-10 col-xl-11 ms-2">
+                                    <button id="btn-search" class="col-2 col-xl-1">
+                                        <img src="img/search-btn.svg" alt="search">
+                                    </button>
+                                </div>
+                            </div>
+                            
                         </div>
-                        
+                        <div class="d-flex col-1 ">
+                            <div class="d-flex justify-content-between col-12 ps-2">
+                                <a href="" class="">
+                                    <img src="img/user-profile.svg" alt="profile" class="img-fluid w-100">
+                                </a>
+                                <a href="" class="">
+                                    <img src="img/cart-fill.svg" alt="cart" class="img-fluid w-100">                          
+                                </a>
+                            </div>
+                            
+                        </div>
                     </div>
-                    
                 </div>
                 <!-- end nav line2 -->
             </nav>
@@ -75,6 +78,9 @@
 
         <!-- start content -->
         <main>
+            <div class="container">
+
+            
             <section id="selling-product" class="single-product pt-3">
                 <div class="row">
                       <div class="col-4 flex-column">
@@ -98,9 +104,10 @@
                               <button class="carousel-control-next" type="button" data-bs-target="#carousel-product" data-bs-slide="next">
                                 <img src="img/right-arrow.svg" alt="next">
                               </button>
+                              
                             </div>
 
-                            <div class="carousel-indicators d-flex justify-content-between col-12 mx-0">
+                            <div class="carousel-indicators d-flex justify-content-between col-12 m-0">
                                 <button type="button" data-bs-target="#carousel-product" data-bs-slide-to="0" class="active">
                                   <img src="img/item1.jpg" class="img-fluid w-100">
                                 </button>
@@ -108,11 +115,12 @@
                                   <img src="img/item2.jpg" class="img-fluid w-100">
                                 </button>
                                 <button type="button" data-bs-target="#carousel-product" data-bs-slide-to="2">
-                                  <img src="img/item3.jpg" class="img-fluid w-100">
-                                </button>
-                                <button type="button" data-bs-target="#carousel-product" data-bs-slide-to="3">
-                                  <img src="img/item4.jpg" class="img-fluid w-100">
-                                </button>
+                                    <img src="img/item3.jpg" class="img-fluid w-100">
+                                  </button>
+                                  <button type="button" data-bs-target="#carousel-product" data-bs-slide-to="3">
+                                    <img src="img/item4.jpg" class="img-fluid w-100">
+                                  </button>
+                                
                               </div>
                           </div>
             
@@ -122,12 +130,185 @@
                       </div>
                 </div>
             </section>
+            <div class="d-flex mt-4 row">
+                <div class="top-title mb-4 text-uppercase">
+                    Схожі товари
+                </div>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-between">
+                    <!-- card1 -->
+                    <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                        <div class="item-content">
+                            <div class="item-img">
+                                <img src="img/item1.jpg" class="img-fluid w-100" alt="">
+                            </div>
+                            <div class="item-name text-uppercase text-center mt-4">
+                                Some gaming headset with long name (Prodijital wireless JD-34q)
+                            </div>
+                            <div class="d-flex justify-content-between font-14px pt-4">
+                                <p>
+                                    Код: 13893
+                                </p>
+                                <p class="item-status">
+                                    в наявності
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <p class="price font-14px text-decoration-line-through">
+                                        12000 ₴
+                                    </p>
+                                    <p class="sale-price ">
+                                        9999 ₴
+                                    </p>
+                                </div>
+                                <button class="btn-add-to-cart">
+                                    До кошика
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </a>
+                    <!-- card2 -->
+                    <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                        <div class="item-content">
+                            <div class="item-img">
+                                <img src="img/item2.jpg" class="img-fluid w-100" alt="">
+                            </div>
+                            <div class="item-name text-uppercase text-center mt-4">
+                                Some gaming headset with long name (Prodijital wireless JD-34q)
+                            </div>
+                            <div class="d-flex justify-content-between font-14px pt-4">
+                                <p>
+                                    Код: 13893
+                                </p>
+                                <p class="item-status">
+                                    в наявності
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <p class="price font-14px text-decoration-line-through">
+                                        12000 ₴
+                                    </p>
+                                    <p class="sale-price ">
+                                        9999 ₴
+                                    </p>
+                                </div>
+                                <button class="btn-add-to-cart">
+                                    До кошика
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </a>
+                    <!-- card3 -->
+                    <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                        <div class="item-content">
+                            <div class="item-img">
+                                <img src="img/item3.jpg" class="img-fluid w-100" alt="">
+                            </div>
+                            <div class="item-name text-uppercase text-center mt-4">
+                                Some gaming headset with long name (Prodijital wireless JD-34q)
+                            </div>
+                            <div class="d-flex justify-content-between font-14px pt-4">
+                                <p>
+                                    Код: 13893
+                                </p>
+                                <p class="item-status">
+                                    в наявності
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <p class="price font-14px text-decoration-line-through">
+                                        12000 ₴
+                                    </p>
+                                    <p class="sale-price ">
+                                        9999 ₴
+                                    </p>
+                                </div>
+                                <button class="btn-add-to-cart">
+                                    До кошика
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </a>
+                    <!-- card4 -->
+                    <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                        <div class="item-content">
+                            <div class="item-img">
+                                <img src="img/item4.jpg" class="img-fluid w-100" alt="">
+                            </div>
+                            <div class="item-name text-uppercase text-center mt-4">
+                                Some gaming headset with long name (Prodijital wireless JD-34q)
+                            </div>
+                            <div class="d-flex justify-content-between font-14px pt-4">
+                                <p>
+                                    Код: 13893
+                                </p>
+                                <p class="item-status">
+                                    в наявності
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <p class="price font-14px text-decoration-line-through">
+                                        12000 ₴
+                                    </p>
+                                    <p class="sale-price ">
+                                        9999 ₴
+                                    </p>
+                                </div>
+                                <button class="btn-add-to-cart">
+                                    До кошика
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </a>
+                    <!-- card5 -->
+                    <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                        <div class="item-content">
+                            <div class="item-img">
+                                <img src="img/item4.jpg" class="img-fluid w-100" alt="">
+                            </div>
+                            <div class="item-name text-uppercase text-center mt-4">
+                                Some gaming headset with long name (Prodijital wireless JD-34q)
+                            </div>
+                            <div class="d-flex justify-content-between font-14px pt-4">
+                                <p>
+                                    Код: 13893
+                                </p>
+                                <p class="item-status">
+                                    в наявності
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <p class="price font-14px text-decoration-line-through">
+                                        12000 ₴
+                                    </p>
+                                    <p class="sale-price ">
+                                        9999 ₴
+                                    </p>
+                                </div>
+                                <button class="btn-add-to-cart">
+                                    До кошика
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
         </main>
         <!-- end content -->
         
         <!-- start footer -->
-        <footer class="footer d-flex mt-4 row">
-            <div class="d-flex flex-row my-5 justify-content-between">
+        <footer class="footer d-flex mt-4">
+            <div class="d-flex flex-row my-5 justify-content-between container-fluid container-xl">
                 <div class="">
                     <div class="footer-title mb-4 ">
                         Покупцям

@@ -23,7 +23,7 @@ button{
     background-color: chocolate;
 }
 .nav_line1{
-    height: 70px;
+    height: 50px;
     background-color: #000;
 }
 .nav_line2{
@@ -46,34 +46,19 @@ button{
 .search-input input::placeholder{
     color: #000;
 }
-.brand{
-    height: 80px;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-/* .slider{
-    background-color: aqua;
-}
-.brands{
-    background-color: rgb(255, 0, 0);
-}
-.container-fluid{
-    background-color: greenyellow;
-} */
 .top-title{
-    font-weight: bold;
     font-size: 24px;
 }
 .item{
     width: 300px;
     height: 500px;
     background-color: #000;
-    box-shadow: inset #CF2EFF 0px 0px 20px 0px;
+     /* box-shadow: inset #CF2EFF 0px 0px 20px 0px; */
     border: #CF2EFF solid 1px;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .item-content{
     width: 250px;
@@ -109,29 +94,52 @@ button{
 }
 .carousel-indicators button{
     width: max-content!important;
+    height: max-content!important;
 }
 .carousel-indicators{
     position: unset;
 }
+
 @media (max-width:1200px){
-.brand{
-    height: 60px;
-}
+
 
 }
 @media (max-width:991px){
     body{
         font-size: 14px;
     }
-    .brand{
-        height: 50px;
-    }
+    
     .footer-title{
         font-size: 16px;
     }
 }
-@media (max-width:767px){
-    .brand{
-        height: 36px;
+@media (min-width: 1400px) {
+    .carousel-cards-inner {
+      display: flex;
     }
-}
+    .carousel-cards-item {
+      margin-right: 0;
+      flex: 0 0 25%;
+      display: block;
+    }
+  }
+  @media (max-width: 1399px) {
+    .carousel-cards-inner {
+      display: flex;
+    }
+    .carousel-cards-item {
+      margin-right: 0;
+      flex: 0 0 33.3%;
+      display: block;
+    }
+  }
+  @media (max-width: 960px) {
+    .carousel-cards-inner {
+      display: flex;
+    }
+    .carousel-cards-item {
+      margin-right: 0;
+      flex: 0 0 50%;
+      display: block;
+    }
+  }
