@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #Project apps
     'goods.apps.GoodsConfig',
     'users.apps.UsersConfig',
+    'carts.apps.CartsConfig',
     'django_filters',
     'imagekit',
     'spurl',

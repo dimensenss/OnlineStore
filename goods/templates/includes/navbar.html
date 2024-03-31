@@ -1,0 +1,67 @@
+{% load static %}
+{% load carts_tags %}
+
+
+<!-- start header -->
+<header class="header sticky-top">
+    <!-- start nav -->
+    <nav class="d-flex flex-wrap flex-column">
+        <!-- start nav line1 -->
+        <div class="nav_line1 d-flex flex-wrap align-items-center justify-content-between me-5 ms-5">
+            <a href="{% url 'goods:main' %}" class="header-logo d-flex align-items-center ">
+                <img class="me-4" src="{% static 'img/logo.svg' %}" alt="logo">
+                <div>
+                    gaming<br>shop
+                </div>
+            </a>
+            <div class="d-flex flex-wrap">
+                <a href="" class="me-5">Про нас</a>
+                <a href="" class="me-5">Доставка та оплата</a>
+                <a href="" class="me-5">Контакти</a>
+                <a href="" class="">Графік роботи</a>
+            </div>
+        </div>
+        <!-- end nav line1 -->
+
+        <!-- start nav line2 -->
+        <div class="nav_line2 d-flex flex-wrap align-items-center justify-content-between">
+            <div class="burger-menu d-flex align-items-center ms-5">
+                <img class="me-4" src="{% static 'img/burger.svg' %}" alt="menu">
+                <div class="text-uppercase">
+                    Каталог товарів
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="d-flex me-4">
+                    <div class="search-input">
+                        <input type="text" placeholder="Пошук" class="ms-2">
+                    </div>
+                    <div class="search-bth">
+                        <button id="btn-search">
+                            <img src="{% static 'img/search-btn.svg' %}" alt="search">
+                        </button>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a href="" class=" me-4">
+                        <img src="{% static 'img/user-profile.svg' %}" alt="profile">
+                    </a>
+
+                    {% user_carts request as carts %}
+                    <a type="button" class="me-5"
+                        data-bs-toggle="modal"
+                        data-bs-target="#cart-modal">
+                        <img src="{% static 'img/cart-fill.svg' %}" alt="cart">
+                        <span class="badge bg-secondary text-white ms-1 rounded-pill goods-in-cart-count">{{ carts.total_quantity }}</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!-- end nav line2 -->
+    </nav>
+    <!-- end nav -->
+</header>
+<!-- end header -->
+
+
