@@ -1,368 +1,226 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load goods_tags %}
 
 {% block content %}
-    {{ product.title }}
+    <div class="container">
+        <section id="selling-product" class="single-product pt-3">
+            <div class="row">
+                <div class="col-4 flex-column">
+                    <div id="carousel-product" class="carousel slide col-12" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{ preview.image.url }}" class="d-block w-100" alt="">
+                            </div>
+                            {% for image in product.images.all|slice:"1:" %}
+                                <div class="carousel-item">
+                                    <img src="{{ image.image.url }}" class="d-block w-100" alt="">
+                                </div>
+                            {% endfor %}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-product"
+                                    data-bs-slide="prev">
+                                <img src="{% static 'img/left-arrow.svg' %}" alt="previous">
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-product"
+                                    data-bs-slide="next">
+                                <img src="{% static 'img/right-arrow.svg' %}" alt="next">
+                            </button>
+
+                        </div>
+
+                        <div class="carousel-indicators d-flex justify-content-between col-12 m-0">
+                            <button type="button" data-bs-target="#carousel-product"
+                                    data-bs-slide-to="0" class="active">
+                                <img src="{{ preview.image.url }}" class="img-fluid w-100">
+                            </button>
+
+                            {% for image in product.images.all|slice:"1:"%}
+                                <button type="button" data-bs-target="#carousel-product"
+                                        data-bs-slide-to="{{ forloop.counter }}">
+                                    <img src="{{ image.image.url }}" class="img-fluid w-100">
+                                </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-8">
+                    info
+                </div>
+            </div>
+        </section>
+        <div class="d-flex mt-4 row">
+            <div class="top-title mb-4 text-uppercase">
+                Схожі товари
+            </div>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-between">
+                <!-- card1 -->
+                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                    <div class="item-content">
+                        <div class="item-img">
+                            <img src="img/item1.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="item-name text-uppercase text-center mt-4">
+                            Some gaming headset with long name (Prodijital wireless JD-34q)
+                        </div>
+                        <div class="d-flex justify-content-between font-14px pt-4">
+                            <p>
+                                Код: 13893
+                            </p>
+                            <p class="item-status">
+                                в наявності
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="price font-14px text-decoration-line-through">
+                                    12000 ₴
+                                </p>
+                                <p class="sale-price ">
+                                    9999 ₴
+                                </p>
+                            </div>
+                            <button class="btn-add-to-cart">
+                                До кошика
+                            </button>
+                        </div>
+                    </div>
+
+                </a>
+                <!-- card2 -->
+                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                    <div class="item-content">
+                        <div class="item-img">
+                            <img src="img/item2.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="item-name text-uppercase text-center mt-4">
+                            Some gaming headset with long name (Prodijital wireless JD-34q)
+                        </div>
+                        <div class="d-flex justify-content-between font-14px pt-4">
+                            <p>
+                                Код: 13893
+                            </p>
+                            <p class="item-status">
+                                в наявності
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="price font-14px text-decoration-line-through">
+                                    12000 ₴
+                                </p>
+                                <p class="sale-price ">
+                                    9999 ₴
+                                </p>
+                            </div>
+                            <button class="btn-add-to-cart">
+                                До кошика
+                            </button>
+                        </div>
+                    </div>
+
+                </a>
+                <!-- card3 -->
+                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                    <div class="item-content">
+                        <div class="item-img">
+                            <img src="img/item3.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="item-name text-uppercase text-center mt-4">
+                            Some gaming headset with long name (Prodijital wireless JD-34q)
+                        </div>
+                        <div class="d-flex justify-content-between font-14px pt-4">
+                            <p>
+                                Код: 13893
+                            </p>
+                            <p class="item-status">
+                                в наявності
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="price font-14px text-decoration-line-through">
+                                    12000 ₴
+                                </p>
+                                <p class="sale-price ">
+                                    9999 ₴
+                                </p>
+                            </div>
+                            <button class="btn-add-to-cart">
+                                До кошика
+                            </button>
+                        </div>
+                    </div>
+
+                </a>
+                <!-- card4 -->
+                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                    <div class="item-content">
+                        <div class="item-img">
+                            <img src="img/item4.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="item-name text-uppercase text-center mt-4">
+                            Some gaming headset with long name (Prodijital wireless JD-34q)
+                        </div>
+                        <div class="d-flex justify-content-between font-14px pt-4">
+                            <p>
+                                Код: 13893
+                            </p>
+                            <p class="item-status">
+                                в наявності
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="price font-14px text-decoration-line-through">
+                                    12000 ₴
+                                </p>
+                                <p class="sale-price ">
+                                    9999 ₴
+                                </p>
+                            </div>
+                            <button class="btn-add-to-cart">
+                                До кошика
+                            </button>
+                        </div>
+                    </div>
+
+                </a>
+                <!-- card5 -->
+                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
+                    <div class="item-content">
+                        <div class="item-img">
+                            <img src="img/item4.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="item-name text-uppercase text-center mt-4">
+                            Some gaming headset with long name (Prodijital wireless JD-34q)
+                        </div>
+                        <div class="d-flex justify-content-between font-14px pt-4">
+                            <p>
+                                Код: 13893
+                            </p>
+                            <p class="item-status">
+                                в наявності
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="price font-14px text-decoration-line-through">
+                                    12000 ₴
+                                </p>
+                                <p class="sale-price ">
+                                    9999 ₴
+                                </p>
+                            </div>
+                            <button class="btn-add-to-cart">
+                                До кошика
+                            </button>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-{#{% load spurl %}#}
-{#{% load sneakers_tags %}#}
-{##}
-{##}
-{#<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>#}
-{#<link rel="stylesheet" href="{% static 'css/product_style.css' %}">#}
-{##}
-{#<section id="selling-product" class="my-2">#}
-{#    <div class="container">#}
-{#        <div class="row g-5">#}
-{#            <div class="col-lg-8">#}
-{#                <div class="row flex-column-reverse flex-lg-row">#}
-{#                    <div class="col-md-12 col-lg-2">#}
-{#                        <!-- product-thumbnail-slider -->#}
-{#                        {% get_photos post as query %}#}
-{#                        <div class="swiper product-thumbnail-slider">#}
-{#                            <div class="swiper-wrapper">#}
-{#                                {% for image in query %}#}
-{#                                    <div class="swiper-slide">#}
-{#                                        <img src="{{ image.image.url }}" alt="" class="thumb-image img-fluid">#}
-{#                                    </div>#}
-{#                                {% endfor %}#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <!-- / product-thumbnail-slider -->#}
-{#                    </div>#}
-{#                    <div class="col-md-12 col-lg-10">#}
-{#                        <!-- product-large-slider -->#}
-{#                        <div class="swiper product-large-slider">#}
-{#                            <div class="swiper-wrapper">#}
-{#                                {% for image in query %}#}
-{#                                <div class="swiper-slide">#}
-{#                                    <div class="image-zoom" data-scale="2.5"#}
-{#                                         data-image="{{ image.image.url }}"><img#}
-{#                                            src="{{ image.image.url }}" alt="product-large"></div>#}
-{#                                    </div>#}
-{#                                {% endfor %}#}
-{#                            </div>#}
-{#                            <div class="swiper-pagination"></div>#}
-{#                        </div>#}
-{#                        <!-- / product-large-slider -->#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-lg-4">#}
-{#                <div class="product-info">#}
-{#                    <div class="element-header">#}
-{#                        <h3 itemprop="name" class="display-6 fw-bold">{{ post.title }}</h3>#}
-{#                    </div>#}
-{#                    <div class="product-price pt-3 pb-3">#}
-{#                        {% if post.discount %}#}
-{#                            <span class="discount">{{ post.discount }} $</span>#}
-{#                            <span class="price">{{ post.price }} $</span>#}
-{#                            {% else %}#}
-{#                            <span class="usual-price">{{ post.price }} $</span>#}
-{#                        {% endif %}#}
-{##}
-{##}
-{#                    </div>#}
-{#                {% autoescape off %}#}
-{#                    <p>{{ post.content|truncatewords:24 }}#}
-{#                        {% if post.content|length > 128 %}#}
-{#                            <a type="button" class="a-blue" id="btnAdditionalContent">#}
-{#                                Детальний опис#}
-{#                            </a>#}
-{#                        {% endif %}#}
-{#                    </p>#}
-{#                {% endautoescape %}#}
-{##}
-{#                    <div class="cart-wrap padding-small">#}
-{#                        <div class="color-options product-select">#}
-{#                            <div class="color-toggle" data-option-index="0">#}
-{#                                <h5 class="widget-title text-decoration-underline pe-2">Color:</h5>#}
-{#                                <ul class="select-list list-unstyled d-flex">#}
-{#                                    <li class="select-item pe-3" data-val="Green" title="Green">#}
-{#                                        <a href="#">Green</a>#}
-{#                                    </li>#}
-{#                                    <li class="select-item pe-3" data-val="Orange" title="Orange">#}
-{#                                        <a href="#">Orange</a>#}
-{#                                    </li>#}
-{#                                    <li class="select-item pe-3" data-val="Red" title="Red">#}
-{#                                        <a href="#">Red</a>#}
-{#                                    </li>#}
-{#                                    <li class="select-item" data-val="Black" title="Black">#}
-{#                                        <a href="#">Black</a>#}
-{#                                    </li>#}
-{#                                </ul>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="swatch product-select" data-option-index="1">#}
-{#                            <h5 class="widget-title text-decoration-underline pe-2">Розміри:</h5>#}
-{#                            <select class="form-select" id='sizes-container' name='sizes'#}
-{#                                    aria-label="Пример выбора по умолчанию">#}
-{#                                <option selected></option>#}
-{#                                {% for variation in post.variations.all %}#}
-{#                                    {% if variation.quantity > 0 %}#}
-{#                                        <option value="{{ variation.size }}">#}
-{#                                            {{ variation.size }}#}
-{#                                        </option>#}
-{#                                    {% else %}#}
-{#                                        <option value="{{ variation.size }}" disabled>{{ variation.size }} Немає</option>#}
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-{#                            </select>#}
-{#                        </div>#}
-{#                        <div class="product-quantity py-2">#}
-{#                            <div class="stock-number text-dark">{{ post.variations.all.total_quantity }} в наявності</div>#}
-{#                            <div class="stock-number text-dark py-2">#}
-{#                                <a type="button" class="a-blue" id="btnSizesTable">#}
-{#                                    <i class="fa-solid fa-grip"></i>#}
-{#                                    Таблиця розмірів#}
-{#                                </a>#}
-{#                            </div>#}
-{#                            <div class="stock-button-wrap py-2">#}
-{#                                <!-- quantity-price -->#}
-{#                                <div class="qty-button d-flex flex-wrap">#}
-{#                                    <a href="{% url 'carts:cart_add' %}" class="btn button-buy a-light add-to-cart"#}
-{#                                        data-product-id = "{{ post.id }}"#}
-{#                                        data-is-order = "true">#}
-{#                                        {% csrf_token %}#}
-{#                                        Оформити замовлення#}
-{#                                    </a>#}
-{#                                    <a href="{% url 'carts:cart_add' %}" class="btn btn-secondary a-light add-to-cart"#}
-{#                                       data-product-id= {{ post.id }}>#}
-{#                                        {% csrf_token %}#}
-{#                                        До кошика#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="meta-product padding-small">#}
-{#                        <div class="meta-item d-flex align-items-baseline">#}
-{#                            <h5 class="widget-title text-decoration-underline pe-2">Артикул:</h5>#}
-{#                            <ul class="select-list list-unstyled d-flex">#}
-{#                                <li data-value="S" class="select-item">{{ post.display_id }}</li>#}
-{#                            </ul>#}
-{#                        </div>#}
-{#                        <div class="meta-item d-flex align-items-baseline">#}
-{#                            <h5 class="widget-title text-decoration-underline pe-2">Теги:</h5>#}
-{#                            {% if post.tags %}#}
-{#                                <ul class="select-list list-unstyled d-flex">#}
-{#                                    {% for tag in post.tags.all %}#}
-{#                                        <a class="a-dark"#}
-{#                                           href="{% spurl base='/search/' set_query='tags={{tag}}' %}">{{ tag }}#}
-{#                                            &nbsp</a>#}
-{#                                    {% endfor %}#}
-{#                                </ul>#}
-{#                            {% endif %}#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</section>#}
-{##}
-{#<section class="product-info-tabs">#}
-{#    <div class="container">#}
-{#        <div class="row">#}
-{#            <div class="tabs-listing">#}
-{#                <nav>#}
-{#                    <div class="nav nav-tabs d-flex flex-wrap justify-content-center" id="nav-tab" role="tablist">#}
-{#                        <button class="nav-link active fs-5" id="nav-additional-info-tab" data-bs-toggle="tab"#}
-{#                                data-bs-target="#nav-additional-info" type="button" role="tab" aria-controls="nav-additional-info"#}
-{#                                aria-selected="true"><span class="text-dark">Детальний опис</span>#}
-{#                        </button>#}
-{#                        <button class="nav-link text-dark fs-5" id="nav-information-tab" data-bs-toggle="tab"#}
-{#                                data-bs-target="#nav-information" type="button" role="tab"#}
-{#                                aria-controls="nav-information"#}
-{#                                aria-selected="false"><span class="text-dark">Таблиця розмірів</span>#}
-{#                        </button>#}
-{#                        <button class="nav-link text-dark fs-5" id="nav-review-tab" data-bs-toggle="tab"#}
-{#                                data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review"#}
-{#                                aria-selected="false"><span class="text-dark">Відгуки</span>#}
-{#                        </button>#}
-{#                    </div>#}
-{#                </nav>#}
-{#                <div class="tab-content" id="nav-tabContent">#}
-{#                    <div class="tab-pane fade show active padding-small" id="nav-additional-info" role="tabpanel"#}
-{#                         aria-labelledby="nav-additional-info-tab">#}
-{#                        <div id="additionalContent">#}
-{#                            {% autoescape off %}#}
-{#                            <p>{{ post.content }}</p>#}
-{#                            {% endautoescape %}#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="tab-pane fade padding-small" id="nav-information" role="tabpanel"#}
-{#                         aria-labelledby="nav-information-tab">#}
-{##}
-{#                        <div id="sizesTable">#}
-{#                            {% include 'includes/size_table.html' %}#}
-{#                        </div>#}
-{##}
-{#                    </div>#}
-{#                    <div class="tab-pane fade padding-small" id="nav-review" role="tabpanel"#}
-{#                         aria-labelledby="nav-review-tab">#}
-{#                        <div class="review-box d-flex flex-wrap">#}
-{#                            <div class="col-lg-6 d-flex flex-wrap">#}
-{#                                <div class="col-md-2 me-3 mb-3">#}
-{#                                    <div class="image-holder">#}
-{#                                        <img src="images/review-item1.jpg" alt="review" class="img-fluid">#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="col-md-8">#}
-{#                                    <div class="review-content">#}
-{#                                        <div class="rating-container d-flex align-items-center mb-3">#}
-{#                                            <div class="rating" data-rating="1" onclick="rate(1)">#}
-{#                                                <svg class="star-fill" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-fill"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="2" onclick="rate(1)">#}
-{#                                                <svg class="star-fill" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-fill"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="3" onclick="rate(1)">#}
-{#                                                <svg class="star-fill" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-fill"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="4" onclick="rate(1)">#}
-{#                                                <svg class="star-half" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-half"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="5" onclick="rate(1)">#}
-{#                                                <svg class="star-empty" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-empty"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                        <div class="review-header">#}
-{#                                            <span class="author-name">Mina Brown</span>#}
-{#                                            <span class="review-date">– 03/07/2023</span>#}
-{#                                        </div>#}
-{#                                        <p>Vitae tortor condimentum lacinia quis vel eros donec ac. Nam at lectus urna#}
-{#                                            duis convallis#}
-{#                                            convallis</p>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-lg-6 d-flex flex-wrap">#}
-{#                                <div class="col-md-2 me-3 mb-3">#}
-{#                                    <div class="image-holder">#}
-{#                                        <img src="images/review-item2.jpg" alt="review" class="img-fluid">#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="col-md-8">#}
-{#                                    <div class="review-content">#}
-{#                                        <div class="rating-container d-flex align-items-center mb-3">#}
-{#                                            <div class="rating" data-rating="1" onclick="rate(1)">#}
-{#                                                <svg class="star-fill" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-fill"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="2" onclick="rate(1)">#}
-{#                                                <svg class="star-fill" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-fill"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="3" onclick="rate(1)">#}
-{#                                                <svg class="star-fill" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-fill"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="4" onclick="rate(1)">#}
-{#                                                <svg class="star-half" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-half"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="5" onclick="rate(1)">#}
-{#                                                <svg class="star-empty" width="16" height="16">#}
-{#                                                    <use xlink:href="#star-empty"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                        <div class="review-header">#}
-{#                                            <span class="author-name">Jenny Rose</span>#}
-{#                                            <span class="review-date">– 03/06/2022</span>#}
-{#                                        </div>#}
-{#                                        <p>Vitae tortor condimentum lacinia quis vel eros donec ac. Nam at lectus urna#}
-{#                                            duis convallis#}
-{#                                            convallis</p>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="add-review mt-5">#}
-{#                            <h3>Add a review</h3>#}
-{#                            <p>Your email address will not be published. Required fields are marked *</p>#}
-{#                            <form id="form" class="form-group">#}
-{##}
-{#                                <div class="pb-3">#}
-{#                                    <div class="review-rating">#}
-{#                                        <span>Your rating *</span>#}
-{#                                        <div class="rating-container d-flex align-items-center">#}
-{#                                            <div class="rating" data-rating="1">#}
-{#                                                <svg width="24" height="24" class="text-primary">#}
-{#                                                    <use xlink:href="#star-solid"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="2">#}
-{#                                                <svg width="24" height="24" class="text-primary">#}
-{#                                                    <use xlink:href="#star-solid"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="3">#}
-{#                                                <svg width="24" height="24" class="text-primary">#}
-{#                                                    <use xlink:href="#star-solid"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="4">#}
-{#                                                <svg width="24" height="24" class="text-secondary">#}
-{#                                                    <use xlink:href="#star-solid"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <div class="rating" data-rating="5">#}
-{#                                                <svg width="24" height="24" class="text-secondary">#}
-{#                                                    <use xlink:href="#star-solid"></use>#}
-{#                                                </svg>#}
-{#                                            </div>#}
-{#                                            <span class="rating-count">(3.5)</span>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="pb-3">#}
-{#                                    <input type="file" class="form-control" data-text="Choose your file">#}
-{#                                </div>#}
-{#                                <div class="pb-3">#}
-{#                                    <label>Your Review *</label>#}
-{#                                    <textarea class="form-control" placeholder="Write your review here"></textarea>#}
-{#                                </div>#}
-{#                                <div class="pb-3">#}
-{#                                    <label>Your Name *</label>#}
-{#                                    <input type="text" name="name" placeholder="Write your name here"#}
-{#                                           class="form-control">#}
-{#                                </div>#}
-{#                                <div class="pb-3">#}
-{#                                    <label>Your Email *</label>#}
-{#                                    <input type="text" name="email" placeholder="Write your email here"#}
-{#                                           class="form-control">#}
-{#                                </div>#}
-{#                                <div class="pb-3">#}
-{#                                    <label>#}
-{#                                        <input type="checkbox" required="">#}
-{#                                        <span class="label-body">Save my name, email, and website in this browser for the next#}
-{#                        time.</span>#}
-{#                                    </label>#}
-{#                                </div>#}
-{#                                <button type="submit" name="submit"#}
-{#                                        class="btn btn-dark btn-large text-uppercase w-100">Submit#}
-{#                                </button>#}
-{#                            </form>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</section>#}
+

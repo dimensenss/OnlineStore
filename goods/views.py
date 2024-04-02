@@ -28,15 +28,15 @@ class ProductView(DataMixin, DetailView):
     context_object_name = 'product'
 
     def get_object(self, *args, **kwargs):
-        return Product.objects.get(slug=self.kwargs['product_slug'])
-
+        return Product.objects.prefetch_related('images').get(slug=self.kwargs['product_slug'])
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        mixin_context = self.get_user_context(title='Головна сторінка')
+        preview = self.object.images.first()
+        mixin_context = self.get_user_context(title='Головна сторінка', preview=preview)
         return dict(list(context.items()) + list(mixin_context.items()))
 
 
-class CategoriesPage(DataMixin, ListView):
+class CatalogPage(DataMixin, ListView):
     model = Product
     template_name = 'goods/main_page.html'
     context_object_name = 'products_qs'

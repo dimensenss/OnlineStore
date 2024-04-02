@@ -65,8 +65,11 @@ button{
 .item-content{
     width: 250px;
 }
-.item-status{
+.item-status-green{
     color: #00FF47;
+}
+.item-status-red{
+    color: #ff0000;
 }
 .font-14px{
     font-size: 14px;

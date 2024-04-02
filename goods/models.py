@@ -13,6 +13,7 @@ class Product(models.Model):
     content = models.TextField(blank=True, verbose_name='Контент')
     price = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Ціна')
     discount = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Ціна зі знижкою')
+    quantity = models.PositiveIntegerField(default=1, verbose_name='Кількість')
     brand = models.CharField(max_length=255, verbose_name='Бренд')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name="Час оновлення")
@@ -65,8 +66,8 @@ class Category(MPTTModel):
 
     def get_absolute_url(self):
         # return '/category/'+'/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
-        slug = '/category/'+'/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
-        return reverse_lazy('goods:category', kwargs={'cat_slug': slug})
+        slug = '/'.join([ancestor.slug for ancestor in self.get_ancestors(include_self=True)])
+        return reverse_lazy('goods:catalog', kwargs={'cat_slug': slug})
 
 
 class ProductImage(models.Model):

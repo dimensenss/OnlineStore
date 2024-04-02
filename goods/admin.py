@@ -20,7 +20,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'time_create', )
 
     fieldsets = [
-        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'brand', 'cat', 'is_published']}),
+        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'brand', 'cat', 'is_published']}),
         ('Додаткові атрибути', {'fields': ['extra_attributes'], 'classes': ['collapse']}),
     ]
 
