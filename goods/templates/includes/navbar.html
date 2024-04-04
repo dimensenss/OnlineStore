@@ -6,6 +6,7 @@
 <header class="header">
     <!-- start nav -->
     <nav class="d-flex flex-wrap flex-column">
+
         <!-- start nav line1 -->
         <div class="nav_line1 d-flex align-items-center">
             <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
@@ -29,10 +30,11 @@
         <div class="nav_line2 d-flex align-items-center">
             <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
                 <div class="burger-menu d-flex align-items-center col-6">
-                    <img class="me-4" src="{% static 'img/burger.svg' %}" alt="menu">
-                    <div class="text-uppercase">
-                        Каталог товарів
-                    </div>
+{#                    <img class="me-4" src="{% static 'img/burger.svg' %}" alt="menu">#}
+{#                    <div class="text-uppercase">#}
+{#                        Каталог товарів#}
+{#                    </div>#}
+                {% include 'includes/catalog.html' %}
                 </div>
                 <div class="d-flex col-5 align-items-center">
                     <div class="search-input w-100">
