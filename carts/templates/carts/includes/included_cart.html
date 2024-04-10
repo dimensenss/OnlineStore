@@ -14,15 +14,15 @@
                 <li class="list-group-item">
                     <div class="row text-center d-flex align-items-center">
                         <div class="col-md-2 col-sm-4 p-0">
-                            <a href="{% url 'goods:product' cart.sneakers_slug  %}">
-                                <img src="{% get_media_prefix %}{{ cart.sneakers_first_image }}"
-                                     alt="{{ cart.product.title }}" class="img-fluid">
+                            <a href="{% url 'goods:product' cart.product.slug  %}">
+                                <img src="{{ cart.product.load_preview }}"
+                                     alt="{{ cart.product_slug }}" class="img-fluid">
                             </a>
 
                         </div>
-                        <div class="col-md-2 col-sm-4 p-0 ">
-                            <small> Розмір: {{ cart.product.size }} </small>
-                        </div>
+{#                        <div class="col-md-2 col-sm-4 p-0 ">#}
+{#                            <small> Розмір: {{ cart.product.size }} </small>#}
+{#                        </div>#}
                         <div class="col-md-2 col-sm-4 p-0">
                             <div class="input-group ">
                             <span class="input-group-btn d-flex align-items-stretch">
@@ -42,7 +42,7 @@
                             </span>
                             </div>
                         </div>
-                        <div class="col-md-2 col-sm-4 p-0"><small>x {{ cart.product.sneakers.sell_price }} $</small>
+                        <div class="col-md-2 col-sm-4 p-0"><small>x {{ cart.product.calculate_sell_price }} $</small>
                         </div>
                         <div class="col-md-2 col-sm-4 p-0"><strong>{{ cart.product_price }} $</strong></div>
                         <div class="col-md-2 col-sm-4 p-0">
@@ -74,8 +74,9 @@
                     </div>
                     {% if carts and not order %}
                         <div class="d-flex align-items-center col justify-content-center ">
-                            <a class="btn btn-1 a-light text-center" href="{% url 'orders:create_order' %}"
+                            <a class="btn btn-1 a-light text-center" href="#"
                                role="button">До замовлення</a>
+{#                        {% url 'orders:create_order' %}#}
                         </div>
                     {% endif %}
                 </div>

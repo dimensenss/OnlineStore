@@ -34,7 +34,7 @@
                                 <img src="{{ preview.image.url }}" class="img-fluid w-100">
                             </button>
 
-                            {% for image in product.images.all|slice:"1:"%}
+                            {% for image in product.images.all|slice:"1:" %}
                                 <button type="button" data-bs-target="#carousel-product"
                                         data-bs-slide-to="{{ forloop.counter }}">
                                     <img src="{{ image.image.url }}" class="img-fluid w-100">
@@ -46,6 +46,11 @@
                 </div>
                 <div class="col-8">
                     info
+                    <a href="{% url 'carts:cart_add' %}" class="add-to-cart"
+                       data-product-id= {{ product.id }}>
+                        {% csrf_token %}
+                        До кошика
+                    </a>
                 </div>
             </div>
         </section>

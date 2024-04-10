@@ -21,6 +21,23 @@ class MainPage(DataMixin, ListView):
         mixin_context = self.get_user_context(title='Головна сторінка')
         return dict(list(context.items()) + list(mixin_context.items()))
 
+class Catalog(DataMixin, ListView):
+    model = Product
+    template_name = 'goods/main_page.html'
+    context_object_name = 'products_qs'
+    allow_empty = True
+    paginate_by = 4
+    #Подправить пагинатор
+
+    def get_queryset(self):
+        products_qs = self.get_products_with_previews(Product.objects.filter(is_published=True))
+        return products_qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        mixin_context = self.get_user_context(title='Каталог')
+        return dict(list(context.items()) + list(mixin_context.items()))
+
 
 class ProductView(DataMixin, DetailView):
     model = Product

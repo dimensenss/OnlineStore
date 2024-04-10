@@ -12,10 +12,9 @@ from goods.models import Product
 
 def cart_add(request):
     product_id = request.POST.get('product_id')
-    size = request.POST.get('size')
     is_order = request.POST.get('is_order')
 
-    product = SneakersVariations.objects.get(sneakers=product_id, size=size)
+    product = Product.objects.get(id=product_id)
 
     if request.user.is_authenticated:
         carts = Cart.objects.filter(user=request.user, product=product)

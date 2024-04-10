@@ -26,6 +26,9 @@ class Product(models.Model):
     def calculate_sell_price(self):
         return self.discount if self.discount else self.price
 
+    def load_preview(self):
+        return self.images.first().image.url
+
     def __str__(self):
         return self.title
 
