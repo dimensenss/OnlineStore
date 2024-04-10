@@ -1,7 +1,8 @@
+from dal import autocomplete
 from django.contrib import admin
 from django.db.models import Count
 from django_mptt_admin.admin import DjangoMpttAdmin
-
+from django import forms
 from goods.models import Product, Category, ProductImage, ProductAttribute
 
 
@@ -14,7 +15,19 @@ class ProductAttributeInline(admin.TabularInline):
     model = ProductAttribute
     extra = 0
 
+
+class ProductAdminForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+        widgets = {
+            'cat': autocomplete.ModelSelect2(url='category-autocomplete'),
+            'brand': autocomplete.ModelSelect2(url='brands-autocomplete')
+        }
+
+
 class ProductAdmin(admin.ModelAdmin):
+    form = ProductAdminForm
     inlines = [ProductAttributeInline, ProductImagesInline]
     list_display = ('id', 'title', 'time_create', 'is_published')
     list_display_links = ('id', 'title')
@@ -24,7 +37,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'time_create', )
 
     fieldsets = [
-        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'brand', 'cat', 'is_published']})
+        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'cat', 'brand', 'is_published']})
     ]
 
 

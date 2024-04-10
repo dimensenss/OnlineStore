@@ -1,10 +1,11 @@
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 import users.views
 from OnlineStore import settings
+from goods.utils import BrandsAutocomplete, CategoryAutocomplete
 from goods.views import page_not_found
 
 urlpatterns = [
@@ -13,6 +14,17 @@ urlpatterns = [
     path('user/', include('users.urls', namespace='user')),
     path('cart/', include('carts.urls', namespace='carts')),
     path('accounts/', include('allauth.urls')),
+
+    re_path(
+        r'^brands-autocomplete/$',
+        BrandsAutocomplete.as_view(),
+        name='brands-autocomplete',
+    ),
+    re_path(
+        r'^category-autocomplete/$',
+        CategoryAutocomplete.as_view(),
+        name='category-autocomplete',
+    ),
 
 ]
 

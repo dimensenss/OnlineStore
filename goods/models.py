@@ -14,7 +14,8 @@ class Product(models.Model):
     price = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Ціна')
     discount = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Ціна зі знижкою')
     quantity = models.PositiveIntegerField(default=1, verbose_name='Кількість')
-    brand = models.CharField(max_length=255, verbose_name='Бренд')
+    brand = models.ForeignKey('Brand', blank=True, null=True, on_delete=models.SET_NULL, related_name='brand',
+                              verbose_name='Бренд')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name="Час оновлення")
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано')
@@ -100,3 +101,14 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = 'Фотографія'
         verbose_name_plural = 'Фотографії'
+
+
+class Brand(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Назва бренду')
+
+    class Meta:
+        verbose_name = 'Бренд'
+        verbose_name_plural = 'Бренди'
+
+    def __str__(self):
+        return self.name

@@ -1,6 +1,7 @@
+from dal import autocomplete
 from django.db.models import OuterRef, Subquery, Count
 
-from goods.models import ProductImage, Category
+from goods.models import ProductImage, Category, Brand
 
 
 class DataMixin:
@@ -19,3 +20,22 @@ class DataMixin:
         )
         return qs
 
+
+class BrandsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Brand.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
+
+
+class CategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Category.objects.all()
+
+        if self.q:
+            qs = qs.filter(title__istartswith=self.q)
+
+        return qs
