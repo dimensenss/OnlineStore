@@ -46,6 +46,10 @@
                 </div>
                 <div class="col-8">
                     info
+                    {% for attr in product.attributes.all %}
+                        {{ attr.name }}
+                        {{ attr.value }}
+                    {% endfor %}
                     <a href="{% url 'carts:cart_add' %}" class="add-to-cart"
                        data-product-id= {{ product.id }}>
                         {% csrf_token %}

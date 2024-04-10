@@ -18,7 +18,6 @@ class Product(models.Model):
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name="Час оновлення")
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано')
-    extra_attributes = models.JSONField(default=dict, blank=True, verbose_name='Додаткові атрибуты')
     cat = models.ForeignKey('Category', models.SET_DEFAULT, default=0, related_name='products',
                             verbose_name='Категорія')
 
@@ -43,6 +42,22 @@ class Product(models.Model):
         verbose_name_plural = 'Товар'
         ordering = ['-time_create', 'title']
 
+class ProductAttributeQS(models.QuerySet):
+    ...
+
+class ProductAttribute(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='attributes')
+    name = models.CharField(blank=True, null=True, verbose_name='name')
+    value = models.CharField(max_length=100, blank=True, verbose_name='value')
+
+    class Meta:
+        verbose_name = 'Атрібут'
+        verbose_name_plural = 'Атрібути'
+
+    def __str__(self):
+        return self.name
+
+    objects = ProductAttributeQS.as_manager()
 
 class Category(MPTTModel):
     title = models.CharField(max_length=255, verbose_name='Назва категорії')

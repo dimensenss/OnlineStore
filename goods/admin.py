@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import Count
 from django_mptt_admin.admin import DjangoMpttAdmin
 
-from goods.models import Product, Category, ProductImage
+from goods.models import Product, Category, ProductImage, ProductAttribute
 
 
 class ProductImagesInline(admin.TabularInline):
@@ -10,8 +10,12 @@ class ProductImagesInline(admin.TabularInline):
     extra = 1
 
 
+class ProductAttributeInline(admin.TabularInline):
+    model = ProductAttribute
+    extra = 0
+
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductImagesInline]
+    inlines = [ProductAttributeInline, ProductImagesInline]
     list_display = ('id', 'title', 'time_create', 'is_published')
     list_display_links = ('id', 'title')
     prepopulated_fields = {'slug': ('title',)}
@@ -20,9 +24,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'time_create', )
 
     fieldsets = [
-        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'brand', 'cat', 'is_published']}),
-        ('Додаткові атрибути', {'fields': ['extra_attributes'], 'classes': ['collapse']}),
+        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'brand', 'cat', 'is_published']})
     ]
+
 
 
 class CategoryAdmin(DjangoMpttAdmin):
