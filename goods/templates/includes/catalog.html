@@ -35,10 +35,10 @@
                                 </ul>
                             {% endif %}
                         {% endwith %}
-
                     </li>
+
                 {% else %}
-                    <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
+                    <li><a href="{{ node.get_absolute_url }}">{{ node.title }}</a></li>
                 {% endif %}
             {% endrecursetree %}
 
