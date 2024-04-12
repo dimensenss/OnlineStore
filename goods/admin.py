@@ -1,13 +1,18 @@
 from dal import autocomplete
 from django.contrib import admin
 from django.db.models import Count
+from django.utils.safestring import mark_safe
 from django_mptt_admin.admin import DjangoMpttAdmin
 from django import forms
 from goods.models import Product, Category, ProductImage, ProductAttribute
 
 
+
+
+
 class ProductImagesInline(admin.TabularInline):
     model = ProductImage
+    readonly_fields = ['get_html_image']
     extra = 1
 
 
@@ -29,15 +34,16 @@ class ProductAdminForm(forms.ModelForm):
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
     inlines = [ProductAttributeInline, ProductImagesInline]
-    list_display = ('id', 'title', 'time_create', 'is_published')
+    list_display = ('id', 'get_html_image', 'title', 'cat', 'time_create', 'is_published')
     list_display_links = ('id', 'title')
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('id', 'title', 'content')
     list_editable = ('is_published',)
-    list_filter = ('is_published', 'time_create', )
-
+    list_filter = ('is_published', 'time_create',)
+    readonly_fields = ('get_html_image',)
     fieldsets = [
-        (None, {'fields': ['title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'cat', 'brand', 'is_published']})
+        (None, {'fields': ['get_html_image', 'title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'cat', 'brand',
+                           'is_published']})
     ]
 
 
@@ -56,7 +62,9 @@ class CategoryAdmin(DjangoMpttAdmin):
 
     def count_products(self, obj):
         return obj.product_count
+
     count_products.short_description = 'Кількість товарів'
+
 
 # Register your models and admin classes using the admin.site.register() method outside of class definitions
 admin.site.register(Product, ProductAdmin)
