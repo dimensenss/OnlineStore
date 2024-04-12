@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 from imagekit.models import ProcessedImageField
@@ -34,6 +35,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
+
+    def get_html_image(self):
+        return mark_safe(f"<img src = '{self.images.first().image.url}' width=100 >")
 
     def display_id(self):
         return self.sku if self.sku else f"{self.id:05}"
@@ -97,6 +101,9 @@ class ProductImage(models.Model):
         format='JPEG',
         options={'quality': 90}
     )
+
+    def get_html_image(self):
+        return mark_safe(f"<img src = '{self.image.url}' width=100 >")
 
     class Meta:
         verbose_name = 'Фотографія'

@@ -14,52 +14,10 @@
         {% endif %}
     </div>
 
-    <!-- start content -->
-
-    <!-- start slider -->
-    <div class="d-flex mt-4">
-        <div id="carousel-banner" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{% static 'img/Black-Friday_web_banner_16.jpg' %}" class="d-block w-100"
-                         alt="Black-Friday">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100" alt="Sales">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'img/slide3.jpg' %}" class="d-block w-100" alt="New brand Hator">
-                </div>
-            </div>
-{#            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-banner"#}
-{#                    data-bs-slide="prev">#}
-{#                <img src="{% static 'img/left-arrow.svg' %}" alt="previous">#}
-{#            </button>#}
-{#            <button class="carousel-control-next " type="button" data-bs-target="#carousel-banner"#}
-{#                    data-bs-slide="next">#}
-{#                <img src="{% static 'img/right-arrow.svg' %}" alt="next">#}
-{#            </button>#}
-        </div>
-    </div>
-    <!-- end slider -->
-
-    <!-- start top-products -->
-    <div class="d-flex mt-4 flex-column container-fluid container-xl">
-        <div class="top-title text-uppercase">
-            Кращі пропозиції
-        </div>
-        <div class="product-slider">
-            {% load_best_products as best_products %}
-            {% for product in best_products %}
-                <div class="slider-item">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for product in products_qs %}
+            {% if product.is_published %}
+                <div class="col mb-5">
                     <div class="item mt-4">
                         <div class="item-content">
                             <a href="{{ product.get_absolute_url }}">
@@ -115,12 +73,11 @@
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-        <!-- end top-products -->
-
-        <!-- end content -->
+            {% endif %}
+        {% endfor %}
     </div>
+
+
 
 {% endblock content %}
 
