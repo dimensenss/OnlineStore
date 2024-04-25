@@ -24,7 +24,7 @@ class RegisterUserForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        validate_email(email)
+        validate_email(self, email)
         return email
 
 
@@ -52,7 +52,7 @@ class ProfileUserForm(UserChangeForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        validate_email(email)
+        validate_email(self, email)
         return email
 
 

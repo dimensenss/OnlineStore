@@ -5,14 +5,6 @@
 
 
 {% block content %}
-    <div class="d-flex flex-row p-2">
-        <a href="{% url 'users:register' %}">Register</a>
-        <a href="{% url 'users:login' %}">Login</a>
-        <a href="{% url 'users:logout' %}">Logout</a>
-        {% if request.user.is_authenticated %}
-            Hi, {{ request.user.first_name }}
-        {% endif %}
-    </div>
 
     <!-- start content -->
 

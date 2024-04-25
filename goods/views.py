@@ -3,7 +3,7 @@ from django.http import HttpResponseNotFound, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from goods.models import Product, ProductImage, Category
-from goods.utils import DataMixin
+from goods.utils import DataMixin, ProductFilter
 
 
 class MainPage(DataMixin, ListView):
@@ -75,6 +75,26 @@ class CatalogPage(DataMixin, ListView):
         c_def = self.get_user_context(title=self.cat_slug)
         return dict(list(context.items()) + list(c_def.items()))
 
+
+class SearchPage(DataMixin, ListView):
+    model = Product
+    template_name = 'goods/catalog_page.html'
+    context_object_name = 'products_qs'
+    paginate_by = 4
+    allow_empty = True
+    pd_filter = None
+
+    def get_queryset(self):
+        products_qs = self.get_products_with_previews(Product.objects.filter(is_published=True))
+        self.pd_filter = ProductFilter(self.request.GET, queryset=products_qs)
+        products_qs = self.pd_filter.qs
+
+        return products_qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        mixin_context = self.get_user_context(title='Nexus')
+        return dict(list(context.items()) + list(mixin_context.items()))
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Сторінка не знайдена</h1>')
