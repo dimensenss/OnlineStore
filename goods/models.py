@@ -64,6 +64,7 @@ class ProductAttribute(models.Model):
 
     objects = ProductAttributeQS.as_manager()
 
+
 class Category(MPTTModel):
     title = models.CharField(max_length=255, verbose_name='Назва категорії')
     slug = models.SlugField(max_length=255, verbose_name='URL', unique=True)

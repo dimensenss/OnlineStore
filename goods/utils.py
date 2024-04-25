@@ -7,7 +7,6 @@ from goods.models import ProductImage, Category, Brand
 class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
-        context['cats'] = Category.objects.all().annotate(len=Count('products'))
         return context
 
     def get_products_with_previews(self, qs):

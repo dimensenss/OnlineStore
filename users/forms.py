@@ -37,23 +37,23 @@ class LoginUserForm(AuthenticationForm):
         fields = ('username', 'password')
 
 
-# class ProfileUserForm(UserChangeForm):
-#     image = forms.ImageField(required=False)
-#     first_name = forms.CharField()
-#     last_name = forms.CharField()
-#     username = forms.CharField()
-#     email = forms.EmailField()
-#     phone_number = forms.CharField(required=False)
-#     address = forms.CharField(required=False)
-#
-#     class Meta:
-#         model = User
-#         fields = ('image', 'first_name', 'last_name', 'username', 'email', 'phone_number', 'address')
-#
-#     def clean_email(self):
-#         email = self.cleaned_data['email']
-#         validate_email(email)
-#         return email
+class ProfileUserForm(UserChangeForm):
+    image = forms.ImageField(required=False)
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    username = forms.CharField()
+    email = forms.EmailField()
+    phone_number = forms.CharField(required=False)
+    address = forms.CharField(required=False)
+
+    class Meta:
+        model = User
+        fields = ('image', 'first_name', 'last_name', 'username', 'email', 'phone_number', 'address')
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        validate_email(email)
+        return email
 
 
 class UserPasswordChangeForm(PasswordChangeForm):
