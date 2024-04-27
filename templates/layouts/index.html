@@ -16,59 +16,41 @@
         <header class="header">
             <!-- start nav -->
             <nav class="d-flex flex-wrap flex-column">
-                <!-- start nav line1 -->
-                <div class="nav_line1 d-flex align-items-center">
+                <div class="nav d-flex align-items-center">
                     <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
-                       <a href="" class="col-6 header-logo d-flex align-items-center ">
-                            <img class="me-4" src="img/logo.svg" alt="logo">
-                            <div>
-                                gaming<br>shop
-                            </div>
-                        </a>
-                        <div class="d-flex flex-wrap col-6 justify-content-between">
-                            <a href="" >Про нас</a>
-                            <a href="" >Доставка та оплата</a>
-                            <a href="" >Контакти</a>
-                            <a href="" >Графік роботи</a>
-                        </div>
-                    </div> 
-                </div>
-                <!-- end nav line1 -->
-
-                <!-- start nav line2 -->
-                <div class="nav_line2 d-flex align-items-center">
-                    <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="burger-menu d-flex align-items-center col-6">
-                            <img class="me-4" src="img/burger.svg" alt="menu">
-                            <div class="text-uppercase">
-                                Каталог товарів
+                        <div class="d-flex col-10 col-sm-11 align-items-center justify-content-between">
+                            <a href="">
+                                <img src="img/NEXUS.svg" alt="" class="img-fluid w-100">
+                            </a>
+                            <a href="">
+                                Каталог ▼
+                            </a>
+                            <a href="" class="d-none d-sm-flex">
+                                Про нас
+                            </a>
+                            <a href="" class="d-none d-sm-flex">
+                                Доставка та оплата
+                            </a>
+                            <a href="" class="d-none d-sm-flex">
+                                Контакти
+                            </a>
+                            <div class="search-input d-flex col-4 col-sm-3 me-2 lg-me-4 px-2 justify-content-between align-items-center">
+                                <input class="col-10" type="text" name="search" id="input-search" placeholder="Пошук">
+                                <button class="col-2 d-flex justify-content-end" id="btn-search">
+                                    <img src="img/search-btn.svg" alt="search">
+                                </button>
                             </div>
                         </div>
-                        <div class="d-flex col-5 align-items-center">
-                            <div class="search-input w-100">
-                                <div class="d-flex">
-                                    <input type="text" placeholder="Пошук" class="col-10 col-xl-11 ms-2">
-                                    <button id="btn-search" class="col-2 col-xl-1">
-                                        <img src="img/search-btn.svg" alt="search">
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="d-flex col-1 ">
-                            <div class="d-flex justify-content-between col-12 ps-2">
-                                <a href="" class="">
-                                    <img src="img/user-profile.svg" alt="profile" class="img-fluid w-100">
-                                </a>
-                                <a href="" class="">
-                                    <img src="img/cart-fill.svg" alt="cart" class="img-fluid w-100">                          
-                                </a>
-                            </div>
-                            
+                        <div class="d-flex col-2 col-sm-1 justify-content-between">
+                            <a href="" class="">
+                                <img src="img/user-profile.svg" alt="profile" class="img-fluid w-100">
+                            </a>
+                            <a href="" class="">
+                                <img src="img/cart-fill.svg" alt="cart" class="img-fluid w-100">                          
+                            </a>
                         </div>
                     </div>
                 </div>
-                <!-- end nav line2 -->
             </nav>
             <!-- end nav -->
         </header>
@@ -79,11 +61,6 @@
             <!-- start slider -->
             <div class="d-flex mt-4">
                 <div id="carousel-banner" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
                     <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="img/Black-Friday_web_banner_16.jpg" class="d-block w-100" alt="Black-Friday">
@@ -106,7 +83,7 @@
             <!-- end slider -->
 
             <!-- start top-products -->
-            <div class="d-flex mt-4 flex-column container-fluid container-xl">
+            <!-- <div class="d-flex mt-4 flex-column container-fluid container-xl">
                 <div class="top-title text-uppercase">
                     Кращі пропозиції
                 </div>
@@ -314,66 +291,66 @@
                             
                         </a>
                     </div>
-            </div>
+            </div> -->
             <!-- end top-products -->
 
             <!-- end content -->
         </main>
         <!-- start footer -->
         <footer class="footer d-flex mt-4">
-            <div class="d-flex flex-row my-5 justify-content-between container-fluid container-xl">
-                <div class="">
-                    <div class="footer-title mb-4 ">
+            <div class="d-flex flex-sm-row flex-column my-3 justify-content-between container-fluid container-xl">
+                <div class="sm-mb-0 mb-2">
+                    <div class="footer-title  mb-2 mb-md-4">
                         Покупцям
                     </div>
                     <div class="footer-links d-flex flex-column mb-0">
-                        <a href="" class="mb-3">Доставка і оплата</a>
-                        <a href="" class="mb-3">Гарантія</a>
-                        <a href="" class="mb-3">Повернення</a>
+                        <a href="" class="mb-1 mb-md-3">Доставка і оплата</a>
+                        <a href="" class="mb-1 mb-md-3">Гарантія</a>
+                        <a href="" class="mb-1 mb-md-3">Повернення</a>
                         <a href="" class="">Ремонт</a>
                     </div>
                 </div>
-                <div class="">
-                    <div class="footer-title mb-4">
+                <div class="sm-mb-0 mb-2">
+                    <div class="footer-title  mb-2 mb-md-4">
                         Інформація
                     </div>
                     <div class="footer-links d-flex flex-column mb-0">
-                        <a href="" class="mb-3">Про нас</a>
-                        <a href="" class="mb-3">Наші магазини</a>
+                        <a href="" class="mb-1 mb-md-3">Про нас</a>
+                        <a href="" class="mb-1 mb-md-3">Наші магазини</a>
                         <a href="" class="">Бренди</a>
                     </div>
                 </div>
-                <div class="">
-                    <div class="footer-title mb-4">
+                <div class="sm-mb-0 mb-2">
+                    <div class="footer-title  mb-2 mb-md-4">
                         Графік роботи
                     </div>
                     <div class="footer-links d-flex flex-column mb-0">
-                        <div class="mb-3">Пн-Пт: 10:00-19:00</div>
-                        <div class="mb-3">Сб: 10:00-18:00</div>
+                        <div class="mb-1 mb-md-3">Пн-Пт: 10:00-19:00</div>
+                        <div class="mb-1 mb-md-3">Сб: 10:00-18:00</div>
                         <div class="">Нд: Вихідний</div>
                     </div>
                 </div>
-                <div class="">
-                    <div class="footer-title mb-4">
+                <div class="sm-mb-0 mb-2">
+                    <div class="footer-title  mb-2 mb-md-4">
                         Контакти
                     </div>
                     <div class="footer-links d-flex flex-column mb-0">
-                        <div class="mb-3">+380688935000</div>
+                        <div class=" mb-1 mb-md-3">+380688935000</div>
                         <div class="">+380686556000</div>
                     </div>
                 </div>
                 <div class="">
-                    <div class="footer-title mb-4">
+                    <div class="footer-title mb-0 mb-md-4">
                         Ми у соц. мережах
                     </div>
-                    <div class="footer-links d-flex flex-row justify-content-between mb-0">
-                        <a href="" class="network">
+                    <div class="footer-links d-flex flex-row sm-justify-content-between justify-content-start align-items-start">
+                        <a href="">
                             <img src="img/inst-ico.svg" alt="inst-link" class="image-fluid w-100">
                         </a>
-                        <a href="" class="network">
+                        <a href="">
                             <img src="img/youtube-ico.svg" alt="youtube-link" class="image-fluid w-100">
                         </a>
-                        <a href="" class="network">
+                        <a href="">
                             <img src="img/facebook-ico.svg" alt="facebook-link" class="image-fluid w-100">
                         </a>
                     </div>
