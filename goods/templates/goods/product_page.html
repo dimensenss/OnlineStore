@@ -34,7 +34,7 @@
                                 <img src="{{ preview.image.url }}" class="img-fluid w-100">
                             </button>
 
-                            {% for image in product.images.all|slice:"1:"%}
+                            {% for image in product.images.all|slice:"1:" %}
                                 <button type="button" data-bs-target="#carousel-product"
                                         data-bs-slide-to="{{ forloop.counter }}">
                                     <img src="{{ image.image.url }}" class="img-fluid w-100">
@@ -46,180 +46,84 @@
                 </div>
                 <div class="col-8">
                     info
+                    {% for attr in product.attributes.all %}
+                        {{ attr.name }}
+                        {{ attr.value }}
+                    {% endfor %}
+                    <a href="{% url 'carts:cart_add' %}" class="add-to-cart"
+                       data-product-id= {{ product.id }}>
+                        {% csrf_token %}
+                        До кошика
+                    </a>
                 </div>
             </div>
         </section>
-        <div class="d-flex mt-4 row">
-            <div class="top-title mb-4 text-uppercase">
+        <div class="d-flex mt-4 flex-column container-fluid container-xl">
+            <div class="top-title text-uppercase">
                 Схожі товари
             </div>
-            <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-between">
-                <!-- card1 -->
-                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
-                    <div class="item-content">
-                        <div class="item-img">
-                            <img src="img/item1.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="item-name text-uppercase text-center mt-4">
-                            Some gaming headset with long name (Prodijital wireless JD-34q)
-                        </div>
-                        <div class="d-flex justify-content-between font-14px pt-4">
-                            <p>
-                                Код: 13893
-                            </p>
-                            <p class="item-status">
-                                в наявності
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="price font-14px text-decoration-line-through">
-                                    12000 ₴
-                                </p>
-                                <p class="sale-price ">
-                                    9999 ₴
-                                </p>
+            <div class="similar-products-slider">
+                {% load_best_products as best_products %}
+                {% for product in best_products %}
+                    <div class="slider-item">
+                        <div class="item mt-4">
+                            <div class="item-content">
+                                <a href="{{ product.get_absolute_url }}">
+                                    <div class="item-img">
+                                        <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
+                                             alt="{{ product.title }}">
+                                    </div>
+
+                                    <div class="item-name text-uppercase text-center mt-4">
+                                        {{ product.title|truncatechars:24 }}
+                                    </div>
+                                </a>
+                                <div class="d-flex justify-content-between font-14px pt-4">
+                                    <p>
+                                        {{ product.display_id }}
+                                    </p>
+
+                                    {% if product.quantity > 0 %}
+                                        <p class="item-status-green">
+                                            в наявності
+                                        </p>
+                                    {% else %}
+                                        <p class="item-status-red">
+                                            немає в наявності
+                                        </p>
+                                    {% endif %}
+
+                                </div>
+                                <div class="d-flex justify-content-between mt-4">
+                                    <div class="d-flex flex-column justify-content-between">
+                                        {% if product.discount %}
+                                            <p class="price font-14px text-decoration-line-through">
+                                                {{ product.price }} ₴
+                                            </p>
+                                            <p class="sale-price ">
+                                                {{ product.discount }} ₴
+                                            </p>
+                                        {% else %}
+                                            <p class="sale-price ">
+                                                {{ product.price }} ₴
+                                            </p>
+                                        {% endif %}
+
+                                    </div>
+
+                                    <a href="{% url 'carts:cart_add' %}" class="add-to-cart"
+                                       data-product-id='{{ product.id }}'
+                                       data-is-order='false'>
+                                        {% csrf_token %}
+                                        До кошика
+                                    </a>
+                                </div>
                             </div>
-                            <button class="btn-add-to-cart">
-                                До кошика
-                            </button>
                         </div>
                     </div>
-
-                </a>
-                <!-- card2 -->
-                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
-                    <div class="item-content">
-                        <div class="item-img">
-                            <img src="img/item2.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="item-name text-uppercase text-center mt-4">
-                            Some gaming headset with long name (Prodijital wireless JD-34q)
-                        </div>
-                        <div class="d-flex justify-content-between font-14px pt-4">
-                            <p>
-                                Код: 13893
-                            </p>
-                            <p class="item-status">
-                                в наявності
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="price font-14px text-decoration-line-through">
-                                    12000 ₴
-                                </p>
-                                <p class="sale-price ">
-                                    9999 ₴
-                                </p>
-                            </div>
-                            <button class="btn-add-to-cart">
-                                До кошика
-                            </button>
-                        </div>
-                    </div>
-
-                </a>
-                <!-- card3 -->
-                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
-                    <div class="item-content">
-                        <div class="item-img">
-                            <img src="img/item3.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="item-name text-uppercase text-center mt-4">
-                            Some gaming headset with long name (Prodijital wireless JD-34q)
-                        </div>
-                        <div class="d-flex justify-content-between font-14px pt-4">
-                            <p>
-                                Код: 13893
-                            </p>
-                            <p class="item-status">
-                                в наявності
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="price font-14px text-decoration-line-through">
-                                    12000 ₴
-                                </p>
-                                <p class="sale-price ">
-                                    9999 ₴
-                                </p>
-                            </div>
-                            <button class="btn-add-to-cart">
-                                До кошика
-                            </button>
-                        </div>
-                    </div>
-
-                </a>
-                <!-- card4 -->
-                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
-                    <div class="item-content">
-                        <div class="item-img">
-                            <img src="img/item4.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="item-name text-uppercase text-center mt-4">
-                            Some gaming headset with long name (Prodijital wireless JD-34q)
-                        </div>
-                        <div class="d-flex justify-content-between font-14px pt-4">
-                            <p>
-                                Код: 13893
-                            </p>
-                            <p class="item-status">
-                                в наявності
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="price font-14px text-decoration-line-through">
-                                    12000 ₴
-                                </p>
-                                <p class="sale-price ">
-                                    9999 ₴
-                                </p>
-                            </div>
-                            <button class="btn-add-to-cart">
-                                До кошика
-                            </button>
-                        </div>
-                    </div>
-
-                </a>
-                <!-- card5 -->
-                <a href="" class="d-flex item flex-column align-items-center justify-content-center">
-                    <div class="item-content">
-                        <div class="item-img">
-                            <img src="img/item4.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="item-name text-uppercase text-center mt-4">
-                            Some gaming headset with long name (Prodijital wireless JD-34q)
-                        </div>
-                        <div class="d-flex justify-content-between font-14px pt-4">
-                            <p>
-                                Код: 13893
-                            </p>
-                            <p class="item-status">
-                                в наявності
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="price font-14px text-decoration-line-through">
-                                    12000 ₴
-                                </p>
-                                <p class="sale-price ">
-                                    9999 ₴
-                                </p>
-                            </div>
-                            <button class="btn-add-to-cart">
-                                До кошика
-                            </button>
-                        </div>
-                    </div>
-
-                </a>
+                {% endfor %}
             </div>
+            <!-- end top-products -->
         </div>
     </div>
 {% endblock %}

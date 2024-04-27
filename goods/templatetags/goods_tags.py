@@ -13,5 +13,5 @@ def show_paginator(context, paginator, page_obj):
 @register.simple_tag(name='load_best_products')
 def load_best_products():
     return DataMixin().get_products_with_previews(
-        Product.objects.filter(is_published=True, cat__title='Best').order_by('-price')
+        Product.objects.filter(is_published=True, cat__slug='best').order_by('-price')
     )

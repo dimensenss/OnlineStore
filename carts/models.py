@@ -12,6 +12,7 @@ class CartQuerySet(models.QuerySet):
             return sum(cart.quantity for cart in self)
         return 0
 
+
 class Cart(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank = True, null = True, verbose_name="Користувач")
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, verbose_name="Товар")

@@ -2,94 +2,110 @@
 {% load static %}
 {% load socialaccount %}
 
+
 {% block header %}
 {% endblock header %}
 
 
 {% block content %}
-<div class="container mt-3">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <form action="{% url 'user:register' %}" method="post">
-                <h2 class="text-center">{{title}}</h2>
-                {% csrf_token %}
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <form action="{% url 'user:register' %}" method="post">
+                    <h2 class="text-center">{{ title }}</h2>
+                    {% csrf_token %}
 
-            <div class="mb-3">
-{#                    <label for="id_username" class="form-label">Ім'я користувача</label>#}
-                    {% if form.username.errors %}
-                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                        <span class="form-error-1 text-center">{{ form.username.errors }}</span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="mb-3">
+                        {#                    <label for="id_username" class="form-label">Ім'я користувача</label>#}
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.username.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="hidden" class="form-control" name="username"
+                               value="{% if form.email.value %}{{ form.email.value }}{% endif %}" id="id_username"
+                               placeholder="Введіть ваше ім'я" required>
                     </div>
-                    {% endif %}
-                    <input type="hidden" class="form-control" name="username" value = "{% if form.email.value %}{{form.email.value}}{% endif %}" id="id_username"
-                           placeholder="Введіть ваше ім'я" required>
-              </div>
-                <div class="mb-3">
-                    <label for="id_email" class="form-label">Email</label>
-                    {% if form.email.errors %}
-                   <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                        <div class="form-error-1 text-center">{{ form.email.errors }}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Email</label>
+                        {% if form.email.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <div class="form-error-1 text-center">{{ form.email.errors }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="email" class="form-control" name="email"
+                               value="{% if form.email.value %}{{ form.email.value }}{% endif %}" id="id_email"
+                               placeholder="Введіть вашу пошту" required>
                     </div>
-                    {% endif %}
-                    <input type="email" class="form-control" name="email" value = "{% if form.email.value %}{{form.email.value}}{% endif %}" id="id_email"
-                           placeholder="Введіть вашу пошту" required>
-                </div>
 
-                <div class="mb-3">
-                    <label for="id_first_name" class="form-label">Ім'я</label>
-                    {% if form.first_name.errors %}
-                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                        <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="mb-3">
+                        <label for="id_first_name" class="form-label">Ім'я</label>
+                        {% if form.first_name.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" class="form-control" name="first_name"
+                               value="{% if form.first_name.value %} {{ form.first_name.value }} {% endif %}"
+                               id="id_first_name"
+                               placeholder="Введіть ваше ім'я">
                     </div>
-                    {% endif %}
-                    <input type="text" class="form-control" name="first_name" value = "{% if form.first_name.value %} {{form.first_name.value}} {% endif %}" id="id_first_name"
-                           placeholder="Введіть ваше ім'я">
-                </div>
 
 
-                <div class="mb-3">
-                <label for="id_last_name" class="form-label">Прізвище</label>
-                    {% if form.last_name.errors %}
-                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                        <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="mb-3">
+                        <label for="id_last_name" class="form-label">Прізвище</label>
+                        {% if form.last_name.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" class="form-control" name="last_name"
+                               value="{% if form.last_name.value %} {{ form.last_name.value }} {% endif %}"
+                               id="id_last_name"
+                               placeholder="Введіть ваше прізвище">
                     </div>
-                    {% endif %}
-                    <input type="text" class="form-control" name="last_name" value = "{% if form.last_name.value %} {{form.last_name.value}} {% endif %}" id="id_last_name"
-                           placeholder="Введіть ваше прізвище">
-                </div>
 
-                <div class="mb-3">
-                    <label for="id_password1" class="form-label">Введіть пароль</label>
-                    {% if form.password1.errors %}
-                   <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                        <div class="form-error-1 text-center">{{ form.password1.errors }}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label">Введіть пароль</label>
+                        {% if form.password1.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <div class="form-error-1 text-center">{{ form.password1.errors }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="password" class="form-control" name="password1" id="id_password1"
+                               placeholder="Введіть пароль" required>
                     </div>
-                    {% endif %}
-                    <input type="password" class="form-control" name="password1" id="id_password1"
-                           placeholder="Введіть пароль" required>
-                </div>
 
-                <div class="mb-3">
-                    <label for="id_password2" class="form-label">Повторіть пароль</label>
-                   {% if form.password2.errors %}
-                   <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                        <div class="form-error-1 text-center">{{ form.password2.errors }}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="mb-3">
+                        <label for="id_password2" class="form-label">Повторіть пароль</label>
+                        {% if form.password2.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <div class="form-error-1 text-center">{{ form.password2.errors }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <input type="password" class="form-control" name="password2" id="id_password2"
+                               placeholder="Повторіть пароль" required>
                     </div>
-                    {% endif %}
-                    <input type="password" class="form-control" name="password2" id="id_password2"
-                           placeholder="Повторіть пароль" required>
-                </div>
+<div class="d-flex justify-content-center pb-2">
+                <button type="submit" class="btn btn-outline-light">Регістрація</button>
+</div>
+                </form>
+                <div class="d-flex justify-content-center">
 
-
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="custom-btn btn-1 ">Регістрація</button>
-                    <button class="gsi-material-button">
+                    <a href="{% provider_login_url 'google' %}" class="gsi-material-button-contents a-dark">
+                        <button class="gsi-material-button">
                             <div class="gsi-material-button-state"></div>
                             <div class="gsi-material-button-content-wrapper">
                                 <div class="gsi-material-button-icon">
@@ -106,16 +122,12 @@
                                         <path fill="none" d="M0 0h48v48H0z"></path>
                                     </svg>
                                 </div>
-
+                                Створити акаунт з Google
                             </div>
                         </button>
+                    </a>
                 </div>
-
-
-            </form>
-        <a href="{% provider_login_url 'google' %}" class="gsi-material-button-contents a-dark">Увійти з Google</a>
-                                <span style="display: none;">Sign up with Google</span>
+            </div>
         </div>
     </div>
-</div>
 {% endblock content %}

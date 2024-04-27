@@ -442,7 +442,7 @@ Primary style
     border-bottom: none;
   }
   .no-touch .cd-dropdown-content > li:not(.has-children) a:hover {
-    color: #3f8654;
+    color: #2f84c4;
   }
   .cd-dropdown-content.move-out > li > a, .cd-dropdown-content.move-out > li > .cd-search, .cd-dropdown-content.move-out > .cd-divider {
     /* reset mobile style */

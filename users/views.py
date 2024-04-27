@@ -125,12 +125,15 @@
 #
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
+from django.views.generic import UpdateView
 
-from users.forms import UserPasswordChangeForm, RegisterUserForm, LoginUserForm
+from goods.utils import DataMixin
+from users.forms import UserPasswordChangeForm, RegisterUserForm, LoginUserForm, ProfileUserForm
 
 
 def register_user(request):
@@ -161,10 +164,8 @@ def register_user(request):
     else:
         form = RegisterUserForm()
 
-    context = {
-        'title': 'Регістрація',
-        'form': form
-    }
+    context = DataMixin().get_user_context(title='Регістрація', form=form)
+
     return render(request, 'users/register.html', context)
 
 
@@ -197,10 +198,7 @@ def login_user(request):
     else:
         form = LoginUserForm()
 
-    context = {
-        'title': 'Вхід',
-        'form': form
-    }
+    context = DataMixin().get_user_context(title='Вхід', form=form)
     return render(request, 'users/login.html', context)
 
 @login_required
@@ -220,3 +218,31 @@ def signup_redirect(request):
     messages.warning(request, 'Сталася помилка. Напевно користувач з таким email вже існує.')
     return redirect('goods:main')
 
+
+class ProfileUser(LoginRequiredMixin, DataMixin, UpdateView):
+    template_name = 'users/profile.html'
+    form_class = ProfileUserForm
+
+    def get_object(self, *args, **kwargs):
+        return self.request.user
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Дані збережено")
+        return redirect('user:profile')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        # orders = Order.objects.filter(user=self.request.user).prefetch_related(
+        #     Prefetch(
+        #         "orderitem_set",
+        #         queryset=OrderItem.objects.select_related("product__sneakers").annotate(
+        #             sneakers_slug=F("product__sneakers__slug"),
+        #             sneakers_first_image=F("product__sneakers__first_image__image")
+        #         ),
+        #     )
+        # ).order_by("-id")
+
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Профіль") #, orders=orders
+
+        return dict(list(context.items()) + list(c_def.items()))

@@ -2,6 +2,7 @@
 {% load static %}
 {% load socialaccount %}
 
+
 {% block header %}
 {% endblock header %}
 
@@ -33,13 +34,19 @@
                                placeholder="Введіть ваш пароль" required>
                     </div>
 
-                    <div class="d-flex justify-content-evenly">
-                        <button type="submit" class="custom-btn btn-1 ">Вхід</button>
+                    <div class="d-flex justify-content-evenly align-items-baseline">
+                        <button type="submit" class="btn btn-outline-light">Вхід</button>
                         <a href="{% url 'users:password_reset' %}" class="a-blue">Забули пароль?</a>
                     </div>
 
-                    <div class="d-flex justify-content-between mt-4 text-end">
-                        <button class="gsi-material-button">
+
+
+
+
+                </form>
+        <div class="d-flex justify-content-between mt-4 text-end">
+                <a href="{% provider_login_url 'google' %}" class="gsi-material-button-contents a-dark">
+                    <button class="gsi-material-button">
                             <div class="gsi-material-button-state"></div>
                             <div class="gsi-material-button-content-wrapper">
                                 <div class="gsi-material-button-icon">
@@ -56,16 +63,14 @@
                                         <path fill="none" d="M0 0h48v48H0z"></path>
                                     </svg>
                                 </div>
-
+                                Увійти з Google
                             </div>
-                        </button>
-                        <p>Нема акаунта? </br> <a class="a-blue" href="{% url 'users:register' %} ">Зареєструватися</a>
+                    </button>
+                </a>
+            <p>Нема акаунта? </br> <a class="a-blue" href="{% url 'users:register' %} ">Зареєструватися</a>
                         </p>
-                    </div>
-                </form>
-                <a href="{% provider_login_url 'google' %}" class="gsi-material-button-contents a-dark">Увійти з
-                    Google</a>
-                <span style="display: none;">Sign in with Google</span>
+        </div>
+
 
             </div>
         </div>
