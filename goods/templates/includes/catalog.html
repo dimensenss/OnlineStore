@@ -3,31 +3,26 @@
 <div class="cd-dropdown-wrapper">
     <a class="cd-dropdown-trigger" href="#0">Каталог</a>
     <nav class="cd-dropdown">
-        <h2>Title</h2>
+        <h2>Каталог</h2>
         <a href="#0" class="cd-close">Close</a>
         <ul class="cd-dropdown-content">
             {% recursetree cats %}
                 {% if not node.is_leaf_node %}
                     <li class="has-children">
-
                         <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
-
                         {% with all_children=node.get_children %}
                             {% if all_children %}
                                 <ul class="cd-secondary-dropdown is-hidden">
                                     <li class="go-back"><a href="#0">{{ node.title }}</a></li>
-                                    <li class="see-all"><a href="{{ node.get_absolute_url }}">Перейти до {{ node.title }}</a></li>
+                                    <li class="see-all"><a href="{{ node.get_absolute_url }}">Переглянути усі</a></li>
                                     {% for child in all_children %}
                                         <li class="has-children">
-                                            <a href="{{ child.get_absolute_url }}">{{ child.title }}</a>
+                                             <a class="d-flex d-lg-none" href="{{ child.get_absolute_url }}">{{ child.title }}</a>
                                             <ul class="is-hidden">
                                                 <li class="go-back"><a href="#0">{{ child.title }}</a></li>
-                                                <li class="see-all"><a
-                                                        href="{{ child.get_absolute_url }}">Перейти до {{ child.title }}</a></li>
+                                                <li class="parent-category"><a href="{{ child.get_absolute_url }}">{{ child.title }}</a></li>
                                                 {% for sub_child in child.get_children %}
-                                                    <li>
-                                                        <a href="{{ sub_child.get_absolute_url }}">{{ sub_child.title }}</a>
-                                                    </li>
+                                                    <li class="mt-2"><a href="{{ sub_child.get_absolute_url }}">{{ sub_child.title }}</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </li>
@@ -38,7 +33,7 @@
                     </li>
 
                 {% else %}
-                    <li><a href="{{ node.get_absolute_url }}">{{ node.title }}</a></li>
+                    <li class="main-cats"><a href="{{ node.get_absolute_url }}">{{ node.title }}</a></li>
                 {% endif %}
             {% endrecursetree %}
 
