@@ -115,7 +115,7 @@
                 </div>
             </div>
         </section>
-        <ul class="nav-pills d-flex flex-row mb-3" id="pills-tab" role="tablist">
+        <ul class="nav-pills d-flex flex-row" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
                 Опис та характеристики
@@ -136,9 +136,9 @@
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...1</div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...2</div>
           </div>
-          <div class="d-flex mt-4 flex-column container-fluid container-xl tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-            <div class="text-uppercase">
-                Схожі товари
+          <div class="d-flex flex-column container-fluid container-xl tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="col-6 product-tab-title my-4">
+                Товари, що можуть вас зацікавити
             </div>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
                 {% load_best_products as best_products %}
