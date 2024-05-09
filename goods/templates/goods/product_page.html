@@ -4,9 +4,18 @@
 
 {% block content %}
     <div class="container">
-        <section id="selling-product" class="single-product pt-3">
+        <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb" class="my-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><img src="{% static 'img/Nexus-gray.svg' %}" alt=""></a></li>
+                <li class="breadcrumb-item"><a href="#">Каталог</a></li>
+                <li class="breadcrumb-item"><a href="#">Ігрові миші</a></li>
+                <li class="breadcrumb-item"><a href="#">Ігрові миші HyperX</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Razer Basilisk V3 Pro Wireless</li>
+            </ol>
+        </nav>
+        <section id="selling-product" class="single-product">
             <div class="row">
-                <div class="col-4 flex-column">
+                <div class="col-5 flex-column">
                     <div id="carousel-product" class="carousel slide col-12" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -44,87 +53,152 @@
                     </div>
 
                 </div>
-                <div class="col-8">
-                    info
-                    {% for attr in product.attributes.all %}
-                        {{ attr.name }}
-                        {{ attr.value }}
-                    {% endfor %}
-                    <a href="{% url 'carts:cart_add' %}" class="add-to-cart"
-                       data-product-id= {{ product.id }}>
-                        {% csrf_token %}
-                        До кошика
-                    </a>
+                <div class="col-7 d-flex flex-column">
+                    <p class="product-title">
+                        {{ product.title }}
+                    </p>
+                    <p class="product-base-info">
+                        Код: {{ product.display_id }}
+                    </p>
+                    {% if product.quantity > 0 %}
+                        <p class="product-available">
+                            В наявності
+                        </p>
+                    {% else %}
+                        <p class="product-not-available">
+                            Немає в наявності
+                        </p>
+                    {% endif %}
+                    <hr/>
+                    <p class="product-base-info">
+                        Виробник: Razer
+                    </p>
+                    <p class="product-base-info">
+                        Гарантія: 12 міс.
+                    </p>
+                    <p class="product-base-info">
+                        Колір: white
+                    </p>
+                    <p class="product-base-info">
+                        Рейтинг:
+                    </p>
+                    <hr/>
+                    <div class="d-flex flex-row align-items-center mt-3">
+                        <div class="d-flex flex-column me-4">
+                        {% if product.discount %}
+                            <div class="d-flex flex-row">
+                                <p class="product-price-title me-3">
+                                    Ціна
+                                </p>
+                                <p class="product-price">
+                                    {{ product.price }} ₴
+                                </p>
+                            </div>
+                            <p class="product-discount mt-1">
+                                {{ product.discount }} ₴
+                            </p>
+                        {% else %}
+                            <p class="product-price-title me-2">
+                                Ціна
+                            </p>
+                            <p class="product-discount mt-1">
+                                {{ product.price }} ₴
+                            </p>
+                        {% endif %}
+                        </div>
+                        <a href="{% url 'carts:cart_add' %}" class="big-btn-add-to-cart"
+                           data-product-id= {{ product.id }}>
+                            {% csrf_token %}
+                            До кошика
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
-        <div class="d-flex mt-4 flex-column container-fluid container-xl">
-            <div class="top-title text-uppercase">
+        <ul class="nav-pills d-flex flex-row mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                Опис та характеристики
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                Відгуки
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                Схожі товари
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...1</div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...2</div>
+          </div>
+          <div class="d-flex mt-4 flex-column container-fluid container-xl tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="text-uppercase">
                 Схожі товари
             </div>
-            <div class="similar-products-slider">
+            <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
                 {% load_best_products as best_products %}
                 {% for product in best_products %}
-                    <div class="slider-item">
-                        <div class="item mt-4">
-                            <div class="item-content">
+                    <div class="col mb-4">
+                    <div class="card product-card">
+                        <div class="product-card-content d-flex flex-column justify-content-between">
+                            <div class="d-flex flex-column pt-4">
+                               <div class="product-card-id">
+                                    <p>Код: {{ product.display_id }}</p>
+                                </div>
                                 <a href="{{ product.get_absolute_url }}">
                                     <div class="item-img">
                                         <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
                                              alt="{{ product.title }}">
                                     </div>
-
-                                    <div class="item-name text-uppercase text-center mt-4">
-                                        {{ product.title|truncatechars:24 }}
+                                    <div class="product-card-name text-center mt-4">
+                                        {{ product.title|truncatechars:100 }}
                                     </div>
                                 </a>
-                                <div class="d-flex justify-content-between font-14px pt-4">
-                                    <p>
-                                        {{ product.display_id }}
-                                    </p>
-
-                                    {% if product.quantity > 0 %}
-                                        <p class="item-status-green">
-                                            в наявності
+                            </div>
+                            <div class="d-flex flex-column pb-4">
+                                <div class="d-flex flex-column justify-content-end mb-4">
+                                    {% if product.discount %}
+                                        <div class="d-flex flex-row align-items-end">
+                                            <p class="product-card-price-title me-2">
+                                                Ціна
+                                            </p>
+                                            <p class="product-card-price">
+                                                {{ product.price }} ₴
+                                            </p>
+                                        </div>
+                                        <p class="product-card-discount">
+                                            {{ product.discount }} ₴
                                         </p>
                                     {% else %}
-                                        <p class="item-status-red">
-                                            немає в наявності
+                                        <p class="product-card-price-title me-2">
+                                            Ціна
+                                        </p>
+                                        <p class="product-card-discount">
+                                            {{ product.price }} ₴
                                         </p>
                                     {% endif %}
-
                                 </div>
-                                <div class="d-flex justify-content-between mt-4">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        {% if product.discount %}
-                                            <p class="price font-14px text-decoration-line-through">
-                                                {{ product.price }} ₴
-                                            </p>
-                                            <p class="sale-price ">
-                                                {{ product.discount }} ₴
-                                            </p>
-                                        {% else %}
-                                            <p class="sale-price ">
-                                                {{ product.price }} ₴
-                                            </p>
-                                        {% endif %}
-
-                                    </div>
-
-                                    <a href="{% url 'carts:cart_add' %}" class="add-to-cart"
-                                       data-product-id='{{ product.id }}'
-                                       data-is-order='false'>
-                                        {% csrf_token %}
-                                        До кошика
-                                    </a>
-                                </div>
+                                <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart"
+                                   data-product-id= '{{ product.id }}'
+                                   data-is-order = 'false'>
+                                    {% csrf_token %}
+                                    До кошика
+                                </a>
                             </div>
                         </div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
             <!-- end top-products -->
         </div>
+        </div>
+
     </div>
 {% endblock %}
 
