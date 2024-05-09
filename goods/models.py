@@ -12,8 +12,8 @@ class Product(models.Model):
     sku = models.CharField(max_length=255, verbose_name='Артикул', blank=True, null=True, unique=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     content = models.TextField(blank=True, verbose_name='Контент')
-    price = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Ціна')
-    discount = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Ціна зі знижкою')
+    price = models.IntegerField(default=0, verbose_name='Ціна')
+    discount = models.IntegerField(default=0, verbose_name='Ціна зі знижкою')
     quantity = models.PositiveIntegerField(default=1, verbose_name='Кількість')
     brand = models.ForeignKey('Brand', blank=True, null=True, on_delete=models.SET_NULL, related_name='brand',
                               verbose_name='Бренд')
@@ -22,7 +22,6 @@ class Product(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано')
     cat = models.ForeignKey('Category', models.SET_DEFAULT, default=0, related_name='products',
                             verbose_name='Категорія')
-
 
     def calculate_sell_price(self):
         return self.discount if self.discount else self.price
