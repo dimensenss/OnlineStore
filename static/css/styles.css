@@ -8,7 +8,14 @@ body{
     color: #FFF;
     min-width: 320px;
 }
-
+.page{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.content{
+    flex: 1 1 auto;
+}
 a{
     text-decoration: none;
     color: white;
@@ -20,7 +27,7 @@ button{
     color: #FFF;
 }
 .nav{
-    height: 60px;
+    height: 55px;
     font-size: 16px;
     background: rgb(92,39,254);
     background: linear-gradient(90deg, rgba(92,39,254,1) 0%, rgba(193,101,221,1) 100%);

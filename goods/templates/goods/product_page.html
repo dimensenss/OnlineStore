@@ -3,7 +3,7 @@
 {% load goods_tags %}
 
 {% block content %}
-    <div class="container">
+    <div class="container content">
         <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb" class="my-3">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#"><img src="{% static 'img/Nexus-gray.svg' %}" alt=""></a></li>
@@ -115,39 +115,140 @@
                 </div>
             </div>
         </section>
-        <ul class="nav-pills d-flex flex-row" id="pills-tab" role="tablist">
+        <ul class="nav-pills d-flex flex-row my-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+            <button class="nav-link active" id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true">
                 Опис та характеристики
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+            <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews" type="button" role="tab" aria-controls="pills-reviews" aria-selected="false">
                 Відгуки
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+            <button class="nav-link" id="pills-similar-tab" data-bs-toggle="pill" data-bs-target="#pills-similar" type="button" role="tab" aria-controls="pills-similar" aria-selected="false">
                 Схожі товари
             </button>
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...1</div>
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...2</div>
+            <div class=" tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                <div class="d-flex flex-row row g-5">
+                    <div class="col-6">
+                        <div class="product-tab-title mb-4">
+                            Характеристики
+                        </div>
+                        <div class="d-flex flex-column">
+                          <div class="mb-3 product-tab-features d-flex justify-content-between">
+                              <p class="product-tab-features-prop">Виробник</p>
+                              <p class="product-tab-features-value">HyperX</p>
+                          </div>
+                          <div class="mb-3 product-tab-features d-flex justify-content-between">
+                              <p class="product-tab-features-prop">Підключення</p>
+                              <p class="product-tab-features-value">Бездротове</p>
+                          </div>
+                          <div class="mb-3 product-tab-features d-flex justify-content-between">
+                              <p class="product-tab-features-prop">Призначення</p>
+                              <p class="product-tab-features-value">Для настільних ПК, для ноутбуків</p>
+                          </div>
+                          <div class="mb-3 product-tab-features d-flex justify-content-between">
+                              <p class="product-tab-features-prop">Кількість клавіш</p>
+                              <p class="product-tab-features-value">6</p>
+                          </div>
+                          <div class="mb-3 product-tab-features d-flex justify-content-between">
+                              <p class="product-tab-features-prop">Інтерфейс</p>
+                              <p class="product-tab-features-value">Радіоканал</p>
+                          </div>
+                          <div class="mb-3 product-tab-features d-flex justify-content-between">
+                              <p class="product-tab-features-prop">Комплектація</p>
+                              <p class="product-tab-features-value">Мишка, USB-приймач</p>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="product-tab-title mb-4">
+                          Опис товару
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="product-tab-description">
+                                <h6 class="product-tab-description-title mb-2">
+                                    Час роботи батарей: 3 роки
+                                </h6>
+                                <p class="product-tab-description-text">
+                                    Трирічний термін служби батарей допоможе вам зберегти свій час, свої гроші і свою планету - адже необхідність в заміні елементів живлення практично відсутня. Світловий індикатор повідомляє про низький рівень заряду батарей.
+                                </p>
+                                <br/>
+                            </div>
+                            <div class="product-tab-description">
+                                <h6 class="product-tab-description-title mb-2">
+                                    Надшвидкісна прокрутка
+                                </h6>
+                                <p class="product-tab-description-text">
+                                    Прокручуйте документи і веб-сторінки одним рухом. Покрокова прокрутка забезпечує необхідну точність для переміщення за списками, слайдів і зображень.
+                                </p>
+                                <br/>
+                            </div>
+                            <div class="product-tab-description">
+                                <h6 class="product-tab-description-title mb-2">
+                                    Точне управління курсором
+                                </h6>
+                                <p class="product-tab-description-text">
+                                    Функція оптичного відстеження від Logitech забезпечує точне управління курсором (1000 точок на дюйм) і плавне пересування по більшості видів поверхностей.
+                                </p>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
           </div>
-          <div class="d-flex flex-column container-fluid container-xl tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-            <div class="col-6 product-tab-title my-4">
-                Товари, що можуть вас зацікавити
+            <div class=" tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+                <div class="d-flex flex-column">
+                    <a href="" class="btn-add-review">
+                        Залишити відгук
+                    </a>
+                    {# start review #}
+                    <div class="d-flex flex-column product-tab-review">
+                        <div class="d-flex flex-row">
+                            <div class="review-user-avatar me-4">
+                                <img src="{% static 'img/non-avatar.svg'%}" alt="">
+                            </div>
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="review-user-name">Михайло Соловей</p>
+                                <div class="review-user-rating">*****</div>
+                            </div>
+                        </div>
+                    </div>
+                    {# end review #}
+                    <div class="d-flex flex-column product-tab-review">
+                        <div class="d-flex flex-row">
+                            <div class="review-user-avatar me-4">
+                                <img src="{% static 'img/user-avatar1.jpg'%}" alt="">
+                            </div>
+                            <div class="d-flex flex-column justify-content-between">
+                                <p class="review-user-name">Джеся Мишківна</p>
+                                <div class="review-user-rating">*****</div>
+                            </div>
+                        </div>
+                        {# if text exist in review #}
+                        <p class="review-text mt-3">
+                            Мишка не дуже смачна, навушники краще смакують, але магазин не поганий).
+                        </p>
+                    </div>
+              </div>
             </div>
-            <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
+            <div class=" tab-pane fade" id="pills-similar" role="tabpanel" aria-labelledby="pills-similar-tab">
+                <div class="col-6 product-tab-title mb-4">
+                    Товари, що можуть вас зацікавити
+                </div>
+                <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
                 {% load_best_products as best_products %}
                 {% for product in best_products %}
                     <div class="col mb-4">
                     <div class="card product-card">
                         <div class="product-card-content d-flex flex-column justify-content-between">
                             <div class="d-flex flex-column pt-4">
-                               <div class="product-card-id">
+                                <div class="product-card-id">
                                     <p>Код: {{ product.display_id }}</p>
                                 </div>
                                 <a href="{{ product.get_absolute_url }}">
