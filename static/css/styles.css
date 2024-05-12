@@ -8,7 +8,14 @@ body{
     color: #FFF;
     min-width: 320px;
 }
-
+.page{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.main {
+    flex: 1 1 auto;
+}
 a{
     text-decoration: none;
     color: white;
@@ -20,7 +27,7 @@ button{
     color: #FFF;
 }
 .nav{
-    height: 60px;
+    height: 55px;
     font-size: 16px;
     background: rgb(92,39,254);
     background: linear-gradient(90deg, rgba(92,39,254,1) 0%, rgba(193,101,221,1) 100%);
@@ -50,7 +57,7 @@ button{
 }
 .product-card{
     height: 450px;
-    max-width: 305px;
+    /*max-width: 305px;*/
     background-color: #000;
     border: #CF2EFF solid 1px;
     border-radius: 0;
@@ -62,6 +69,7 @@ button{
 }
 .product-card:hover{
     box-shadow: #CF2EFF 0px 0px 20px 0px;
+    transition: box-shadow 0.3s;
 }
 .product-card-name{
     font-size: 16px;
@@ -69,6 +77,7 @@ button{
 }
 .product-card-name:hover{
     color: #CF2EFF;
+    transition: color 0.3s;
 }
 .product-card-content{
     width: 190px;
@@ -109,8 +118,50 @@ button{
 .small-btn-add-to-cart:hover{
     background-color: #FFFFFF;
     color: #CF2EFF;
+    transition: color 0.3s, background-color 0.3s;
 }
-
+.youtube-card{
+    background-color: #151515;
+}
+.card-youtube-title{
+    font-weight: 600;
+    font-size: 16px;
+}
+.card-youtube-text{
+    color: #8a8a8a;
+    font-size: 14px;
+}
+.card-youtube-img{
+    width: 100%;
+}
+.card-youtube-link:hover{
+    color: #ff1f42;
+    transition: color 0.3s;
+}
+.card-youtube-link:hover .card-youtube-img{
+    scale: 1.02;
+    transition: scale 0.3s;
+}
+.card-youtube-link:hover ~.card-youtube-text{
+    color: #b3b3b3;
+    transition: color 0.3s;
+}
+.btn-youtube-link{
+    width: 170px;
+    height: 34px;
+    color: #FFFFFF;
+    background-color: #FF0027;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 34px;
+}
+.btn-youtube-link:hover{
+    background-color: #FFFFFF;
+    color: #FF0027;
+    transition: color 0.3s, background-color 0.3s;
+}
 .footer{
     background-color: #1D1D1D;
 }

@@ -3,8 +3,7 @@
 
 <!--test commit-->
 <!-- start header -->
-<header class="header">
-
+<header class="header sticky-top">
     <!-- start nav -->
     <nav class="d-flex flex-wrap flex-column">
         <div class="nav d-flex align-items-center">
@@ -25,7 +24,7 @@
                     <a href="" class="d-none d-sm-flex">
                         Контакти
                     </a>
-                        <form method="get"  action="{% url 'goods:search' %}" class="search-input d-flex col-4 col-sm-3 me-2 lg-me-4 px-2 justify-content-between align-items-center">
+                      <form method="get"  action="{% url 'goods:search' %}" class="search-input d-flex col-4 col-sm-3 me-2 lg-me-4 px-2 justify-content-between align-items-center">
                             <input type="text" name="title_search" class="col-10"
                                    placeholder="Пошук товарів"
                                    value="{{ request.GET.title_search }}">
@@ -35,7 +34,7 @@
 
                         </form>
                 </div>
-            {% user_carts request as carts %}
+      {% user_carts request as carts %}
                 <div class="d-flex col-2 col-sm-1 justify-content-between">
                     <a href="" class="" data-bs-toggle="modal"
                        data-bs-target="#profile-modal">

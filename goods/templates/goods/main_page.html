@@ -9,7 +9,7 @@
     <!-- start content -->
 
     <!-- start slider -->
-    <div class="d-flex mt-4">
+    <div class="d-flex flex-column main">
         <div id="carousel-banner" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="0" class="active"
@@ -31,82 +31,127 @@
                     <img src="{% static 'img/slide3.jpg' %}" class="d-block w-100" alt="New brand Hator">
                 </div>
             </div>
-{#            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-banner"#}
-{#                    data-bs-slide="prev">#}
-{#                <img src="{% static 'img/left-arrow.svg' %}" alt="previous">#}
-{#            </button>#}
-{#            <button class="carousel-control-next " type="button" data-bs-target="#carousel-banner"#}
-{#                    data-bs-slide="next">#}
-{#                <img src="{% static 'img/right-arrow.svg' %}" alt="next">#}
-{#            </button>#}
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-banner"
+                    data-bs-slide="prev">
+                <img src="{% static 'img/left-arrow.svg' %}" alt="previous">
+            </button>
+            <button class="carousel-control-next " type="button" data-bs-target="#carousel-banner"
+                    data-bs-slide="next">
+                <img src="{% static 'img/right-arrow.svg' %}" alt="next">
+            </button>
         </div>
-    </div>
-    <!-- end slider -->
-
-    <!-- start top-products -->
-    <div class="d-flex mt-4 flex-column container-fluid container-xl">
-        <div class="block-title">
-            Кращі пропозиції
-        </div>
-        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
-            {% load_best_products as best_products %}
-            {% for product in best_products %}
-                <div class="col mt-4">
-                    <div class="card product-card">
-                        <div class="product-card-content d-flex flex-column justify-content-between">
-                            <div class="d-flex flex-column pt-4">
-                               <div class="product-card-id">
-                                    <p>Код: {{ product.display_id }}</p>
+        <!-- end slider -->
+        <!-- start top-products -->
+        <div class="d-flex flex-column container-fluid container-xl">
+            <div class="block-title my-4">
+                Кращі пропозиції
+            </div>
+            <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
+                {% load_best_products as best_products %}
+                {% for product in best_products %}
+                    <div class="col mb-4">
+                        <div class="card product-card">
+                            <div class="product-card-content d-flex flex-column justify-content-between">
+                                <div class="d-flex flex-column pt-4">
+                                   <div class="product-card-id">
+                                        <p>Код: {{ product.display_id }}</p>
+                                    </div>
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <div class="item-img">
+                                            <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
+                                                 alt="{{ product.title }}">
+                                        </div>
+                                        <div class="product-card-name text-center mt-4">
+                                            {{ product.title|truncatechars:100 }}
+                                        </div>
+                                    </a>
                                 </div>
-                                <a href="{{ product.get_absolute_url }}">
-                                    <div class="item-img">
-                                        <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
-                                             alt="{{ product.title }}">
-                                    </div>
-                                    <div class="product-card-name text-center mt-4">
-                                        {{ product.title|truncatechars:100 }}
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="d-flex flex-column pb-4">
-                                <div class="d-flex flex-column justify-content-end mb-4">
-                                    {% if product.discount %}
-                                        <div class="d-flex flex-row align-items-end">
+                                <div class="d-flex flex-column pb-4">
+                                    <div class="d-flex flex-column justify-content-end mb-4">
+                                        {% if product.discount %}
+                                            <div class="d-flex flex-row align-items-end">
+                                                <p class="product-card-price-title me-2">
+                                                    Ціна
+                                                </p>
+                                                <p class="product-card-price">
+                                                    {{ product.price }} ₴
+                                                </p>
+                                            </div>
+                                            <p class="product-card-discount">
+                                                {{ product.discount }} ₴
+                                            </p>
+                                        {% else %}
                                             <p class="product-card-price-title me-2">
                                                 Ціна
                                             </p>
-                                            <p class="product-card-price">
+                                            <p class="product-card-discount">
                                                 {{ product.price }} ₴
                                             </p>
-                                        </div>
-                                        <p class="product-card-discount">
-                                            {{ product.discount }} ₴
-                                        </p>
-                                    {% else %}
-                                        <p class="product-card-price-title me-2">
-                                            Ціна
-                                        </p>
-                                        <p class="product-card-discount">
-                                            {{ product.price }} ₴
-                                        </p>
-                                    {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
+                                       data-product-id= '{{ product.id }}'
+                                       data-is-order = 'false'>
+                                        {% csrf_token %}
+                                        До кошика
+                                    </a>
                                 </div>
-                                <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
-                                   data-product-id= '{{ product.id }}'
-                                   data-is-order = 'false'>
-                                    {% csrf_token %}
-                                    До кошика
-                                </a>
                             </div>
                         </div>
                     </div>
+                {% endfor %}
+            </div>
+            <!-- end top-products -->
+
+            <!-- start YouTube links -->
+            <div class="block-title mb-4">
+                Корисні відео
+            </div>
+            <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-3 row-cols-md-2 g-3">
+                <div class="col">
+                    <div class="card youtube-card">
+                        <a class="card-youtube-link" href="https://www.youtube.com" target="_blank">
+                            <img src="{% static 'img/youtube-preview1.jpg' %}" alt="..." class="card-youtube-img">
+                            <p class="card-youtube-title mt-3">Порівняння двох ТОП ігрових мишок від Hator та Razer.</p>
+                        </a>
+                        <p class="card-youtube-text mt-2">
+                         Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus. Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus. Etiam vitae nibh non leo aliquet aliquet.
+                        </p>
+                    </div>
                 </div>
-            {% endfor %}
+                <div class="col">
+                    <div class="card youtube-card">
+                        <a class="card-youtube-link" href="https://www.youtube.com" target="_blank">
+                            <img src="{% static 'img/youtube-preview2.jpg' %}" alt="..." class="card-youtube-img">
+                            <p class="card-youtube-title mt-3">Зручність двох моніторів під час геймінгу</p>
+                        </a>
+                        <p class="card-youtube-text mt-2">
+                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus.
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card youtube-card">
+                        <a class="card-youtube-link" href="https://www.youtube.com" target="_blank">
+                            <img src="{% static 'img/youtube-preview3.jpg' %}" alt="..." class="card-youtube-img">
+                            <p class="card-youtube-title mt-3">Огляд на нову модель безпровідних навушників Hator DJ940-98</p>
+                        </a>
+                        <p class="card-youtube-text mt-2">
+                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-4 d-flex justify-content-center">
+                <a href="https://www.youtube.com" target="_blank" class="btn-youtube-link">
+                    Більше відео
+                </a>
+            </div>
         </div>
-        <!-- end top-products -->
+            <!-- end YouTube links -->
+        </div>
 
         <!-- end content -->
-    </div>
 
 {% endblock content %}
 
