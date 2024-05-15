@@ -74,9 +74,8 @@
                     </div>
                     {% if carts and not order %}
                         <div class="d-flex align-items-center col justify-content-center ">
-                            <a class="btn btn-1 a-light text-center" href="#"
+                            <a class="btn btn-1 a-light text-center" href="{% url 'orders:create_order' %}"
                                role="button">До замовлення</a>
-{#                        {% url 'orders:create_order' %}#}
                         </div>
                     {% endif %}
                 </div>

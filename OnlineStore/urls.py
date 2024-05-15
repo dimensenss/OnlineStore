@@ -5,7 +5,7 @@ from django.urls import path, include, re_path
 
 import users.views
 from OnlineStore import settings
-from goods.utils import BrandsAutocomplete, CategoryAutocomplete
+from goods.utils import BrandsAutocomplete, CategoryAutocomplete, ProductsAutocomplete
 from goods.views import page_not_found
 
 urlpatterns = [
@@ -13,6 +13,8 @@ urlpatterns = [
     path('', include('goods.urls', namespace='goods')),
     path('user/', include('users.urls', namespace='user')),
     path('cart/', include('carts.urls', namespace='carts')),
+    path('orders/', include('orders.urls', namespace='orders')),
+
     path('accounts/', include('allauth.urls')),
 
     re_path(
@@ -24,6 +26,11 @@ urlpatterns = [
         r'^category-autocomplete/$',
         CategoryAutocomplete.as_view(),
         name='category-autocomplete',
+    ),
+    re_path(
+        r'^products-autocomplete/$',
+        ProductsAutocomplete.as_view(),
+        name='products-autocomplete',
     ),
 
 ]

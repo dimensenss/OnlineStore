@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load spurl %}
+
+{% load carts_tags %}
+
+
+{% block header %}
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+        <div class="container mb-3">
+            <h3 class="text-center mb-4">Обрані товари</h3>
+            <div class="container cart-items-container">
+                <!-- Разметка корзины -->
+                {% include 'carts/includes/included_cart.html' %}
+                <!-- Закончилась разметка корзины -->
+            </div>
+        </div>
+    </div>
+    <!-- Детали заказа -->
+    <div class="container mt-3">
+
+
+        <h3>Ваші контактні данні</h3>
+
+        <div class="d-flex justify-content-start align-items-center">
+         <span class="green-stroke">
+                Я новий покупець
+        </span>
+            <span class="green-stroke">
+                <a href="{% url 'users:login' %}?next=/orders/create-order/">Я постійний покупець</a>
+        </span>
+        </div>
+
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <form action="{% url 'orders:create_order' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <div class="col-md-6 mb-3">
+
+                                {% if form.first_name.errors %}
+                                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                        <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+
+                                <label for="id_first_name" class="form-label">Ім'я:</label>
+                                <input type="text" class="form-control" id="id_first_name"
+                                       value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                                       name="first_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {% if form.last_name.errors %}
+                                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                        <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+                                <label for="id_last_name" class="form-label">Прізвище:</label>
+                                <input type="text" class="form-control" id="id_last_name"
+                                       value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                                       name="last_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {% if form.email.errors %}
+                                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                        <span class="form-error-1 text-center">{{ form.email.errors }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+                                <label for="id_email" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="id_email"
+                                       value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+                                       name="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {% if form.phone_number.errors %}
+                                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                        <span class="form-error-1 text-center">{{ form.phone_number.errors }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+                                <label for="id_phone_number" class="form-label">Номер телефона:</label>
+                                <input type="text" class="form-control" id="id_phone_number" name="phone_number"
+                                       placeholder="098-765-43-21"
+                                       value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
+                                       required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="delivery" class="form-label">Спосіб доставлення: </label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requires_delivery"
+                                           id="id_requires_delivery" value="1" checked>
+                                    <label class="form-check-label" for="id_requires_delivery">Потрібна
+                                        доставка</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requires_delivery"
+                                           id="id_requires_delivery" value="0">
+                                    <label class="form-check-label" for="id_requires_delivery">Самовивіз</label>
+                                </div>
+                            </div>
+                            <div class="mb-3" id="deliveryAddressField">
+                                {% if form.delivery_address.errors %}
+                                    <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                        <span class="form-error-1 text-center">{{ form.delivery_address.errors }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+                                <label for="id_delivery_address" class="form-label">Адрес
+                                    доставки*:</label>
+                                <textarea class="form-control" id="id_delivery_address"
+                                          value="
+
+
+                                                  {% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
+                                          name="delivery_address" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Спосіб оплати: </label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_on_get"
+                                           id="id_payment_on_get" value="0" checked>
+                                    <label class="form-check-label" for="id_payment_on_get">Оплата
+                                        картою</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_on_get"
+                                           id="id_payment_on_get" value="1">
+                                    <label class="form-check-label" for="id_payment_on_get">Готівкою/картой
+                                        при отриманні</label>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-12 mb-3">
+                                <label for="requires_registration" class="form-label">Зареєструвати акаунт? </label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requires_registration"
+                                           id="id_requires_registration_1" value="1">
+                                    <label class="form-check-label" for="id_requires_registration_1">Так</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requires_registration"
+                                           id="id_requires_registration_0" value="0" checked>
+                                    <label class="form-check-label" for="id_requires_registration_0">Ні</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" id="passwordField">
+                                <div id="passwordFieldsContainer"
+                                     {% if form.requires_registration.value != '1' %}style="display: none;"{% endif %}>
+                                    <label for="id_password1" class="form-label">Введіть пароль</label>
+                                    {% if form.password1.errors %}
+                                        <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                            <div class="form-error-1 text-center">{{ form.password1.errors }}</div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                    {% endif %}
+                                    <input type="password" class="form-control" name="password1" id="id_password1"
+                                           placeholder="Введіть пароль">
+
+                                    <label for="id_password2" class="form-label">Повторіть пароль</label>
+                                    {% if form.password2.errors %}
+                                        <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                            <div class="form-error-1 text-center">{{ form.password2.errors }}</div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                    {% endif %}
+                                    <input type="password" class="form-control" name="password2" id="id_password2"
+                                           placeholder="Повторіть пароль">
+                                </div>
+                            </div>
+
+
+                            <script>
+                                // Скрипт для изменения видимости полей ввода пароля в зависимости от выбора
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var requiresRegistration = document.getElementsByName('requires_registration');
+                                    var passwordFieldsContainer = document.getElementById('passwordFieldsContainer');
+
+                                    for (var i = 0; i < requiresRegistration.length; i++) {
+                                        requiresRegistration[i].addEventListener('change', function () {
+                                            if (this.value === '1') {
+                                                passwordFieldsContainer.style.display = 'block';
+                                            } else {
+                                                passwordFieldsContainer.style.display = 'none';
+                                            }
+                                        });
+                                    }
+                                });
+                            </script>
+
+
+                        </div>
+
+                        <div class="col-md-4">
+                            {% user_carts request as carts %}
+
+                            {% if carts %}
+                                <div class="checkout-total">
+                                    <div class="row">
+                                        <h3>Разом</h3>
+                                    </div>
+
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p><strong>{{ carts.total_quantity }}</strong>&nbsp; товар(ів) на суму</p>
+                                        <p><strong>{{ carts.total_price }} $</strong></p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>Вартість доставки</p>
+                                        <p>За тарифом перевізника</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>До сплати</p>
+                                        <h4><strong>{{ carts.total_price }} $</strong>
+                                        </h4>
+                                    </div>
+
+
+                                    <div class="row justify-content-center m-2">
+                                        <button type="submit" class="button-success ">Підтвердити замовлення
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
