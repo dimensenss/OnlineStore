@@ -1,0 +1,12 @@
+{% load static %}
+
+<nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb" class="my-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'goods:main' %}"><img src="{% static 'img/Nexus-gray.svg' %}" alt=""></a></li>
+        {% for parent in category.get_ancestors %}
+                <li class="breadcrumb-item "><a  href="{{ parent.get_absolute_url }}">{{ parent.title }}</a></li>
+        {% endfor %}
+        <li class="breadcrumb-item active"><a href="{{ category.get_absolute_url }}">  {{ category.title }}</a><li>
+
+    </ol>
+</nav>
