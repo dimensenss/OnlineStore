@@ -258,4 +258,41 @@ $(document).ready(function ($) {
         const value = parseInt(select.value);
         highlightStars(value);
     });
+
+
+
+    $(document).on("click", ".btn-delete-review", function (e) {
+        e.preventDefault();
+
+        var review_id = $(this).data("review_id");
+        var product_id = $(this).data("product_id");
+        var view_url = $(this).data('view_url')
+
+        $.ajax({
+
+            type: "GET",
+            url: view_url,
+            data: {
+                review_id: review_id,
+                product_id: product_id,
+            },
+            success: function (data) {
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                setTimeout(function () {
+                    successMessage.fadeOut(400);
+                }, 1500);
+
+
+                // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+                var review_container = $(".review-container");
+                review_container.html(data.review_container);
+
+            },
+
+            error: function (data) {
+                console.log("Помилка при видаленні відгука");
+            },
+        });
+    });
 });

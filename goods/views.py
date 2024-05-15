@@ -1,11 +1,12 @@
 from django.db.models import F, OuterRef, Subquery
-from django.http import HttpResponseNotFound, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
 from goods.forms import ReviewForm
-from goods.models import Product, ProductImage, Category
+from goods.models import Product, ProductImage, Category, Review
 from goods.utils import DataMixin, ProductFilter
 
 
@@ -55,7 +56,8 @@ class ProductView(FormMixin, DataMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         preview = self.object.images.first()
-        mixin_context = self.get_user_context(title='Головна сторінка', preview=preview)
+        reviews_qs = self.object.reviews.all().order_by('-date')
+        mixin_context = self.get_user_context(title='Головна сторінка', preview=preview, reviews_qs=reviews_qs)
         context.update({'form': self.get_form()})
         return dict(list(context.items()) + list(mixin_context.items()))
 
@@ -130,3 +132,29 @@ class SearchPage(DataMixin, ListView):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Сторінка не знайдена</h1>')
+
+
+def remove_review(request):
+    if request.method == 'GET':
+        review_id = request.GET.get('review_id')
+        product_id = request.GET.get('product_id')
+
+        review = Review.objects.get(id=review_id)
+        review.delete()
+
+        reviews_qs = Review.objects.filter(product_id=product_id)
+        review_container_html = render_to_string(
+            'includes/review_block.html',{
+                'reviews_qs': reviews_qs
+            }, request=request
+        )
+
+        response_data = {
+            'message': "Відгук видалено",
+            'review_container' : review_container_html
+        }
+
+        return JsonResponse(response_data)
+
+
+

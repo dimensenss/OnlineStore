@@ -9,6 +9,7 @@ urlpatterns = [
     path('product/<slug:product_slug>/', ProductView.as_view(), name='product'),
     re_path(r'^catalog/(?P<cat_slug>[-\w/]+)/$', CatalogPage.as_view(), name='catalog'),
     path('search/', SearchPage.as_view(), name='search'),
+    path('remove_review/', remove_review, name='remove_review'),
 
     # redirect social auth
     path('accounts/social/signup/', signup_redirect, name='signup_redirect'),
