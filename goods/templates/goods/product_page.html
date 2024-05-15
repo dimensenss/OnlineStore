@@ -85,26 +85,26 @@
                     <hr/>
                     <div class="d-flex flex-row align-items-center mt-3">
                         <div class="d-flex flex-column me-4">
-                        {% if product.discount %}
-                            <div class="d-flex flex-row">
-                                <p class="product-price-title me-3">
+                            {% if product.discount %}
+                                <div class="d-flex flex-row">
+                                    <p class="product-price-title me-3">
+                                        Ціна
+                                    </p>
+                                    <p class="product-price">
+                                        {{ product.price }} ₴
+                                    </p>
+                                </div>
+                                <p class="product-discount mt-1">
+                                    {{ product.discount }} ₴
+                                </p>
+                            {% else %}
+                                <p class="product-price-title me-2">
                                     Ціна
                                 </p>
-                                <p class="product-price">
+                                <p class="product-discount mt-1">
                                     {{ product.price }} ₴
                                 </p>
-                            </div>
-                            <p class="product-discount mt-1">
-                                {{ product.discount }} ₴
-                            </p>
-                        {% else %}
-                            <p class="product-price-title me-2">
-                                Ціна
-                            </p>
-                            <p class="product-discount mt-1">
-                                {{ product.price }} ₴
-                            </p>
-                        {% endif %}
+                            {% endif %}
                         </div>
                         <a href="{% url 'carts:cart_add' %}" class="big-btn-add-to-cart add-to-cart"
                            data-product-id= {{ product.id }}>
@@ -116,59 +116,64 @@
             </div>
         </section>
         <ul class="nav-pills d-flex flex-row my-3" id="pills-tab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true">
-                Опис та характеристики
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews" type="button" role="tab" aria-controls="pills-reviews" aria-selected="false">
-                Відгуки
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-similar-tab" data-bs-toggle="pill" data-bs-target="#pills-similar" type="button" role="tab" aria-controls="pills-similar" aria-selected="false">
-                Схожі товари
-            </button>
-          </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-description-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description"
+                        aria-selected="true">
+                    Опис та характеристики
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews"
+                        type="button" role="tab" aria-controls="pills-reviews" aria-selected="false">
+                    Відгуки
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-similar-tab" data-bs-toggle="pill" data-bs-target="#pills-similar"
+                        type="button" role="tab" aria-controls="pills-similar" aria-selected="false">
+                    Схожі товари
+                </button>
+            </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-            <div class=" tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+            <div class=" tab-pane fade show active" id="pills-description" role="tabpanel"
+                 aria-labelledby="pills-description-tab">
                 <div class="d-flex flex-row row g-5">
                     <div class="col-6">
                         <div class="product-tab-title mb-4">
                             Характеристики
                         </div>
                         <div class="d-flex flex-column">
-                          <div class="mb-3 product-tab-features d-flex justify-content-between">
-                              <p class="product-tab-features-prop">Виробник</p>
-                              <p class="product-tab-features-value">HyperX</p>
-                          </div>
-                          <div class="mb-3 product-tab-features d-flex justify-content-between">
-                              <p class="product-tab-features-prop">Підключення</p>
-                              <p class="product-tab-features-value">Бездротове</p>
-                          </div>
-                          <div class="mb-3 product-tab-features d-flex justify-content-between">
-                              <p class="product-tab-features-prop">Призначення</p>
-                              <p class="product-tab-features-value">Для настільних ПК, для ноутбуків</p>
-                          </div>
-                          <div class="mb-3 product-tab-features d-flex justify-content-between">
-                              <p class="product-tab-features-prop">Кількість клавіш</p>
-                              <p class="product-tab-features-value">6</p>
-                          </div>
-                          <div class="mb-3 product-tab-features d-flex justify-content-between">
-                              <p class="product-tab-features-prop">Інтерфейс</p>
-                              <p class="product-tab-features-value">Радіоканал</p>
-                          </div>
-                          <div class="mb-3 product-tab-features d-flex justify-content-between">
-                              <p class="product-tab-features-prop">Комплектація</p>
-                              <p class="product-tab-features-value">Мишка, USB-приймач</p>
-                          </div>
-                      </div>
+                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <p class="product-tab-features-prop">Виробник</p>
+                                <p class="product-tab-features-value">HyperX</p>
+                            </div>
+                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <p class="product-tab-features-prop">Підключення</p>
+                                <p class="product-tab-features-value">Бездротове</p>
+                            </div>
+                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <p class="product-tab-features-prop">Призначення</p>
+                                <p class="product-tab-features-value">Для настільних ПК, для ноутбуків</p>
+                            </div>
+                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <p class="product-tab-features-prop">Кількість клавіш</p>
+                                <p class="product-tab-features-value">6</p>
+                            </div>
+                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <p class="product-tab-features-prop">Інтерфейс</p>
+                                <p class="product-tab-features-value">Радіоканал</p>
+                            </div>
+                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <p class="product-tab-features-prop">Комплектація</p>
+                                <p class="product-tab-features-value">Мишка, USB-приймач</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-6">
                         <div class="product-tab-title mb-4">
-                          Опис товару
+                            Опис товару
                         </div>
                         <div class="d-flex flex-column">
                             <div class="product-tab-description">
@@ -176,7 +181,9 @@
                                     Час роботи батарей: 3 роки
                                 </h6>
                                 <p class="product-tab-description-text">
-                                    Трирічний термін служби батарей допоможе вам зберегти свій час, свої гроші і свою планету - адже необхідність в заміні елементів живлення практично відсутня. Світловий індикатор повідомляє про низький рівень заряду батарей.
+                                    Трирічний термін служби батарей допоможе вам зберегти свій час, свої гроші і свою
+                                    планету - адже необхідність в заміні елементів живлення практично відсутня.
+                                    Світловий індикатор повідомляє про низький рівень заряду батарей.
                                 </p>
                                 <br/>
                             </div>
@@ -185,7 +192,8 @@
                                     Надшвидкісна прокрутка
                                 </h6>
                                 <p class="product-tab-description-text">
-                                    Прокручуйте документи і веб-сторінки одним рухом. Покрокова прокрутка забезпечує необхідну точність для переміщення за списками, слайдів і зображень.
+                                    Прокручуйте документи і веб-сторінки одним рухом. Покрокова прокрутка забезпечує
+                                    необхідну точність для переміщення за списками, слайдів і зображень.
                                 </p>
                                 <br/>
                             </div>
@@ -194,110 +202,152 @@
                                     Точне управління курсором
                                 </h6>
                                 <p class="product-tab-description-text">
-                                    Функція оптичного відстеження від Logitech забезпечує точне управління курсором (1000 точок на дюйм) і плавне пересування по більшості видів поверхностей.
+                                    Функція оптичного відстеження від Logitech забезпечує точне управління курсором
+                                    (1000 точок на дюйм) і плавне пересування по більшості видів поверхностей.
                                 </p>
                                 <br/>
                             </div>
                         </div>
                     </div>
                 </div>
-          </div>
+            </div>
             <div class=" tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
                 <div class="d-flex flex-column">
-                    <a href="" class="btn-add-review">
-                        Залишити відгук
-                    </a>
+                    {# write review #}
+                    {% if request.user.is_authenticated %}
+                        <div class="add-review mt-5">
+                            <div class="half-star-ratings" data-rateyo-half-star="true"></div>
+                            <form id="review_form" class="form-group" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <label for="id_text">Текст:</label>
+                                <textarea name="text" cols="40" rows="10" maxlength="500" required=""
+                                          id="id_text"></textarea>
+
+                                <label for="id_rate">Rate:</label>
+
+                                <div class="rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <select name="rate" required="" id="id_rate" style="display: none">
+                                    <option value="1">1 звезда</option>
+                                    <option value="2">2 звезды</option>
+                                    <option value="3">3 звезды</option>
+                                    <option value="4">4 звезды</option>
+                                    <option value="5">5 звезд</option>
+                                </select>
+
+                                <button type="submit" name="submit"
+                                        class="btn-add-review">Залишити відгук
+                                </button>
+                            </form>
+                        </div>
+                    {% endif %}
+                    {# end write review #}
+
+
                     {# start review #}
-                    <div class="d-flex flex-column product-tab-review">
-                        <div class="d-flex flex-row">
-                            <div class="review-user-avatar me-4">
-                                <img src="{% static 'img/non-avatar.svg'%}" alt="">
+                    {% for review in product.reviews.all %}
+                        <div class="d-flex flex-column product-tab-review">
+                            <div class="d-flex flex-row">
+                                <div class="review-user-avatar me-4">
+                                    <img src="
+                                            {% if review.user.image %}{% get_media_prefix %}{{ review.user.image }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
+                                         alt="review">
+                                </div>
+                                <div class="d-flex flex-column justify-content-between">
+                                    <p class="review-user-name">{{ review.user }}</p>
+                                    <div class="review-user-rating">
+                                        {% for _ in 'x'|rjust:review.rate %}
+                                            <span class="readonly-star">★</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% if request.user == review.user or request.user.is_superuser %}
+                                {{ request.user }}
+                                <button type="submit" name="submit"
+                                        class="btn btn-danger">Видалити відгук
+                                </button>
+                            {% endif %}
                             </div>
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="review-user-name">Михайло Соловей</p>
-                                <div class="review-user-rating">*****</div>
-                            </div>
+                            <p class="review-text mt-3">
+                                {{ review.text }}
+                            </p>
                         </div>
-                    </div>
-                    {# end review #}
-                    <div class="d-flex flex-column product-tab-review">
-                        <div class="d-flex flex-row">
-                            <div class="review-user-avatar me-4">
-                                <img src="{% static 'img/user-avatar1.jpg'%}" alt="">
-                            </div>
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="review-user-name">Джеся Мишківна</p>
-                                <div class="review-user-rating">*****</div>
-                            </div>
-                        </div>
-                        {# if text exist in review #}
-                        <p class="review-text mt-3">
-                            Мишка не дуже смачна, навушники краще смакують, але магазин не поганий).
-                        </p>
-                    </div>
-              </div>
+                    {% endfor %}
+                </div>
             </div>
+
+
+
+
+
             <div class=" tab-pane fade" id="pills-similar" role="tabpanel" aria-labelledby="pills-similar-tab">
                 <div class="col-6 product-tab-title mb-4">
                     Товари, що можуть вас зацікавити
                 </div>
                 <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
-                {% load_best_products as best_products %}
-                {% for product in best_products %}
-                    <div class="col mb-4">
-                    <div class="card product-card">
-                        <div class="product-card-content d-flex flex-column justify-content-between">
-                            <div class="d-flex flex-column pt-4">
-                                <div class="product-card-id">
-                                    <p>Код: {{ product.display_id }}</p>
-                                </div>
-                                <a href="{{ product.get_absolute_url }}">
-                                    <div class="item-img">
-                                        <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
-                                             alt="{{ product.title }}">
-                                    </div>
-                                    <div class="product-card-name text-center mt-4">
-                                        {{ product.title|truncatechars:100 }}
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="d-flex flex-column pb-4">
-                                <div class="d-flex flex-column justify-content-end mb-4">
-                                    {% if product.discount %}
-                                        <div class="d-flex flex-row align-items-end">
-                                            <p class="product-card-price-title me-2">
-                                                Ціна
-                                            </p>
-                                            <p class="product-card-price">
-                                                {{ product.price }} ₴
-                                            </p>
+                    {% load_best_products as best_products %}
+                    {% for product in best_products %}
+                        <div class="col mb-4">
+                            <div class="card product-card">
+                                <div class="product-card-content d-flex flex-column justify-content-between">
+                                    <div class="d-flex flex-column pt-4">
+                                        <div class="product-card-id">
+                                            <p>Код: {{ product.display_id }}</p>
                                         </div>
-                                        <p class="product-card-discount">
-                                            {{ product.discount }} ₴
-                                        </p>
-                                    {% else %}
-                                        <p class="product-card-price-title me-2">
-                                            Ціна
-                                        </p>
-                                        <p class="product-card-discount">
-                                            {{ product.price }} ₴
-                                        </p>
-                                    {% endif %}
+                                        <a href="{{ product.get_absolute_url }}">
+                                            <div class="item-img">
+                                                <img src="{% get_media_prefix %}{{ product.preview }}"
+                                                     class="img-fluid w-100"
+                                                     alt="{{ product.title }}">
+                                            </div>
+                                            <div class="product-card-name text-center mt-4">
+                                                {{ product.title|truncatechars:100 }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex flex-column pb-4">
+                                        <div class="d-flex flex-column justify-content-end mb-4">
+                                            {% if product.discount %}
+                                                <div class="d-flex flex-row align-items-end">
+                                                    <p class="product-card-price-title me-2">
+                                                        Ціна
+                                                    </p>
+                                                    <p class="product-card-price">
+                                                        {{ product.price }} ₴
+                                                    </p>
+                                                </div>
+                                                <p class="product-card-discount">
+                                                    {{ product.discount }} ₴
+                                                </p>
+                                            {% else %}
+                                                <p class="product-card-price-title me-2">
+                                                    Ціна
+                                                </p>
+                                                <p class="product-card-discount">
+                                                    {{ product.price }} ₴
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                        <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
+                                           data-product-id='{{ product.id }}'
+                                           data-is-order='false'>
+                                            {% csrf_token %}
+                                            До кошика
+                                        </a>
+                                    </div>
                                 </div>
-                                <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
-                                   data-product-id= '{{ product.id }}'
-                                   data-is-order = 'false'>
-                                    {% csrf_token %}
-                                    До кошика
-                                </a>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                <!-- end top-products -->
             </div>
-            <!-- end top-products -->
-        </div>
         </div>
 
     </div>

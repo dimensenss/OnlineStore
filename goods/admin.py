@@ -4,10 +4,7 @@ from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django_mptt_admin.admin import DjangoMpttAdmin
 from django import forms
-from goods.models import Product, Category, ProductImage, ProductAttribute
-
-
-
+from goods.models import Product, Category, ProductImage, ProductAttribute, Brand, Review
 
 
 class ProductImagesInline(admin.TabularInline):
@@ -69,3 +66,13 @@ class CategoryAdmin(DjangoMpttAdmin):
 # Register your models and admin classes using the admin.site.register() method outside of class definitions
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
+
+
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text')

@@ -1,7 +1,10 @@
 from django.db.models import F, OuterRef, Subquery
 from django.http import HttpResponseNotFound, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormMixin
+
+from goods.forms import ReviewForm
 from goods.models import Product, ProductImage, Category
 from goods.utils import DataMixin, ProductFilter
 
@@ -39,18 +42,47 @@ class MainPage(DataMixin, ListView):
 #         return dict(list(context.items()) + list(mixin_context.items()))
 
 
-class ProductView(DataMixin, DetailView):
+class ProductView(FormMixin, DataMixin, DetailView):
     model = Product
     template_name = 'goods/product_page.html'
     context_object_name = 'product'
 
+    form_class = ReviewForm
+
     def get_object(self, *args, **kwargs):
         return Product.objects.prefetch_related('images').get(slug=self.kwargs['product_slug'])
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         preview = self.object.images.first()
         mixin_context = self.get_user_context(title='Головна сторінка', preview=preview)
+        context.update({'form': self.get_form()})
         return dict(list(context.items()) + list(mixin_context.items()))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        review = form.save(commit=False)
+        review.user = self.request.user
+        review.product = self.object
+        review.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        context = self.get_context_data(form=form)
+        return self.render_to_response(context)
+
+    def get_success_url(self):
+        return self.request.get_full_path()
+
+
+
 
 
 class CatalogPage(DataMixin, ListView):

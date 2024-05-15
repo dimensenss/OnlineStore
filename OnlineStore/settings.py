@@ -16,7 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #
-SITE_ID = 1
+# SITE_ID = 1
 
 ALLOWED_HOSTS = []
 DEBUG_TOOLBAR_CONFIG = {

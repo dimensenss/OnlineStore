@@ -6,6 +6,8 @@ from mptt.models import MPTTModel
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+from users.models import User
+
 
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='Назва')
@@ -119,3 +121,25 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, default='Анонім', on_delete=models.SET_DEFAULT, related_name='reviews')
+    text = models.TextField(verbose_name='Текст', max_length=500)
+    date = models.DateTimeField(auto_now_add=True)
+    rate = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
+
+    class Meta:
+        verbose_name = 'Відгук'
+        verbose_name_plural = 'Відгуки'
+
+    def __str__(self):
+        return self.text
