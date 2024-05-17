@@ -58,18 +58,16 @@
 
 <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content cart-body">
-            <div class="modal-header cart-header d-flex justify-content-between">
-                <h5 class="modal-title " id="exampleModalLabel2">Кошик</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content cart-modal">
+            <div class="modal-header cart-header d-flex justify-content-between mx-3">
+                <h5 class="modal-title modal-cart-title" id="exampleModalLabel2">Кошик</h5>
+                <button type="button" style="color:#FFFFFF; background-color: #1D1D1D" data-bs-dismiss="modal" aria-label="Close"><img
+                        src="{% static 'img/x-icon.svg' %}" alt="close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body pt-0">
                 <div class="container cart-items-container cart-body">
                     {% include 'carts/includes/included_cart.html' %}
                 </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
 
             </div>
         </div>

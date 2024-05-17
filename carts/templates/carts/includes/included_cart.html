@@ -7,15 +7,18 @@
 {% if carts %}
     {% for cart in carts %}
             <div class="cart-product">
-                <div class="cart-product-title d-flex justify-content-between">
-                    <h5 class="card-title">{{ cart.product.title }}</h5>
-                    <a href="{% url 'carts:cart_remove' %}" class="a-dark remove-from-cart"
+                <div class="cart-product-title d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center" style="height: 50px;">
+                       <h5 class="card-title m-0">{{ cart.product.title }}</h5>
+                        <a href="{% url 'carts:cart_remove' %}" class="a-dark remove-from-cart"
                        data-cart-id="{{ cart.id }}">
                         {% csrf_token %}
-                        <i class="fa-solid fa-trash" style="color: #FFFFFF;"></i>
-                    </a>
+                            <img src="{% static 'img/cart-del-ico.svg' %}" alt="delete">
+                        </a>
+                    </div>
+                    <hr/>
                 </div>
-                <ul class="list-group list-group-flush ">
+                <ul class="list-group list-group-flush cart-product-body">
                     <li class="list-group-item cart-product-info">
                         <div class="row text-center d-flex align-items-center">
                             <div class="col-md-2 col-sm-4 p-0">
@@ -23,7 +26,7 @@
                                     <img src="{{ cart.product.load_preview }}"
                                          alt="{{ cart.product_slug }}" class="img-fluid cart-img">
                                 </a>
-    
+
                             </div>
     {#                        <div class="col-md-2 col-sm-4 p-0 ">#}
     {#                            <small> Розмір: {{ cart.product.size }} </small>#}
@@ -31,16 +34,15 @@
                             <div class="col-md-2 col-sm-4 p-0">
                                 <div class="input-group ">
                                     <span class="input-group-btn d-flex align-items-stretch">
-                                        <button type="button" class="btn btn-dark btn-sm decrement"
+                                        <button type="button" class="btn btn-dark btn-sm decrement cart-btn-dec"
                                                 data-cart-id="{{ cart.id }}"
                                                 data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}-
                                         </button>
                                     </span>
-                                        <input name="cart_quantity" type="text" class="form-control number text-center" style="font-size: 20px; max-width: 70px;"
+                                        <input name="cart_quantity" type="text" class="form-control number text-center cart-quantity"
                                                value="{{ cart.quantity }}">
-
                                         <span class="input-group-btn d-flex align-items-stretch">
-                                        <button type="button" class="btn btn-dark btn-sm increment"
+                                        <button type="button" class="btn btn-dark btn-sm increment cart-btn-inc"
                                                 data-cart-id="{{ cart.id }}"
                                                 data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}+
                                         </button>
@@ -49,7 +51,7 @@
                             </div>
                             <div class="col-md-2 col-sm-4 p-0 cart-product-text d-flex justify-content-start"><small>x {{ cart.product.calculate_sell_price }} ₴</small>
                             </div>
-                            <div class="col-md-6 pe-md-3 col-sm-4 p-0 cart-product-text d-flex justify-content-end"><strong>{{ cart.product_price }} ₴</strong></div>
+                            <div class="col-md-6 pe-md-3 col-sm-4 p-0 cart-product-text d-flex justify-content-end">{{ cart.product_price }} ₴</div>
                         </div>
                     </li>
                 </ul>
@@ -59,26 +61,17 @@
 {% endif %}
 
 
-<div class="card mb-3 text-bg-light shadow-lg">
-    <div class="card-footer">
-        <div class="row">
-            <div class="col p-0 d-flex align-items-center m-2 align-items-center">
-                <a class="btn btn-dark" role="button" onclick="closeModalOrRedirect()">Продовжити покупки</a>
-            </div>
-            <div class="col green-stroke">
-                <div class="row">
-                    <div class="col justify-content-center text-center">
-                        <p class="float-left">Усього <strong>{{ carts.total_quantity }}</strong> товар(ів) на суму</p>
-                        <h4 class="float-left"><strong>{{ carts.total_price }} $</strong></h4>
-                    </div>
-                    {% if carts and not order %}
-                        <div class="d-flex align-items-center col justify-content-center ">
-                            <a class="btn btn-1 a-light text-center" href="{% url 'orders:create_order' %}"
-                               role="button">До замовлення</a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
+<div class="card shadow-lg cart-footer">
+    <div class="card-footer d-flex flex-column p-0">
+        <div class="cart-total my-3">
+            <p class="">Усього {{ carts.total_quantity }} товар(ів) на суму {{ carts.total_price }} ₴</p>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+            <a class="cart-footer-btn me-3" role="button" onclick="closeModalOrRedirect()">Продовжити покупки</a>
+            {% if carts and not order %}
+                <a class="cart-footer-btn" href="{% url 'orders:create_order' %}"
+                role="button">Оформити замовлення</a>
+            {% endif %}
         </div>
     </div>
 </div>
