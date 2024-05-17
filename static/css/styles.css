@@ -215,7 +215,41 @@ button {
 .carousel-indicators {
     position: unset;
 }
+.cart-header{
+    color: #FFFFFF;
+    font-size: 20px;
+    background-color: #1D1D1D;
+}
+.cart-body{
+    background-color: #1D1D1D;
+}
+.cart-product {
+    background-color: black;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    
 
+}
+.cart-img{
+    max-width: 150px;
+}
+.cart-product-title{
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 1rem;
+    border-bottom: solid 2px;
+    border-image: linear-gradient(to right, rgba(92, 39, 254, 1), rgba(193, 101, 221, 1)) 1;
+}
+.cart-product-info{
+    background-color: black;
+    border: 10px;
+}
+.cart-product-text{
+    color: #FFFFFF;
+    font-size: 20px;
+}
 @media (max-width: 1200px) {
 
 

@@ -5,58 +5,57 @@
 
 <!-- Разметка корзины -->
 {% if carts %}
-    <div class="card mb-3 mt-3 text-bg-light shadow-lg">
-        {% for cart in carts %}
-            <div class="card-header">
-                <h5 class="card-title">{{ cart.product.title }}</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <div class="row text-center d-flex align-items-center">
-                        <div class="col-md-2 col-sm-4 p-0">
-                            <a href="{% url 'goods:product' cart.product.slug  %}">
-                                <img src="{{ cart.product.load_preview }}"
-                                     alt="{{ cart.product_slug }}" class="img-fluid">
-                            </a>
-
-                        </div>
-{#                        <div class="col-md-2 col-sm-4 p-0 ">#}
-{#                            <small> Розмір: {{ cart.product.size }} </small>#}
-{#                        </div>#}
-                        <div class="col-md-2 col-sm-4 p-0">
-                            <div class="input-group ">
-                            <span class="input-group-btn d-flex align-items-stretch">
-                                <button type="button" class="btn btn-dark btn-sm decrement"
-                                        data-cart-id="{{ cart.id }}"
-                                        data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}-
-                                </button>
-                            </span>
-                                <input name="cart_quantity" type="text" class="form-control number"
-                                       value="{{ cart.quantity }}">
-
-                                <span class="input-group-btn d-flex align-items-stretch">
-                                <button type="button" class="btn btn-dark btn-sm increment"
-                                        data-cart-id="{{ cart.id }}"
-                                        data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}+
-                                </button>
-                            </span>
+    {% for cart in carts %}
+            <div class="cart-product">
+                <div class="cart-product-title d-flex justify-content-between">
+                    <h5 class="card-title">{{ cart.product.title }}</h5>
+                    <a href="{% url 'carts:cart_remove' %}" class="a-dark remove-from-cart"
+                       data-cart-id="{{ cart.id }}">
+                        {% csrf_token %}
+                        <i class="fa-solid fa-trash" style="color: #FFFFFF;"></i>
+                    </a>
+                </div>
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item cart-product-info">
+                        <div class="row text-center d-flex align-items-center">
+                            <div class="col-md-2 col-sm-4 p-0">
+                                <a href="{% url 'goods:product' cart.product.slug  %}">
+                                    <img src="{{ cart.product.load_preview }}"
+                                         alt="{{ cart.product_slug }}" class="img-fluid cart-img">
+                                </a>
+    
                             </div>
+    {#                        <div class="col-md-2 col-sm-4 p-0 ">#}
+    {#                            <small> Розмір: {{ cart.product.size }} </small>#}
+    {#                        </div>#}
+                            <div class="col-md-2 col-sm-4 p-0">
+                                <div class="input-group ">
+                                    <span class="input-group-btn d-flex align-items-stretch">
+                                        <button type="button" class="btn btn-dark btn-sm decrement"
+                                                data-cart-id="{{ cart.id }}"
+                                                data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}-
+                                        </button>
+                                    </span>
+                                        <input name="cart_quantity" type="text" class="form-control number text-center" style="font-size: 20px; max-width: 70px;"
+                                               value="{{ cart.quantity }}">
+
+                                        <span class="input-group-btn d-flex align-items-stretch">
+                                        <button type="button" class="btn btn-dark btn-sm increment"
+                                                data-cart-id="{{ cart.id }}"
+                                                data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}+
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 p-0 cart-product-text d-flex justify-content-start"><small>x {{ cart.product.calculate_sell_price }} ₴</small>
+                            </div>
+                            <div class="col-md-6 pe-md-3 col-sm-4 p-0 cart-product-text d-flex justify-content-end"><strong>{{ cart.product_price }} ₴</strong></div>
                         </div>
-                        <div class="col-md-2 col-sm-4 p-0"><small>x {{ cart.product.calculate_sell_price }} $</small>
-                        </div>
-                        <div class="col-md-2 col-sm-4 p-0"><strong>{{ cart.product_price }} $</strong></div>
-                        <div class="col-md-2 col-sm-4 p-0">
-                            <a href="{% url 'carts:cart_remove' %}" class="a-dark remove-from-cart"
-                               data-cart-id="{{ cart.id }}">
-                                {% csrf_token %}
-                                <i class="fa-solid fa-trash" style="color: #060b13;"></i>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
+            
         {% endfor %}
-    </div>
 {% endif %}
 
 
