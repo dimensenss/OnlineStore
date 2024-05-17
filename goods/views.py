@@ -51,12 +51,12 @@ class ProductView(FormMixin, DataMixin, DetailView):
     form_class = ReviewForm
 
     def get_object(self, *args, **kwargs):
-        return Product.objects.prefetch_related('images').get(slug=self.kwargs['product_slug'])
+        return Product.objects.prefetch_related('images', 'attributes').get(slug=self.kwargs['product_slug'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         preview = self.object.images.first()
-        reviews_qs = self.object.reviews.all().order_by('-date')
+        reviews_qs = self.object.reviews.all().prefetch_related('user').order_by('-date')
         mixin_context = self.get_user_context(title='Головна сторінка', preview=preview, reviews_qs=reviews_qs)
         context.update({'form': self.get_form()})
         return dict(list(context.items()) + list(mixin_context.items()))

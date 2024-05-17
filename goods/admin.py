@@ -1,10 +1,13 @@
+from ckeditor.widgets import CKEditorWidget
 from dal import autocomplete
 from django.contrib import admin
+from django.db import models
 from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django_mptt_admin.admin import DjangoMpttAdmin
 from django import forms
-from goods.models import Product, Category, ProductImage, ProductAttribute, Brand, Review
+from goods.models import Product, Category, ProductImage, ProductAttribute, Brand, Review, AttributesValues, \
+    AttributesNames
 
 
 class ProductImagesInline(admin.TabularInline):
@@ -13,8 +16,19 @@ class ProductImagesInline(admin.TabularInline):
     extra = 1
 
 
+class ProductAttributeForm(forms.ModelForm):
+    class Meta:
+        model = ProductAttribute
+        fields = '__all__'
+        widgets = {
+            'atr_name': autocomplete.ModelSelect2(url='attribute-name-autocomplete'),
+            'value': autocomplete.ModelSelect2(url='attribute-value-autocomplete'),
+        }
+
+
 class ProductAttributeInline(admin.TabularInline):
     model = ProductAttribute
+    form = ProductAttributeForm
     extra = 0
 
 
@@ -23,8 +37,9 @@ class ProductAdminForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         widgets = {
+            'content': CKEditorWidget(),
             'cat': autocomplete.ModelSelect2(url='category-autocomplete'),
-            'brand': autocomplete.ModelSelect2(url='brands-autocomplete')
+            'brand': autocomplete.ModelSelect2(url='brands-autocomplete'),
         }
 
 
@@ -76,3 +91,16 @@ class BrandAdmin(admin.ModelAdmin):
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('id', 'text')
+
+
+# @admin.register(ProductAttribute)
+# class ProductAttributeAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'atr_name', 'value')
+
+@admin.register(AttributesValues)
+class AttributesValuesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name',)
+
+@admin.register(AttributesNames)
+class AttributesNamesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name',)

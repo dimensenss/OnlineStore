@@ -2,10 +2,11 @@ import django_filters
 from dal import autocomplete
 from django import forms
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.db.models import OuterRef, Subquery, Count, Value
+from django.db.models import OuterRef, Subquery, Count, Value, CharField
+from django.db.models.functions import Cast
 from django_filters import CharFilter
 
-from goods.models import ProductImage, Category, Brand, Product
+from goods.models import ProductImage, Category, Brand, Product, ProductAttribute, AttributesValues, AttributesNames
 
 
 class DataMixin:
@@ -54,7 +55,24 @@ class ProductsAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
+class AttributeNameAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = AttributesNames.objects.all()
 
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+
+        return qs
+
+
+class AttributeValueAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = AttributesValues.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+
+        return qs
 
 
 class ProductFilter(django_filters.FilterSet):

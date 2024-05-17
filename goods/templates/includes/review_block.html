@@ -9,11 +9,11 @@
                 <form id="review_form" class="form-group" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    <label for="id_text">Текст:</label>
+                    <label for="id_text">Ваші враження від товару:</label>
                     <textarea name="text" cols="40" rows="10" maxlength="500" required=""
                               id="id_text"></textarea>
 
-                    <label for="id_rate">Rate:</label>
+                    <label for="id_rate">Оцінка:</label>
 
                     <div class="rating">
                         <span class="star" data-value="1">★</span>
@@ -23,11 +23,11 @@
                         <span class="star" data-value="5">★</span>
                     </div>
                     <select name="rate" required="" id="id_rate" style="display: none">
-                        <option value="1">1 звезда</option>
-                        <option value="2">2 звезды</option>
-                        <option value="3">3 звезды</option>
-                        <option value="4">4 звезды</option>
-                        <option value="5">5 звезд</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
 
                     <button type="submit" name="submit"
@@ -39,15 +39,16 @@
         {# end write review #}
 
         {# start review #}
+    {% if not reviews_qs %}
+        <div class="d-flex flex-column product-tab-review">
+            На данний товар поки що немає відгуків, станьте першим!
+        </div>
+    {% else %}
         {% for review in reviews_qs %}
             <div class="d-flex flex-column product-tab-review">
                 <div class="d-flex flex-row">
                     <div class="review-user-avatar me-4">
-                        <img src="
-
-
-
-                                {% if review.user.image %}{% get_media_prefix %}{{ review.user.image }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
+                        <img src="{% if review.user.image %}{% get_media_prefix %}{{ review.user.image }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
                              alt="review">
                     </div>
                     <div class="d-flex flex-column justify-content-between">
@@ -74,10 +75,10 @@
                 {% endif %}
                 <p class="review-text mt-3">
                     {{ review.text }}
-
                 </p>
                 {{ review.date }}
             </div>
         {% endfor %}
+     {% endif %}
     </div>
 </div>

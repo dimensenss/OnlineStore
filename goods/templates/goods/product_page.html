@@ -63,17 +63,38 @@
                     {% endif %}
                     <hr/>
                     <p class="product-base-info">
-                        Виробник: Razer
-                    </p>
-                    <p class="product-base-info">
-                        Гарантія: 12 міс.
-                    </p>
-                    <p class="product-base-info">
-                        Колір: white
+                        Виробник: {{ product.brand }}
                     </p>
                     <p class="product-base-info">
                         Рейтинг:
+                        {% with rate=product.calculate_rate %}
+                            {% if rate == 0 %}
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            {% else %}
+                                {% for _ in 'x'|rjust:rate %}
+                                    <span class="readonly-star">★</span>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </p>
+                    {% if product.guarantee == 0 %}
+                        <p class="product-base-info">
+                            Немає гарантії
+                        </p>
+                    {% else %}
+                        <p class="product-base-info">
+                            Гарантія: {{ product.guarantee }}
+                        </p>
+                    {% endif %}
+
+                    {#                    <p class="product-base-info">#}
+                    {#                        Колір: white#}
+                    {#                    </p>#}
+
                     <hr/>
                     <div class="d-flex flex-row align-items-center mt-3">
                         <div class="d-flex flex-column me-4">
@@ -139,28 +160,16 @@
                         <div class="d-flex flex-column">
                             <div class="mb-3 product-tab-features d-flex justify-content-between">
                                 <p class="product-tab-features-prop">Виробник</p>
-                                <p class="product-tab-features-value">HyperX</p>
+                                <p class="product-tab-features-value">{{ product.brand }}</p>
                             </div>
+                            {% for attr in product.attributes.all %}
                             <div class="mb-3 product-tab-features d-flex justify-content-between">
-                                <p class="product-tab-features-prop">Підключення</p>
-                                <p class="product-tab-features-value">Бездротове</p>
+
+                                <p class="product-tab-features-prop">{{ attr.atr_name }}</p>
+                                <p class="product-tab-features-value">{{ attr.value }}</p>
                             </div>
-                            <div class="mb-3 product-tab-features d-flex justify-content-between">
-                                <p class="product-tab-features-prop">Призначення</p>
-                                <p class="product-tab-features-value">Для настільних ПК, для ноутбуків</p>
-                            </div>
-                            <div class="mb-3 product-tab-features d-flex justify-content-between">
-                                <p class="product-tab-features-prop">Кількість клавіш</p>
-                                <p class="product-tab-features-value">6</p>
-                            </div>
-                            <div class="mb-3 product-tab-features d-flex justify-content-between">
-                                <p class="product-tab-features-prop">Інтерфейс</p>
-                                <p class="product-tab-features-value">Радіоканал</p>
-                            </div>
-                            <div class="mb-3 product-tab-features d-flex justify-content-between">
-                                <p class="product-tab-features-prop">Комплектація</p>
-                                <p class="product-tab-features-value">Мишка, USB-приймач</p>
-                            </div>
+                            {% endfor %}
+
                         </div>
                     </div>
                     <div class="col-6">
@@ -169,36 +178,13 @@
                         </div>
                         <div class="d-flex flex-column">
                             <div class="product-tab-description">
-                                <h6 class="product-tab-description-title mb-2">
-                                    Час роботи батарей: 3 роки
-                                </h6>
                                 <p class="product-tab-description-text">
-                                    Трирічний термін служби батарей допоможе вам зберегти свій час, свої гроші і свою
-                                    планету - адже необхідність в заміні елементів живлення практично відсутня.
-                                    Світловий індикатор повідомляє про низький рівень заряду батарей.
+                                    {{ product.content|safe }}
                                 </p>
                                 <br/>
                             </div>
-                            <div class="product-tab-description">
-                                <h6 class="product-tab-description-title mb-2">
-                                    Надшвидкісна прокрутка
-                                </h6>
-                                <p class="product-tab-description-text">
-                                    Прокручуйте документи і веб-сторінки одним рухом. Покрокова прокрутка забезпечує
-                                    необхідну точність для переміщення за списками, слайдів і зображень.
-                                </p>
-                                <br/>
-                            </div>
-                            <div class="product-tab-description">
-                                <h6 class="product-tab-description-title mb-2">
-                                    Точне управління курсором
-                                </h6>
-                                <p class="product-tab-description-text">
-                                    Функція оптичного відстеження від Logitech забезпечує точне управління курсором
-                                    (1000 точок на дюйм) і плавне пересування по більшості видів поверхностей.
-                                </p>
-                                <br/>
-                            </div>
+
+
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
@@ -19,6 +20,7 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=1, verbose_name='Кількість')
     brand = models.ForeignKey('Brand', blank=True, null=True, on_delete=models.SET_NULL, related_name='brand',
                               verbose_name='Бренд')
+    guarantee = models.SmallIntegerField(default=0, verbose_name='Гарантія(міс)')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name="Час оновлення")
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано')
@@ -30,6 +32,12 @@ class Product(models.Model):
 
     def load_preview(self):
         return self.images.first().image.url
+
+    def calculate_rate(self):
+        average_rating = self.reviews.aggregate(Avg('rate'))['rate__avg']
+        if average_rating is not None:
+            return round(average_rating)
+        return 0
 
     def __str__(self):
         return self.title
@@ -48,22 +56,51 @@ class Product(models.Model):
         verbose_name_plural = 'Товар'
         ordering = ['-time_create', 'title']
 
+
 class ProductAttributeQS(models.QuerySet):
     ...
 
+
 class ProductAttribute(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='attributes')
-    name = models.CharField(blank=True, null=True, verbose_name='name')
-    value = models.CharField(max_length=100, blank=True, verbose_name='value')
+    atr_name = models.ForeignKey('AttributesNames', blank=True, null=True, on_delete=models.SET_NULL,
+                                 related_name='atr_name',
+                                 verbose_name='Назва')
+    value = models.ForeignKey('AttributesValues', blank=True, null=True, on_delete=models.SET_NULL,
+                              related_name='value',
+                              verbose_name='Значення')
 
     class Meta:
         verbose_name = 'Атрібут'
         verbose_name_plural = 'Атрібути'
 
     def __str__(self):
+        return self.atr_name.name
+
+    # objects = ProductAttributeQS.as_manager()
+    objects = models.Manager()
+
+
+class AttributesNames(models.Model):
+    name = models.CharField(max_length=100, blank=True, verbose_name='value')
+
+    def __str__(self):
         return self.name
 
-    objects = ProductAttributeQS.as_manager()
+    class Meta:
+        verbose_name = 'Атрибут'
+        verbose_name_plural = 'Атрибути'
+
+
+class AttributesValues(models.Model):
+    name = models.CharField(max_length=100, blank=True, verbose_name='value')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Значення атрибута'
+        verbose_name_plural = 'Значення атрибутів'
 
 
 class Category(MPTTModel):

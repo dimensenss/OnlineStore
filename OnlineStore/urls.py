@@ -5,7 +5,7 @@ from django.urls import path, include, re_path
 
 import users.views
 from OnlineStore import settings
-from goods.utils import BrandsAutocomplete, CategoryAutocomplete, ProductsAutocomplete
+from goods.utils import BrandsAutocomplete, CategoryAutocomplete, ProductsAutocomplete, AttributeNameAutocomplete, AttributeValueAutocomplete
 from goods.views import page_not_found
 
 urlpatterns = [
@@ -32,6 +32,17 @@ urlpatterns = [
         ProductsAutocomplete.as_view(),
         name='products-autocomplete',
     ),
+    re_path(
+        r'^attribute-name-autocomplete/$',
+        AttributeNameAutocomplete.as_view(),
+        name='attribute-name-autocomplete',
+    ),
+    re_path(
+        r'^attribute-value-autocomplete/$',
+        AttributeValueAutocomplete.as_view(),
+        name='attribute-value-autocomplete',
+    ),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
 ]
 
