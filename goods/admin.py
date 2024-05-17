@@ -54,7 +54,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'time_create',)
     readonly_fields = ('get_html_image',)
     fieldsets = [
-        (None, {'fields': ['get_html_image', 'title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'cat', 'brand',
+        (None, {'fields': ['get_html_image', 'title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'guarantee', 'cat', 'brand',
                            'is_published']})
     ]
 

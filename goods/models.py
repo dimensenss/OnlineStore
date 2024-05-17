@@ -17,7 +17,7 @@ class Product(models.Model):
     content = models.TextField(blank=True, verbose_name='Контент')
     price = models.IntegerField(default=0, verbose_name='Ціна')
     discount = models.IntegerField(default=0, verbose_name='Ціна зі знижкою')
-    quantity = models.PositiveIntegerField(default=1, verbose_name='Кількість')
+    quantity = models.PositiveIntegerField(default=1, verbose_name='Кількість товару')
     brand = models.ForeignKey('Brand', blank=True, null=True, on_delete=models.SET_NULL, related_name='brand',
                               verbose_name='Бренд')
     guarantee = models.SmallIntegerField(default=0, verbose_name='Гарантія(міс)')
