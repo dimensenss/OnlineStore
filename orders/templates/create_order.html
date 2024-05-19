@@ -27,7 +27,7 @@
 
 
         <h3>Ваші контактні данні</h3>
-
+    {% if not request.user.is_authenticated %}
         <div class="d-flex justify-content-start align-items-center">
          <span class="green-stroke">
                 Я новий покупець
@@ -36,6 +36,7 @@
                 <a href="{% url 'users:login' %}?next=/orders/create-order/">Я постійний покупець</a>
         </span>
         </div>
+    {% endif %}
 
 
         <div class="card mb-3">

@@ -59,14 +59,14 @@
 
                                     <dt class="order-tile__label">Товар</dt>
                                     <div class="d-flex flex-row align-items-center">
-                                        <a href="{% url 'goods:product' item.sneakers_slug %}"
+                                        <a href="{% url 'goods:product' item.product_slug %}"
                                            class="order-tile__picture">
-                                            <img src="{% get_media_prefix %}{{ item.sneakers_first_image }}"
+                                            <img src="{% get_media_prefix %}{{ item.product.images.first.image }}"
                                                  alt="{{ item.product.title }}">
                                         </a>
-                                        <a href="{% url 'goods:product' item.sneakers_slug %}"
+                                        <a href="{% url 'goods:product' item.product_slug %}"
                                            class="a-blue">
-                                            {{ item.product.sneakers.title }}
+                                            {{ item.product.title }}
                                         </a>
                                     </div>
 

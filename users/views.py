@@ -127,13 +127,17 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.db.models import Prefetch, F
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import UpdateView
 
+from carts.models import Cart
 from goods.utils import DataMixin
+from orders.models import Order, OrderItem
 from users.forms import UserPasswordChangeForm, RegisterUserForm, LoginUserForm, ProfileUserForm
+from users.models import User
 
 
 def register_user(request):
@@ -148,16 +152,16 @@ def register_user(request):
             user.backend = 'users.authentication.EmailAuthBackend'
             auth.login(request, user)
 
-            # if session_key:
-            #     Cart.objects.filter(session_key=session_key).update(user=user)
-            #     existing_orders = Order.objects.filter(session=session_key)
-            #
-            #     # удалить временного пользователя
-            #     User.objects.get(username=existing_orders[0].user.username).delete()
-            #
-            #     if existing_orders:
-            #         for order in existing_orders:
-            #             order.update(user=user)
+            if session_key:
+                Cart.objects.filter(session_key=session_key).update(user=user)
+                existing_orders = Order.objects.filter(session=session_key)
+
+                # удалить временного пользователя
+                User.objects.get(username=existing_orders[0].user.username).delete()
+
+                if existing_orders:
+                    for order in existing_orders:
+                        order.update(user=user)
 
             messages.success(request, f"Ваш акаунт {user.username} зареєстровано")
             return HttpResponseRedirect(reverse('goods:main'))
@@ -187,8 +191,8 @@ def login_user(request):
                 auth.login(request, user)
                 messages.success(request, f"Ви авторизовані")
 
-                # if session_key:
-                #     Cart.objects.filter(session_key=session_key).update(user=user)
+                if session_key:
+                    Cart.objects.filter(session_key=session_key).update(user=user)
 
                 redirect_page = request.POST.get('next', None)
                 if redirect_page and redirect_page != reverse('users:logout'):
@@ -218,6 +222,9 @@ def signup_redirect(request):
     messages.warning(request, 'Сталася помилка. Напевно користувач з таким email вже існує.')
     return redirect('goods:main')
 
+def profile_redirect(request):
+    return redirect('goods:main')
+
 
 class ProfileUser(LoginRequiredMixin, DataMixin, UpdateView):
     template_name = 'users/profile.html'
@@ -232,17 +239,16 @@ class ProfileUser(LoginRequiredMixin, DataMixin, UpdateView):
         return redirect('user:profile')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        # orders = Order.objects.filter(user=self.request.user).prefetch_related(
-        #     Prefetch(
-        #         "orderitem_set",
-        #         queryset=OrderItem.objects.select_related("product__sneakers").annotate(
-        #             sneakers_slug=F("product__sneakers__slug"),
-        #             sneakers_first_image=F("product__sneakers__first_image__image")
-        #         ),
-        #     )
-        # ).order_by("-id")
+        orders = Order.objects.filter(user=self.request.user).prefetch_related(
+            Prefetch(
+                "orderitem_set",
+                queryset=OrderItem.objects.select_related("product").annotate(
+                    product_slug=F("product__slug"),
+                ),
+            )
+        ).order_by("-id")
 
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Профіль") #, orders=orders
+        c_def = self.get_user_context(title="Профіль", orders=orders)
 
         return dict(list(context.items()) + list(c_def.items()))

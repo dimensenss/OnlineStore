@@ -26,6 +26,7 @@ class Product(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано')
     cat = models.ForeignKey('Category', models.SET_DEFAULT, default=0, related_name='products',
                             verbose_name='Категорія')
+    sell_price = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Актуальна ціна')
 
     def calculate_sell_price(self):
         return self.discount if self.discount else self.price
@@ -50,6 +51,10 @@ class Product(models.Model):
 
     def display_id(self):
         return self.sku if self.sku else f"{self.id:05}"
+
+    def save(self, *args, **kwargs):
+        self.sell_price = self.calculate_sell_price()
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Товар'

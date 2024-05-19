@@ -5,6 +5,55 @@
 
 
 {% block content %}
+    <aside class="d-none d-lg-flex d-xl-flex d-xxl-flex">
+                <div class="sidebar">
+
+                    <form method="get" class="offcanvas-body py-0">
+
+
+                        <div class="d-flex flex-column">
+
+
+                            <div class="d-flex flex-column py-2">
+                                <label for="order_by">Оберіть сортування</label>
+                                {{ filter.form.order_by }}
+                            </div>
+                            <div class="d-flex flex-column py-2">
+                                <label for="order_by">Оберіть Бренди</label>
+                                {{ filter.form.brand}}
+                            </div>
+
+
+
+
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center">
+
+                                    {{ filter.form.price__gte }}
+                                    {{ filter.form.price__lte }}
+                                    <button type="submit" class="btn btn-secondary mb-2">
+                                        Ок
+                                    </button>
+                                </div>
+                                {% get_min_max_prices products_qs %}
+                                <div class="row mx-1 mb-2">
+                                    <div id="slider-range-lg" data-min-price="{{ min_price }}"
+                                         data-max-price="{{ max_price }}"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary mb-2">
+                                    Примінити фільтри
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </aside>
     <div class="d-flex flex-column container-fluid container-xl main">
         <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1 mx-0 mt-4">
             {% for product in products_qs %}

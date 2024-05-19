@@ -527,3 +527,86 @@ button {
     font-size: 20px;
     color: gold;
 }
+
+/*.layout {*/
+/*    box-sizing: border-box;*/
+/*    display: block;*/
+/*    margin: 0 auto;*/
+/*    max-width: 1600px;*/
+/*    padding-left: 8px;*/
+/*    padding-right: 8px;*/
+/*    width: 100%;*/
+/*}*/
+
+/*@media (min-width: 768px) {*/
+/*    .layout {*/
+/*        padding-left: 16px;*/
+/*        padding-right: 16px;*/
+/*    }*/
+/*    .filter-btn{*/
+/*    padding-left: 16px;*/
+/*    padding-right: 16px;*/
+/*}*/
+/*}*/
+/*.layout_with_sidebar {*/
+/*    display: flex;*/
+/*    flex-direction: row-reverse;*/
+/*    margin-top: 1.5em;*/
+/*}*/
+/*.sidebar {*/
+/*    display: none;*/
+/*    flex-shrink: 0;*/
+/*    width: 250px;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+.accordion-collapse {
+    transition: height 0.118s ease-in-out;
+}
+
+.order-tile__options {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.order-tile__option--left {
+    text-align: left;
+}
+.order-tile__option {
+    flex-grow: 1;
+    text-align: center;
+}
+.order-tile__label {
+    display: block;
+    margin-bottom: 4px;
+    color: #797878;
+}
+.order-tile__digit {
+    font-size: 14px;
+}
+.order-tile__option--quantity {
+    flex-grow: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.order-tile__option--right {
+    text-align: right;
+}
+.order-tile__picture {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 102px;
+    height: 102px;
+    margin-right: 16px;
+}
+
+.order-tile__picture img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}

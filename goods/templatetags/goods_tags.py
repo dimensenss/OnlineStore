@@ -1,4 +1,5 @@
 from django import template
+from django.db.models import Min, Max
 
 from goods.models import Product
 from goods.utils import DataMixin
@@ -28,3 +29,18 @@ def get_breadcrumbs(category):
     return {
         'category': category
     }
+
+@register.simple_tag(name='get_min_max_prices', takes_context=True)
+def get_prices(context, queryset):
+    aggregate_data = Product.objects.all().filter(is_published=True).aggregate(
+        min_price=Min('sell_price'),
+        max_price=Max('sell_price'),
+    )
+
+    min_price = int(aggregate_data['min_price']) if aggregate_data['min_price'] is not None else None
+    max_price = int(aggregate_data['max_price']) if aggregate_data['max_price'] is not None else None
+
+    context['min_price'] = min_price
+    context['max_price'] = max_price
+
+    return ''

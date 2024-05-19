@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
+from OnlineStore.settings import MAX_RECENT_VIEWED_PRODUCTS
 from goods.forms import ReviewForm
 from goods.models import Product, ProductImage, Category, Review
 from goods.utils import DataMixin, ProductFilter
@@ -25,23 +26,6 @@ class MainPage(DataMixin, ListView):
         mixin_context = self.get_user_context(title='Головна сторінка')
         return dict(list(context.items()) + list(mixin_context.items()))
 
-# class CatalogPage(DataMixin, ListView):
-#     model = Product
-#     template_name = 'goods/main_page.html'
-#     context_object_name = 'products_qs'
-#     allow_empty = True
-#     paginate_by = 4
-#     #Подправить пагинатор
-#
-#     def get_queryset(self):
-#         products_qs = self.get_products_with_previews(Product.objects.filter(is_published=True))
-#         return products_qs
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         mixin_context = self.get_user_context(title='Каталог')
-#         return dict(list(context.items()) + list(mixin_context.items()))
-
 
 class ProductView(FormMixin, DataMixin, DetailView):
     model = Product
@@ -51,6 +35,7 @@ class ProductView(FormMixin, DataMixin, DetailView):
     form_class = ReviewForm
 
     def get_object(self, *args, **kwargs):
+        recently_viewed(self.request, self.kwargs['product_slug'])
         return Product.objects.prefetch_related('images', 'attributes').get(slug=self.kwargs['product_slug'])
 
     def get_context_data(self, **kwargs):
@@ -93,7 +78,7 @@ class CatalogPage(DataMixin, ListView):
     context_object_name = 'products_qs'
     allow_empty = True
     cat_slug = None
-    paginate_by = 4
+    paginate_by = 12
 
     def get_queryset(self):
         self.cat_slug = self.kwargs['cat_slug'].split('/')[-1]
@@ -102,11 +87,15 @@ class CatalogPage(DataMixin, ListView):
         subcategories = current_category.get_descendants(include_self=True)
         product_qs = self.get_products_with_previews(
             Product.objects.filter(cat__in=subcategories, is_published=True).select_related('cat'))
+
+        self.filtered_qs = ProductFilter(self.request.GET, queryset=product_qs)
+        product_qs = self.filtered_qs.qs
+
         return product_qs
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title=self.cat_slug)
+        c_def = self.get_user_context(title=self.cat_slug, filter=self.filtered_qs)
         return dict(list(context.items()) + list(c_def.items()))
 
 
@@ -157,5 +146,15 @@ def remove_review(request):
         return JsonResponse(response_data)
 
 
-
+def recently_viewed(request, product_slug):
+    if "recently_viewed" not in request.session:
+        request.session["recently_viewed"] = []
+        request.session["recently_viewed"].append(product_slug)
+    else:
+        if product_slug in request.session["recently_viewed"]:
+            request.session["recently_viewed"].remove(product_slug)
+        request.session["recently_viewed"].insert(0, product_slug)
+        if len(request.session["recently_viewed"]) > MAX_RECENT_VIEWED_PRODUCTS:
+            del request.session["recently_viewed"][MAX_RECENT_VIEWED_PRODUCTS-1]
+    request.session.modified = True
 

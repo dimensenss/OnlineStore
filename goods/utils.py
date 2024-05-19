@@ -45,6 +45,7 @@ class CategoryAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
+
 class ProductsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Product.objects.all()

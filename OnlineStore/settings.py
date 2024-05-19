@@ -141,8 +141,8 @@ INTERNAL_IPS = [
 AUTH_USER_MODEL = 'users.User'
 
 LOGIN_URL = "users:login"
-LOGIN_REDIRECT_URL = "goods:main"
-LOGOUT_REDIRECT_URL = LOGIN_URL
+# LOGIN_REDIRECT_URL = "goods:main"
+LOGOUT_REDIRECT_URL = "goods:main"
 
 # CACHES = {
 #     "default": {
@@ -161,14 +161,14 @@ AUTHENTICATION_BACKENDS = [
 ]
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-#
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.getenv('EMAIL_HOST')
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-#
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 # LOGIN_REDIRECT_URL = '/'
 # MAX_RECENT_VIEWED_PRODUCTS = 20
 
@@ -262,3 +262,4 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+MAX_RECENT_VIEWED_PRODUCTS = 20

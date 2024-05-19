@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from users.views import signup_redirect
+from users.views import signup_redirect, profile_redirect
 from goods.views import *
 
 app_name = 'goods'
@@ -13,4 +13,5 @@ urlpatterns = [
 
     # redirect social auth
     path('accounts/social/signup/', signup_redirect, name='signup_redirect'),
+    path('accounts/profile/', profile_redirect, name='profile_redirect'),
 ]
