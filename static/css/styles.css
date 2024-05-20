@@ -271,11 +271,13 @@ button {
 
 }
 .cart-btn-inc, .cart-btn-dec{
+    text-align: center;
     background-color: #b3b3b3;
     font-size: 22px;
     color: #FFFFFF;
     width: 30px;
     height: 50px;
+    line-height: 50px;
     border: none;
 }
 .cart-btn-inc:hover, .cart-btn-dec:hover{
@@ -312,7 +314,7 @@ button {
     height: 50px;
     line-height: 50px;
     background-color: #FFFFFF;
-    width: 350px;
+    max-width: 350px;
     border-radius: 5px;
     text-align: center;
     font-size: 20px;
@@ -326,6 +328,9 @@ button {
 .remove-from-cart:hover{
     scale:0.9;
     transition: scale 0.3s;
+}
+.order-form{
+    background-color: #151515;
 }
 @media (max-width: 1200px) {
 
@@ -379,6 +384,24 @@ button {
     .footer-links {
         font-size: 12px;
     }
+    .cart-btn-inc, .cart-btn-dec{
+        font-size: 16px;
+        width: 25px;
+        height: 40px;
+        line-height: 25px;
+    }
+    .cart-quantity{
+        font-size: 16px;
+        max-width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+    .cart-total, .cart-footer-btn, .cart-product-text{
+        font-size: 16px;
+    }
+    .cart-img{
+        max-width: 100px;
+    }
 }
 
 @media (max-width: 575px) {
@@ -395,6 +418,31 @@ button {
     .footer-links {
         font-size: 10px;
     }
+    .cart-btn-inc, .cart-btn-dec{
+        font-size: 10px;
+        width: 15px;
+        height: 25px;
+        line-height: 15px;
+    }
+    .cart-quantity{
+        font-size: 10px;
+        max-width: 30px;
+        height: 25px;
+        line-height: 25px;
+    }
+    .cart-total, .cart-footer-btn, .cart-product-text{
+        font-size: 12px;
+    }
+    .cart-product-title{
+        font-size: 12px;
+    }
+    .cart-btn-inc{
+    border-radius: 0 5px 5px 0;
+    }
+    .cart-btn-dec{
+        border-radius: 5px 0 0 5px;
+    }
+
 }
 
 #loader-wrapper {

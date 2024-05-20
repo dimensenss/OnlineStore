@@ -20,38 +20,34 @@
                 </div>
                 <ul class="list-group list-group-flush cart-product-body">
                     <li class="list-group-item cart-product-info">
-                        <div class="row text-center d-flex align-items-center">
-                            <div class="col-md-2 col-sm-4 p-0">
+                        <div class="row text-center d-flex align-items-center px-3">
+                            <div class="col-4 col-sm-3 p-0">
                                 <a href="{% url 'goods:product' cart.product.slug  %}">
                                     <img src="{{ cart.product.load_preview }}"
                                          alt="{{ cart.product_slug }}" class="img-fluid cart-img">
                                 </a>
-
                             </div>
-    {#                        <div class="col-md-2 col-sm-4 p-0 ">#}
-    {#                            <small> Розмір: {{ cart.product.size }} </small>#}
-    {#                        </div>#}
-                            <div class="col-md-2 col-sm-4 p-0">
-                                <div class="input-group ">
-                                    <span class="input-group-btn d-flex align-items-stretch">
+                            <div class="col-5 col-sm-3 p-0">
+                                <div class="input-group d-flex justify-content-center">
+                                    <span class="input-group-btn">
                                         <button type="button" class="btn btn-dark btn-sm decrement cart-btn-dec"
                                                 data-cart-id="{{ cart.id }}"
-                                                data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}-
+                                                data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %} <p>-</p>
                                         </button>
                                     </span>
-                                        <input name="cart_quantity" type="text" class="form-control number text-center cart-quantity"
+                                    <input name="cart_quantity" type="text" class="form-control number text-center cart-quantity"
                                                value="{{ cart.quantity }}">
-                                        <span class="input-group-btn d-flex align-items-stretch">
+                                    <span class="input-group-btn">
                                         <button type="button" class="btn btn-dark btn-sm increment cart-btn-inc"
                                                 data-cart-id="{{ cart.id }}"
-                                                data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %}+
+                                                data-cart-change-url="{% url 'carts:cart_change' %} ">{% csrf_token %} <p>+</p>
                                         </button>
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-4 p-0 cart-product-text d-flex justify-content-start"><small>x {{ cart.product.calculate_sell_price }} ₴</small>
+                            <div class="d-none d-sm-flex col-sm-3 p-0 cart-product-text d-flex justify-content-start"><small> x {{ cart.product.calculate_sell_price }} ₴</small>
                             </div>
-                            <div class="col-md-6 pe-md-3 col-sm-4 p-0 cart-product-text d-flex justify-content-end">{{ cart.product_price }} ₴</div>
+                            <div class="col-3 col-sm-3 p-0 cart-product-text d-flex justify-content-end">{{ cart.product_price }} ₴</div>
                         </div>
                     </li>
                 </ul>
@@ -67,9 +63,9 @@
             <p class="">Усього {{ carts.total_quantity }} товар(ів) на суму {{ carts.total_price }} ₴</p>
         </div>
         <div class="d-flex justify-content-center mb-3">
-            <a class="cart-footer-btn me-3" role="button" onclick="closeModalOrRedirect()">Продовжити покупки</a>
+            <a class="cart-footer-btn me-3 px-3" role="button" onclick="closeModalOrRedirect()">Продовжити покупки</a>
             {% if carts and not order %}
-                <a class="cart-footer-btn" href="{% url 'orders:create_order' %}"
+                <a class="cart-footer-btn px-3" href="{% url 'orders:create_order' %}"
                 role="button">Оформити замовлення</a>
             {% endif %}
         </div>
