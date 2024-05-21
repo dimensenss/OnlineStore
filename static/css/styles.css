@@ -332,6 +332,59 @@ button {
 .order-form{
     background-color: #151515;
 }
+.cart-table{
+    background-color: #1D1D1D;
+}
+.cart-table td{
+    height: 40px;
+    font-size: 16px;
+    vertical-align: middle;
+    border: solid #303030 2px;
+    text-align: center;
+    padding: 0 1rem 0 1rem;
+}
+.cart-table thead{
+    color: #b3b3b3;
+}
+.cart-table tfoot{
+    background-color: #2b2b2b;
+}
+.cart-table a:hover{
+    color: #CF2EFF;
+    transition: color 0.3s;
+}
+.cart-table img{
+    max-width: 120px;
+}
+.cart-form-title{
+    color: #da5bff;
+    font-size: 20px;
+    font-weight: 600;
+}
+.create-order-btn{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background-color: #00FF47;
+}
+.order-form-info input[type='text'], .order-form-info input[type='email'], .order-form-info textarea{
+    background-color: #1D1D1D;
+    border-radius: 5px;
+    border: solid #303030 2px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+.order-form-info input[type='radio']{
+    border: none;
+    background-color: #a1a1a1;
+    height: 20px;
+    width: 20px;
+}
+.order-form-info input[type='radio']:checked{
+    background-color: #CF2EFF;
+}
+
 @media (max-width: 1200px) {
 
 
