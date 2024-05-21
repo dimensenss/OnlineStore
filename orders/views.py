@@ -87,7 +87,6 @@ def create_order(request):
                         cart_items.delete()
 
                         html_body = render_to_string('order_email.html', {'order': order})
-                        #
                         msg = EmailMultiAlternatives(subject=f'Дякуємо за замовлення №{order.id} на Nexus.com',
                                                      to=[order.email])
                         msg.attach_alternative(html_body, 'text/html')

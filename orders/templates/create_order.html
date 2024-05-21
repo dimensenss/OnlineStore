@@ -115,12 +115,13 @@
                                                 aria-label="Close"></button>
                                     </div>
                                 {% endif %}
-                                <label for="id_delivery_address" class="form-label">Адрес
-                                    доставки*:</label>
-                                <textarea class="form-control" id="id_delivery_address"
-                                          value="
-                                               {% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
-                                          name="delivery_address" rows="2"></textarea>
+                                <div id="delivery_address_container">
+                                    <label for="id_delivery_address" class="form-label">Адреса
+                                        доставки:</label>
+                                    <textarea class="form-control" id="id_delivery_address"
+                                              value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
+                                              name="delivery_address" rows="2"></textarea>
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Спосіб оплати: </label>
@@ -197,6 +198,30 @@
                                         });
                                     }
                                 });
+
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const deliveryAddressContainer = document.getElementById('delivery_address_container');
+                                    const radioButtons = document.getElementsByName('requires_delivery');
+
+                                    function toggleDeliveryAddressField() {
+                                        for (let radioButton of radioButtons) {
+                                            if (radioButton.checked) {
+                                                if (radioButton.value === '0') {
+                                                    deliveryAddressContainer.style.display = 'none';
+                                                } else {
+                                                    deliveryAddressContainer.style.display = 'block';
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    for (let radioButton of radioButtons) {
+                                        radioButton.addEventListener('change', toggleDeliveryAddressField);
+                                    }
+
+                                    // Initial check on page load
+                                    toggleDeliveryAddressField();
+                                });
                             </script>
 
 
@@ -229,7 +254,7 @@
 
 
                                     <div class="row justify-content-center m-2">
-                                        <button type="submit" class="button-success ">Підтвердити замовлення
+                                        <button type="submit" class="cart-footer-btn">Підтвердити замовлення
                                         </button>
                                     </div>
                                 </div>
