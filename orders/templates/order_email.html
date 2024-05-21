@@ -1,33 +1,4 @@
-{#<p>Доброго дня,</p>#}
-{##}
-{#<p>{{ order.user.first_name|capfirst }}, дякуємо за Ваше замовлення. Ми отримали інформацію про нього та#}
-{#    найближчим часом обробимо Ваш запит. Номер Вашого замовлення: {{ order.id }}.</p>#}
-{##}
-{#<p>Деталі Вашого замовлення:</p>#}
-{#<ul>#}
-{#    <li>Телефон: {{ order.phone_number }}</li>#}
-{#    <li>Email: {{ order.email }}</li>#}
-{#    <li>Доставка:#}
-{#        {% if order.requires_delivery %}#}
-{#            адреса доставки: {{ order.delivery_address }}#}
-{#        {% else %}#}
-{#           Самовивіз#}
-{#        {% endif %}#}
-{##}
-{#    </li>#}
-{##}
-{#    <li>Спосіб оплати:#}
-{#        {% if order.payment_on_get %}#}
-{#          готівкою/картою при отриманні#}
-{#        {% else %}#}
-{#            оплата картою#}
-{#        {% endif %}#}
-{#    </li>#}
-{#</ul>#}
-{##}
-{#<p>Якщо у вас є питання або потрібна додаткова інформація, будь ласка, зв'яжіться з нами.</p>#}
-{##}
-{#<p>Дякуємо за покупку!</p>#}
+
 
 <!DOCTYPE html>
 <html lang="uk">
@@ -73,6 +44,7 @@
             font-size: 12px;
             color: #777777;
         }
+
     </style>
 </head>
 <body>
@@ -82,15 +54,20 @@
     <p>{{ order.user.first_name|capfirst }}, дякуємо за Ваше замовлення. Ми отримали інформацію про нього та
         найближчим часом обробимо Ваш запит. Номер Вашого замовлення: {{ order.id }}.</p>
 
+    {% for item in order.orderitem_set.all %}
+
+    {% endfor %}
+    <hr class="separator">
+
     <p>Деталі Вашого замовлення:</p>
     <ul>
         <li><strong>Телефон:</strong> {{ order.phone_number }}</li>
         <li><strong>Email:</strong> {{ order.email }}</li>
         <li><strong>Доставка:</strong>
             {% if order.requires_delivery %}
-                адреса доставки: {{ order.delivery_address }}
+                {{ order.delivery_address }}
             {% else %}
-                Самовивіз
+                самовивіз
             {% endif %}
         </li>
         <li><strong>Спосіб оплати:</strong>
@@ -113,34 +90,3 @@
 </body>
 </html>
 
-<div class="col-md-6">
-    <p class="order-tile__label">Номер замовлення: 7</p>
-    <dt class="order-tile__label">Товар</dt>
-    <div class="d-flex flex-row align-items-center">
-        <a href="/product/test-4/" class="order-tile__picture">
-            <img src="/media/product_images/2024/04/10/games-the-elder-scrolls-v-skyrim-64193.jpg" alt="test 4">
-        </a>
-        <a href="/product/test-4/" class="a-blue">
-            test 4
-        </a>
-    </div>
-
-    <dl class="order-tile__options justify-content-between">
-        <div class="order-tile__option--left">
-            <dt class="order-tile__label">Ціна</dt>
-            <dd class="order-tile__digit">233,00<span class=" currency">₴</span></dd>
-        </div>
-
-        <div class="order-tile__option order-tile__option--quantity">
-            <dt class="order-tile__label">Кількість</dt>
-            <dd class="order-tile__digit">1</dd>
-        </div>
-        <div class="order-tile__option--right">
-            <dt class="order-tile__label">Сума</dt>
-            <dd class="order-tile__digit"><span class="order-tile__price">233<span class=" currency">₴</span></span>
-                <!----></dd>
-        </div>
-    </dl>
-
-
-</div>

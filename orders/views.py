@@ -1,9 +1,12 @@
+from email.mime.image import MIMEImage
+
 from django.contrib import messages, auth
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from carts.models import Cart
 from goods.utils import DataMixin
@@ -11,7 +14,15 @@ from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
 from users.models import User
 
+def send_order_email(order):
+    html_body = render_to_string('order_email.html', {'order': order})
+    text_body = strip_tags(html_body)
+    subject = f'Дякуємо за замовлення №{order.id} на Nexus.com'
+    msg = EmailMultiAlternatives(subject=subject, body=text_body, to=[order.email])
+    msg.attach_alternative(html_body, 'text/html')
 
+
+    msg.send()
 def create_order(request):
     if request.method == 'POST':
         form = CreateOrderForm(data=request.POST)
@@ -86,11 +97,12 @@ def create_order(request):
                         # Очистить корзину пользователя после создания заказа
                         cart_items.delete()
 
-                        html_body = render_to_string('order_email.html', {'order': order})
-                        msg = EmailMultiAlternatives(subject=f'Дякуємо за замовлення №{order.id} на Nexus.com',
-                                                     to=[order.email])
-                        msg.attach_alternative(html_body, 'text/html')
-                        msg.send()
+                        # html_body = render_to_string('order_email.html', {'order': order})
+                        # msg = EmailMultiAlternatives(subject=f'Дякуємо за замовлення №{order.id} на Nexus.com',
+                        #                              to=[order.email])
+                        # msg.attach_alternative(html_body, 'text/html')
+                        # msg.send()
+                        send_order_email(order)
 
                         messages.success(request, 'Замовлення оформлено!')
 
