@@ -168,7 +168,7 @@ def register_user(request):
     else:
         form = RegisterUserForm()
 
-    context = DataMixin().get_user_context(title='Регістрація', form=form)
+    context = DataMixin().get_user_context(title='Реєстрація', form=form)
 
     return render(request, 'users/register.html', context)
 
