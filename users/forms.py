@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
 from users.models import User
-from users.utils import validate_email
+from users.utils import validate_email, validate_username
 
 
 class RegisterUserForm(UserCreationForm):
@@ -35,6 +35,11 @@ class LoginUserForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+    def clean_username(self):
+        email = self.cleaned_data['username']
+        validate_username(email)
+        return email
 
 
 class ProfileUserForm(UserChangeForm):

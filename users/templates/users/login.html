@@ -22,7 +22,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="id_username" class="form-label">E-mail</label>
-                        <div class="form-error-1 text-center">{{ form.username.errors }}</div>
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                <span class="form-error-1 text-center">{{ form.username.errors }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endif %}
                         <input type="text" class="form-control" name="username" id="id_username"
                                placeholder="Введіть E-mail" required>
                     </div>
