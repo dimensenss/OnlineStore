@@ -12,16 +12,6 @@ from goods.models import ProductImage, Category, Brand, Product, ProductAttribut
 class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
-        if 'request' not in context:
-            context['request'] = self.request
-
-        recently_viewed_qs = (
-            self.get_products_with_previews(Product.objects.filter(
-                slug__in=context['request'].session.get("recently_viewed", [])))) #.annotate( sneakers_first_image=F("first_image__image"))
-
-        # recently_viewed_qs = sorted(recently_viewed_qs, key=lambda x: context['request'].session[x.slug])
-
-        context['recently_viewed_qs'] = recently_viewed_qs
 
         return context
 
@@ -34,6 +24,8 @@ class DataMixin:
             preview=Subquery(first_image_subquery)
         )
         return qs
+
+
 
 
 class BrandsAutocomplete(autocomplete.Select2QuerySetView):

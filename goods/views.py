@@ -69,9 +69,6 @@ class ProductView(FormMixin, DataMixin, DetailView):
         return self.request.get_full_path()
 
 
-
-
-
 class CatalogPage(DataMixin, ListView):
     model = Product
     template_name = 'goods/catalog_page.html'
@@ -119,6 +116,7 @@ class SearchPage(DataMixin, ListView):
         mixin_context = self.get_user_context(title='Nexus')
         return dict(list(context.items()) + list(mixin_context.items()))
 
+
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Сторінка не знайдена</h1>')
 
@@ -133,14 +131,14 @@ def remove_review(request):
 
         reviews_qs = Review.objects.filter(product_id=product_id)
         review_container_html = render_to_string(
-            'includes/review_block.html',{
+            'includes/review_block.html', {
                 'reviews_qs': reviews_qs
             }, request=request
         )
 
         response_data = {
             'message': "Відгук видалено",
-            'review_container' : review_container_html
+            'review_container': review_container_html
         }
 
         return JsonResponse(response_data)
@@ -155,6 +153,5 @@ def recently_viewed(request, product_slug):
             request.session["recently_viewed"].remove(product_slug)
         request.session["recently_viewed"].insert(0, product_slug)
         if len(request.session["recently_viewed"]) > MAX_RECENT_VIEWED_PRODUCTS:
-            del request.session["recently_viewed"][MAX_RECENT_VIEWED_PRODUCTS-1]
+            del request.session["recently_viewed"][MAX_RECENT_VIEWED_PRODUCTS - 1]
     request.session.modified = True
-

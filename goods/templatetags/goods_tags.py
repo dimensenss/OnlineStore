@@ -44,3 +44,12 @@ def get_prices(context):
     context['max_price'] = str(max_price)
 
     return ''
+
+
+@register.simple_tag(name='get_recently_viewed_products', takes_context=True)
+def get_recently_viewed_products(context):
+    recently_viewed_qs = (
+        DataMixin().get_products_with_previews(Product.objects.filter(
+            slug__in=context['request'].session.get("recently_viewed",
+                                                    []))))
+    return recently_viewed_qs
