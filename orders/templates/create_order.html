@@ -8,27 +8,15 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Детали заказа -->
-    <div class="container">
-        <h3 class="block-title my-4">Оформлення замовлення</h3>
+    <div class="container-fluid container-xl">
+        <h3 class="block-title my-xl-4 my-3">Оформлення замовлення</h3>
         <div class="card mb-3 order-form">
             <div class="card-body">
                 <form action="{% url 'orders:create_order' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-md-4 order-form-info">
+                        <div class="col-xl-4 col-md-5 order-form-info">
                             <div class="mb-3">
-                                {% if not request.user.is_authenticated %}
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <p class="green-stroke">
-                                            Я новий клієнт
-                                        </p>
-                                        <p class="green-stroke">
-                                            <a href="{% url 'users:login' %}?next=/orders/create-order/">Я постійний
-                                                клієнт</a>
-                                        </p>
-                                    </div>
-                                {% endif %}
                                 {% if form.first_name.errors %}
                                     <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                         <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
@@ -87,15 +75,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="requires_registration" class="form-label">Зареєструвати акаунт? </label>
+                                <div class="d-flex justify-content-between">
+                                    <label for="requires_registration" class="form-label">Зареєструватися?</label>
+                                    {% if not request.user.is_authenticated %}
+                                        <p class="green-stroke">
+                                            <a href="{% url 'users:login' %}?next=/orders/create-order/">Увійти</a>
+                                        </p>
+                                    {% endif %}
+                                </div>
                                 <div class="">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="requires_registration"
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input me-2" type="radio" name="requires_registration"
                                                id="id_requires_registration_1" value="1">
                                         <label class="form-check-label" for="id_requires_registration_1">Так</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="requires_registration"
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input me-2" type="radio" name="requires_registration"
                                                id="id_requires_registration_0" value="0" checked>
                                         <label class="form-check-label" for="id_requires_registration_0">Ні</label>
                                     </div>
@@ -105,7 +100,7 @@
                             <div class="mb-3" id="passwordField">
                                 <div id="passwordFieldsContainer"
                                      {% if form.requires_registration.value != '1' %}style="display: none;"{% endif %}>
-                                    <label for="id_password1" class="form-label">Введіть пароль</label>
+{#                                    <label for="id_password1" class="form-label">Введіть пароль</label>#}
                                     {% if form.password1.errors %}
                                         <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                             <div class="form-error-1 text-center">{{ form.password1.errors }}</div>
@@ -116,7 +111,7 @@
                                     <input type="password" class="form-control" name="password1" id="id_password1"
                                            placeholder="Введіть пароль">
 
-                                    <label for="id_password2" class="form-label mt-3">Повторіть пароль</label>
+{#                                    <label for="id_password2" class="form-label mt-3">Повторіть пароль</label>#}
                                     {% if form.password2.errors %}
                                         <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                             <div class="form-error-1 text-center">{{ form.password2.errors }}</div>
@@ -124,7 +119,7 @@
                                                     aria-label="Close"></button>
                                         </div>
                                     {% endif %}
-                                    <input type="password" class="form-control" name="password2" id="id_password2"
+                                    <input type="password" class="form-control mt-3" name="password2" id="id_password2"
                                            placeholder="Повторіть пароль">
                                 </div>
                             </div>
@@ -133,13 +128,13 @@
                                 <div class="cart-form-title mb-3">Доставка</div>
 {#                                <label for="delivery" class="form-label">Спосіб доставки: </label>#}
                                 <div class="">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="requires_delivery"
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input me-2" type="radio" name="requires_delivery"
                                                id="id_requires_delivery" value="1" checked>
                                         <label class="form-check-label" for="id_requires_delivery">Нова пошта</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="requires_delivery"
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input me-2" type="radio" name="requires_delivery"
                                                id="id_requires_delivery" value="0">
                                         <label class="form-check-label" for="id_requires_delivery">Самовивіз</label>
                                     </div>
@@ -167,14 +162,14 @@
                                 <div class="cart-form-title mb-3">Оплата</div>
 {#                                <label class="form-label">Спосіб оплати: </label>#}
                                 <div class="">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="payment_on_get"
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input me-2" type="radio" name="payment_on_get"
                                                id="id_payment_on_get" value="0" checked>
                                         <label class="form-check-label" for="id_payment_on_get">Оплата
                                             картою</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="payment_on_get"
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input me-2" type="radio" name="payment_on_get"
                                                id="id_payment_on_get" value="1">
                                         <label class="form-check-label" for="id_payment_on_get">Накладний платіж</label>
                                     </div>
@@ -184,7 +179,7 @@
                             {% user_carts request as carts %}
                             {% if carts %}
                                 <div class="mt-3">
-                                    <button type="submit" class="create-order-btn">Підтвердити замовлення
+                                    <button type="submit" class="create-order-btn mb-3">Підтвердити замовлення
                                     </button>
                                 </div>
                             {% endif %}
@@ -231,7 +226,7 @@
                                 });
                             </script>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-xl-8 col-md-7 ">
                             <div class="cart-form-title mb-3">Деталі замовлення</div>
                             <table class="cart-table">
                                 <thead>

@@ -331,6 +331,7 @@ button {
 }
 .order-form{
     background-color: #151515;
+    font-size: 16px;
 }
 .cart-table{
     background-color: #1D1D1D;
@@ -341,7 +342,7 @@ button {
     vertical-align: middle;
     border: solid #303030 2px;
     text-align: center;
-    padding: 0 1rem 0 1rem;
+    padding: 0 5px 0 5px;
 }
 .cart-table thead{
     color: #b3b3b3;
@@ -363,12 +364,18 @@ button {
 }
 .create-order-btn{
     width: 100%;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 5px;
-    background-color: #00FF47;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50px;
+    background-color: #7FFF00;
+    font-weight: 600;
 }
-.order-form-info input[type='text'], .order-form-info input[type='email'], .order-form-info textarea{
+.create-order-btn:hover{
+    background-color: #CF2EFF;
+    color: #FFFFFF;
+    transition: all 0.3s;
+}
+.order-form-info input[type='text'], .order-form-info input[type='email'], .order-form-info textarea, .order-form-info input[type='password']{
     background-color: #1D1D1D;
     border-radius: 5px;
     border: solid #303030 2px;
@@ -384,10 +391,16 @@ button {
 .order-form-info input[type='radio']:checked{
     background-color: #CF2EFF;
 }
-
+.form-check-label{
+    margin-top: 6px;
+}
 @media (max-width: 1200px) {
-
-
+    .cart-table td{
+        font-size: 14px;
+    }
+    .cart-table img{
+    max-width: 80px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -404,7 +417,26 @@ button {
         height: 30px;
         line-height: 30px;
     }
-
+    /*cart-form*/
+    .cart-table td{
+        font-size: 12px;
+    }
+    .order-form-info input[type='text'], .order-form-info input[type='email'], .order-form-info textarea, .order-form-info input[type='password']{
+        font-size: 14px;
+    }
+    .cart-form-title{
+        font-size: 16px;
+    }
+    .order-form{
+        font-size: 14px;
+    }
+    .order-form-info input[type='radio']{
+    height: 18px;
+    width: 18px;
+    }
+    .block-title{
+        font-size: 20px;
+    }
     /* footer */
     .footer-title {
         font-size: 16px;
@@ -459,6 +491,26 @@ button {
 
 @media (max-width: 575px) {
     /* header */
+
+    /*cart-form*/
+    .cart-table td{
+        font-size: 10px;
+    }
+    .order-form-info input[type='text'], .order-form-info input[type='email'], .order-form-info textarea, .order-form-info input[type='password']{
+        font-size: 12px;
+    }
+    .cart-form-title{
+        font-size: 14px;
+    }
+    .order-form{
+        font-size: 12px;
+    }
+    .cart-table img{
+        max-width: 60px;
+    }
+    .block-title{
+        font-size: 16px;
+    }
     /* footer */
     .footer-title {
         font-size: 12px;
