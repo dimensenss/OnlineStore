@@ -445,6 +445,9 @@ a:hover{
     color: #FFFFFF;
     font-size: 16px;
 }
+.profile-info{
+
+}
 
 @media (max-width: 1200px) {
     .cart-table td{

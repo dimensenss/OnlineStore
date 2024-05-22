@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block header %}
 {% endblock header %}
-
 
 {% block content %}
     <div class="container mt-3">
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-5 sign-form-info">
+            <div class="col-md-5 profile-info">
                 <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
                     <h2 class="text-center">{{ title }}</h2>
                     {% csrf_token %}
@@ -23,8 +20,8 @@
                             </div>
                         {% endif %}
                         {% if user.image %}
-                            <div class="text-center mb-3">
-                                <img src="{{ user.image.url }}" alt="Фото користувача" class="img-fluid rounded-3"
+                            <div class="text-center mb-3 review-user-avatar">
+                                <img src="{{ user.image.url }}" alt="Фото користувача" class=""
                                      style="max-width: 150px">
                             </div>
                         {% endif %}
@@ -121,15 +118,12 @@
 
                 </form>
             </div>
-            <div class="col-md-7">
-                <div class="container cart-items-container">
-                    {% include 'carts/includes/included_cart.html' %}
-                </div>
+            <div class="col-7">
+                {% if orders %}
+                     {% include 'includes/orders_list.html' %}
+                {% endif %}
             </div>
 
-            {% if orders %}
-                 {% include 'includes/orders_list.html' %}
-            {% endif %}
         </div>
     </div>
 {% endblock content %}
