@@ -438,17 +438,43 @@ a:hover{
     background-color: #e8e8e8;
     transition: all 0.3s;
 }
-.feedback__file, .feedback__label{
-    background-color: #1D1D1D;
-    border-radius: 5px;
-    border: solid #303030 2px;
-    color: #FFFFFF;
-    font-size: 16px;
+.feedback__label{
+    position: relative;
+    z-index: 1;
+    right: 35px;
+}
+.feedback__label img{
+    background-color: #151515;
+    width: 35px;
+    height: 35px;
+    border-radius: 0 0 0 7px;
+    padding: 0 0 2px 2px;
+
 }
 .profile-info{
 
 }
-
+.profile-user-avatar img{
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+}
+.profile-info .form-control{
+    height: 30px;
+    line-height: 30px;
+    background-color: #151515;
+    border: none;
+    color: #FFFFFF;
+}
+.profile-info .form-label{
+    height: 30px;
+    line-height: 30px;
+    color: #B3B3B3;
+}
+.accordion-item{
+    background-color: #1D1D1D;
+    border: none;
+}
 @media (max-width: 1200px) {
     .cart-table td{
         font-size: 14px;

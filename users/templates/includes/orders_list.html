@@ -30,10 +30,10 @@
                      aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
 
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="d-flex flex-column">
+                            <div class="">
                                 <p class="order-tile__label">Інформація про замовлення</p>
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column orders-list-info">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p>{{ order.user }}</p>
                                     </div>
@@ -46,79 +46,122 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p>{{ order.phone_number }}</p>
                                     </div>
-                                    <h2>Графік роботи:</h2>
-                                    <p>Пн-Пт: 08:00-19:00</p>
-                                    <p>Сб-Нд: 09:00-18:00</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="">
                                 <p class="order-tile__label">Номер замовлення: {{ order.id }}</p>
-
-
-                                {% for item in order.orderitem_set.all %}
-
-                                    <dt class="order-tile__label">Товар</dt>
-                                    <div class="d-flex flex-row align-items-center">
-                                        <a href="{% url 'goods:product' item.product_slug %}"
-                                           class="order-tile__picture">
-                                            <img src="{% get_media_prefix %}{{ item.product.images.first.image }}"
-                                                 alt="{{ item.product.title }}">
-                                        </a>
-                                        <a href="{% url 'goods:product' item.product_slug %}"
-                                           class="a-blue">
-                                            {{ item.product.title }}
-                                        </a>
-                                    </div>
-
-                                    <dl class="order-tile__options justify-content-between">
-                                        <div class="order-tile__option--left">
-                                            <dt class="order-tile__label">Ціна</dt>
-                                            <dd class="order-tile__digit">{{ item.price }}<span
-                                                    class=" currency">₴</span></dd>
-                                        </div>
-
-                                        <div class="order-tile__option order-tile__option--quantity">
-                                            <dt class="order-tile__label">Кількість</dt>
-                                            <dd class="order-tile__digit">{{ item.quantity }}</dd>
-                                        </div>
-                                        <div class="order-tile__option--right">
-                                            <dt class="order-tile__label">Сума</dt>
-                                            <dd class="order-tile__digit"><span
-                                                    class="order-tile__price">{{ item.products_price }}<span
-                                                    class=" currency">₴</span></span><!----></dd>
-                                        </div>
-                                    </dl>
-                                {% endfor %}
-                                <hr class="separator">
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="order-tile__label">Спосіб оплати</p>
-                                        {% if order.payment_on_get %}
-                                            <p>Готівкою/картою при отриманні</p>
-                                        {% else %}
-                                            <p>Оплата картою</p>
-                                        {% endif %}
-
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="order-tile__label">Статус</p>
-                                        <p>{{ order.status }}</p>
-
-                                    </div>
-
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="order-tile__label">Доставка</p>
-                                        {% if order.requires_delivery %}
-                                            <p>На адресу: {{ order.delivery_address }}</p>
-                                        {% else %}
-                                            <p>Самовивіз</p>
-                                        {% endif %}
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="order-tile__label">Разом:</p>
-                                        <h4>{{ order.orderitem_set.total_price }} ₴</h4>
-                                    </div>
-                                </div>
+                                    <table class="cart-table">
+                                        <thead>
+                                        <td colspan="2" class="col-7">Найменування</td>
+                                        <td class="col-2">Ціна</td>
+                                        <td class="col-1">Кількість</td>
+                                        <td class="col-2">Сума</td>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in order.orderitem_set.all %}
+                                                <tr>
+                                                    <td class="p-0">
+                                                        <a href="{% url 'goods:product' item.product_slug %}">
+                                                            <img src="{% get_media_prefix %}{{ item.product.images.first.image }}"
+                                                                 alt="{{ item.product.title }}"
+                                                                 class="img-fluid cart-img">
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-start">
+                                                        <a href="{% url 'goods:product' item.product.slug %}">
+                                                            <p>{{ item.product.title }}</p>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <p>{{ item.price }} ₴</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>{{ item.quantity }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>{{ item.products_price }} ₴</p>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="4" class="text-end" style="color: #b3b3b3;">
+                                                <p>Загальна сума</p>
+                                            </td>
+                                            <td>
+                                                <p>{{ order.orderitem_set.total_price }} ₴</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-end" style="color: #b3b3b3;">
+                                                <p>Вартість доставки за тарифом перевізника</p>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+{#                                    <dt class="order-tile__label">Товар</dt>#}
+{#                                    <div class="d-flex flex-row align-items-center">#}
+{#                                        <a href="{% url 'goods:product' item.product_slug %}"#}
+{#                                           class="order-tile__picture">#}
+{#                                            <img src="{% get_media_prefix %}{{ item.product.images.first.image }}"#}
+{#                                                 alt="{{ item.product.title }}">#}
+{#                                        </a>#}
+{#                                        <a href="{% url 'goods:product' item.product_slug %}"#}
+{#                                           class="a-blue">#}
+{#                                            {{ item.product.title }}#}
+{#                                        </a>#}
+{#                                    </div>#}
+{##}
+{#                                    <dl class="order-tile__options justify-content-between">#}
+{#                                        <div class="order-tile__option--left">#}
+{#                                            <dt class="order-tile__label">Ціна</dt>#}
+{#                                            <dd class="order-tile__digit">{{ item.price }}<span#}
+{#                                                    class=" currency">₴</span></dd>#}
+{#                                        </div>#}
+{##}
+{#                                        <div class="order-tile__option order-tile__option--quantity">#}
+{#                                            <dt class="order-tile__label">Кількість</dt>#}
+{#                                            <dd class="order-tile__digit">{{ item.quantity }}</dd>#}
+{#                                        </div>#}
+{#                                        <div class="order-tile__option--right">#}
+{#                                            <dt class="order-tile__label">Сума</dt>#}
+{#                                            <dd class="order-tile__digit"><span#}
+{#                                                    class="order-tile__price">{{ item.products_price }}<span#}
+{#                                                    class=" currency">₴</span></span><!----></dd>#}
+{#                                        </div>#}
+{#                                    </dl>#}
+{#                                {% endfor %}#}
+{#                                <hr class="separator">#}
+{#                                <div class="d-flex flex-column">#}
+{#                                    <div class="d-flex justify-content-between align-items-center">#}
+{#                                        <p class="order-tile__label">Спосіб оплати</p>#}
+{#                                        {% if order.payment_on_get %}#}
+{#                                            <p>Готівкою/картою при отриманні</p>#}
+{#                                        {% else %}#}
+{#                                            <p>Оплата картою</p>#}
+{#                                        {% endif %}#}
+{##}
+{#                                    </div>#}
+{#                                    <div class="d-flex justify-content-between align-items-center">#}
+{#                                        <p class="order-tile__label">Статус</p>#}
+{#                                        <p>{{ order.status }}</p>#}
+{##}
+{#                                    </div>#}
+{##}
+{#                                    <div class="d-flex justify-content-between align-items-center">#}
+{#                                        <p class="order-tile__label">Доставка</p>#}
+{#                                        {% if order.requires_delivery %}#}
+{#                                            <p>На адресу: {{ order.delivery_address }}</p>#}
+{#                                        {% else %}#}
+{#                                            <p>Самовивіз</p>#}
+{#                                        {% endif %}#}
+{#                                    </div>#}
+{#                                    <div class="d-flex justify-content-between align-items-center">#}
+{#                                        <p class="order-tile__label">Разом:</p>#}
+{#                                        <h4>{{ order.orderitem_set.total_price }} ₴</h4>#}
+{#                                    </div>#}
+{#                                </div>#}
                             </div>
                         </div>
                     </div>
