@@ -10,7 +10,7 @@
 {% block content %}
     <div class="container mt-3">
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-5">
+            <div class="col-md-5 sign-form-info">
                 <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
                     <h2 class="text-center">{{ title }}</h2>
                     {% csrf_token %}
@@ -112,7 +112,7 @@
 
 
                     <div class="d-flex justify-content-around align-items-baseline">
-                        <button type="submit" class="custom-btn btn-1 ">Зберегти</button>
+                        <button type="submit" class="cart-footer-btn me-3 px-3">Зберегти</button>
                         <div class="mb-3">
                         <a href="{% url 'users:password_change' %}" class="a-blue">Змінити пароль</a>
                     </div>
