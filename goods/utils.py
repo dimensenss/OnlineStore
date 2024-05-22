@@ -2,7 +2,7 @@ import django_filters
 from dal import autocomplete
 from django import forms
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.db.models import OuterRef, Subquery, Count, Value, CharField
+from django.db.models import OuterRef, Subquery, Count, Value, CharField, F
 from django.db.models.functions import Cast
 from django_filters import CharFilter
 
@@ -12,6 +12,7 @@ from goods.models import ProductImage, Category, Brand, Product, ProductAttribut
 class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
+
         return context
 
     def get_products_with_previews(self, qs):
@@ -23,6 +24,8 @@ class DataMixin:
             preview=Subquery(first_image_subquery)
         )
         return qs
+
+
 
 
 class BrandsAutocomplete(autocomplete.Select2QuerySetView):

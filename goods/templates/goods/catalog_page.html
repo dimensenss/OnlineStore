@@ -23,12 +23,11 @@
                                 {{ filter.form.brand}}
                             </div>
 
-            {% get_min_max_prices products_qs %}
+            {% get_min_max_prices %}
 
              <div class="price-input-container">
                 <div class="price-input">
                     <div class="price-field">
-
                         <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
                                value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
 
@@ -138,7 +137,7 @@
                                             </p>
                                         {% endif %}
                                     </div>
-                                    <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart"
+                                    <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
                                        data-product-id= '{{ product.id }}'
                                        data-is-order = 'false'>
                                         {% csrf_token %}
@@ -151,6 +150,7 @@
                 {% endif %}
             {% endfor %}
         </div>
+     {% include 'includes/recently_viewed.html' %}
     </div>
     
 {% endblock content %}

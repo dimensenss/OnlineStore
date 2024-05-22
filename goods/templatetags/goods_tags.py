@@ -31,8 +31,8 @@ def get_breadcrumbs(category):
     }
 
 @register.simple_tag(name='get_min_max_prices', takes_context=True)
-def get_prices(context, queryset):
-    aggregate_data = Product.objects.all().filter(is_published=True).aggregate(
+def get_prices(context):
+    aggregate_data = Product.objects.filter(is_published=True).aggregate(
         min_price=Min('sell_price'),
         max_price=Max('sell_price'),
     )
@@ -44,3 +44,12 @@ def get_prices(context, queryset):
     context['max_price'] = str(max_price)
 
     return ''
+
+
+@register.simple_tag(name='get_recently_viewed_products', takes_context=True)
+def get_recently_viewed_products(context):
+    recently_viewed_qs = (
+        DataMixin().get_products_with_previews(Product.objects.filter(
+            slug__in=context['request'].session.get("recently_viewed",
+                                                    []))))
+    return recently_viewed_qs
