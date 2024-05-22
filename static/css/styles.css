@@ -368,8 +368,8 @@ a:hover{
 }
 .create-order-btn{
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     border-radius: 50px;
     background-color: #7FFF00;
     font-weight: 600;
@@ -396,12 +396,25 @@ a:hover{
     background-color: #CF2EFF;
 }
 
-.sign-form-info input[type='text'], .sign-form-info input[type='email'], .sign-form-info input[type='password'],.order-form-info textarea{
-    background-color: #1D1D1D;
+.sign-form-info input[type='text'], .sign-form-info input[type='password']{
+    height: 40px;
+    background-color: #FFFFFF;
+    border: none;
     border-radius: 5px;
-    border: solid #303030 2px;
-    color: #FFFFFF;
     font-size: 16px;
+}
+.sign-form-info{
+    border-radius: 10px;
+    padding: 1.5rem;
+    font-size: 16px;
+    background: rgb(92, 39, 254);
+    background: linear-gradient(90deg, rgba(92, 39, 254, 1) 0%, rgba(193, 101, 221, 1) 100%);
+}
+.sign-form-info label{
+    color: #dcdcdc;
+}
+.sign-form-info a:hover{
+    color: #1D1D1D;
 }
 .sign-form-info input[type='radio']{
     border: none;
@@ -414,6 +427,16 @@ a:hover{
 }
 .form-check-label{
     margin-top: 6px;
+}
+.btn-login{
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    font-size: 16px;
+    width: 100%;
+}
+.btn-login:hover, .gsi-material-button:hover{
+    background-color: #e8e8e8;
+    transition: all 0.3s;
 }
 .feedback__file, .feedback__label{
     background-color: #1D1D1D;
@@ -540,6 +563,10 @@ a:hover{
     .block-title{
         font-size: 16px;
     }
+    /*log in*/
+    .sign-form-info, .sign-form-info input[type='text'], .sign-form-info input[type='password'], .btn-login, .login-btn-google{
+        font-size: 14px;
+    }
     /* footer */
     .footer-title {
         font-size: 12px;
@@ -592,21 +619,20 @@ a:hover{
     z-index: 9999;
 }
 
-.gsi-material-button {
+.gsi-material-button{
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     -webkit-appearance: none;
     background-color: WHITE;
     background-image: none;
-    border: 1px solid #747775;
     -webkit-border-radius: 4px;
     border-radius: 4px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: #1f1f1f;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     height: 40px;
     letter-spacing: 0.25px;
     outline: none;
@@ -618,14 +644,14 @@ a:hover{
     transition: background-color .218s, border-color .218s, box-shadow .218s;
     vertical-align: middle;
     white-space: nowrap;
-    width: auto;
-    max-width: 400px;
+    width: 100%;
     min-width: min-content;
 }
 
 .gsi-material-button .gsi-material-button-icon {
     height: 20px;
-    margin-right: 12px;
+    margin-left: 0;
+    margin-right: 10px;
     min-width: 20px;
     width: 20px;
 }
@@ -639,7 +665,7 @@ a:hover{
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     height: 100%;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     width: 100%;
 }
@@ -685,13 +711,13 @@ a:hover{
 }
 
 .gsi-material-button:not(:disabled):hover {
-    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    /*-webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);*/
+    /*box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);*/
 }
 
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
-    background-color: #303030;
-    opacity: 8%;
+    /*background-color: #303030;*/
+    /*opacity: 8%;*/
 }
 
 .rating {
