@@ -113,21 +113,21 @@
 
                         {% if request.user.is_authenticated %}
                             <div class="col  d-flex justify-content-center">
-                                <a class="btn btn-outline-light" href="{% url 'user:profile' %}"
+                                <a class="btn btn-light" href="{% url 'user:profile' %}"
                                    role="button">Кабінет</a>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-light" href="{% url 'user:logout' %}"
+                                <a class="btn btn-light" href="{% url 'user:logout' %}"
                                    role="button">Вийти</a>
                             </div>
                         {% else %}
                             <div class="col pt-2 d-flex justify-content-center">
-                                <a class="btn btn-outline-light" href="{% url 'user:login' %}" role="button">Вхід</a>
+                                <a class="btn btn-light" href="{% url 'user:login' %}" role="button">Вхід</a>
                             </div>
                             <div class="row pt-2">
                                 <div class="col text-center">
                                     Нема аккаунта?
-                                    <a class="a-light text-decoration-underline" href="{% url 'user:register' %}">Регістрація</a>
+                                    <a href="{% url 'user:register' %}">Регістрація</a>
                                 </div>
                             </div>
 

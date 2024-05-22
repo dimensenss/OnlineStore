@@ -2,7 +2,7 @@ import django_filters
 from dal import autocomplete
 from django import forms
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.db.models import OuterRef, Subquery, Count, Value, CharField
+from django.db.models import OuterRef, Subquery, Count, Value, CharField, F
 from django.db.models.functions import Cast
 from django_filters import CharFilter
 
@@ -12,6 +12,17 @@ from goods.models import ProductImage, Category, Brand, Product, ProductAttribut
 class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
+        if 'request' not in context:
+            context['request'] = self.request
+
+        recently_viewed_qs = (
+            self.get_products_with_previews(Product.objects.filter(
+                slug__in=context['request'].session.get("recently_viewed", [])))) #.annotate( sneakers_first_image=F("first_image__image"))
+
+        # recently_viewed_qs = sorted(recently_viewed_qs, key=lambda x: context['request'].session[x.slug])
+
+        context['recently_viewed_qs'] = recently_viewed_qs
+
         return context
 
     def get_products_with_previews(self, qs):
