@@ -31,8 +31,8 @@ def get_breadcrumbs(category):
     }
 
 @register.simple_tag(name='get_min_max_prices', takes_context=True)
-def get_prices(context, queryset):
-    aggregate_data = queryset.aggregate(
+def get_prices(context):
+    aggregate_data = Product.objects.filter(is_published=True).aggregate(
         min_price=Min('sell_price'),
         max_price=Max('sell_price'),
     )
