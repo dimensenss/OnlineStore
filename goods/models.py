@@ -174,7 +174,7 @@ class Review(models.Model):
         (5, '5'),
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, default='Анонім', on_delete=models.SET_DEFAULT, related_name='reviews')
+    user = models.ForeignKey(User, default=0, on_delete=models.SET_DEFAULT, related_name='reviews')
     text = models.TextField(verbose_name='Текст', max_length=500)
     date = models.DateTimeField(auto_now_add=True)
     rate = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
