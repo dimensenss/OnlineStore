@@ -23,23 +23,63 @@
                                 {{ filter.form.brand}}
                             </div>
 
+            {% get_min_max_prices products_qs %}
+
+             <div class="price-input-container">
+                <div class="price-input">
+                    <div class="price-field">
+
+                        <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
+                               value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
+
+
+{#                        <span>Minimum Price</span>#}
+{#                        <input type="number"#}
+{#                               class="min-input"#}
+{#                               value="2500">#}
+                    </div>
+                    <div class="price-field">
+                        <input type="number" name="price__lte" step="any" class="max-input " id="id_price__lte"
+                               value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
+{#                        <span>Maximum Price</span>#}
+{#                        <input type="number"#}
+{#                               class="max-input"#}
+{#                               value="8500">#}
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <div class="price-slider">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider -->
+            <div class="range-input">
+                <input type="range"
+                       class="min-range"
+                       min="0"
+                       max="{{ max_price }}"
+                       value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
+                       step="1">
+                <input type="range"
+                       class="max-range"
+                       min="0"
+                       max="{{ max_price }}"
+                       value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
+                       step="1">
+            </div>
 
 
 
                             <div>
                                 <div class="d-flex flex-row justify-content-center align-items-center">
 
-                                    {{ filter.form.price__gte }}
-                                    {{ filter.form.price__lte }}
+
                                     <button type="submit" class="btn btn-secondary mb-2">
                                         Ок
                                     </button>
                                 </div>
-                                {% get_min_max_prices products_qs %}
-                                <div class="row mx-1 mb-2">
-                                    <div id="slider-range-lg" data-min-price="{{ min_price }}"
-                                         data-max-price="{{ max_price }}"></div>
-                                </div>
+
                             </div>
 
                             <div class="d-flex justify-content-center">

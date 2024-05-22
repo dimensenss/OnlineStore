@@ -40,7 +40,7 @@ def get_prices(context, queryset):
     min_price = int(aggregate_data['min_price']) if aggregate_data['min_price'] is not None else None
     max_price = int(aggregate_data['max_price']) if aggregate_data['max_price'] is not None else None
 
-    context['min_price'] = min_price
-    context['max_price'] = max_price
+    context['min_price'] = str(min_price)
+    context['max_price'] = str(max_price)
 
     return ''
