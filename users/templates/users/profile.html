@@ -5,7 +5,7 @@
 {% endblock header %}
 
 {% block content %}
-    <div class="container main">
+    <div class="container-fluid container-xl main px-3">
         <h2 class="block-title my-3">{{ title }} користувача {{ form.username.value }}</h2>
         <div class="d-flex row">
             <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data"
@@ -19,7 +19,6 @@
                                     aria-label="Close"></button>
                         </div>
                     {% endif %}
-
                     <div class="d-flex">
                         <label for="file" class="feedback__label">
 {#                            <img src="{% static 'img/edit-ico.svg' %}" alt="edit">#}
@@ -117,7 +116,7 @@
                     </div>
                 </div>
             </form>
-            <div class="col-8">
+            <div class="col-8 ps-3">
                 {% if orders %}
                     {% include 'includes/orders_list.html' %}
                 {% endif %}
