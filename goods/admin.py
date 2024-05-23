@@ -60,6 +60,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 
+
 class CategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'title', 'slug', 'count_products')
     list_display_links = ('id', 'title')

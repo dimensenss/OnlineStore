@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Avg
+from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
@@ -47,7 +48,12 @@ class Product(models.Model):
         return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
 
     def get_html_image(self):
-        return mark_safe(f"<img src = '{self.images.first().image.url}' width=100 >")
+        first_image = self.images.first()
+        if first_image and first_image.image:
+            return mark_safe(f"<img src='{first_image.image.url}' width='100' />")
+        else:
+            image_url = static('img/NEXUS.svg')
+            return mark_safe(f"<img src='{image_url}' width='100' />")
 
     def display_id(self):
         return self.sku if self.sku else f"{self.id:05}"
@@ -147,7 +153,11 @@ class ProductImage(models.Model):
     )
 
     def get_html_image(self):
-        return mark_safe(f"<img src = '{self.image.url}' width=100 >")
+        if self.image.url:
+            return mark_safe(f"<img src = '{self.image.url}' width=100 >")
+        else:
+            image_url = static('img/NEXUS.svg')
+            return mark_safe(f"<img src = '{image_url}' width=100 >")
 
     class Meta:
         verbose_name = 'Фотографія'
