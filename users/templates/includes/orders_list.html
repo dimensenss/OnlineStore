@@ -1,8 +1,7 @@
 {% load static %}
 <div class="row">
-    <h3 class="text-center mb-4">Мої замовлення</h3>
     <!-- Разметка заказов -->
-    <div class="accordion" id="accordionExample">
+    <div class="accordion orders-list" id="accordionExample">
         {% for order in orders %}
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading{{ order.id }}">
@@ -26,7 +25,7 @@
                     </button>
                 </h2>
                 <div id="collapse{{ order.id }}"
-                     class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %} shadow p-3 mb-5"
+                     class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %} p-3 mb-5"
                      aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
 

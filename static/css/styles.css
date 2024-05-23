@@ -438,42 +438,68 @@ a:hover{
     background-color: #e8e8e8;
     transition: all 0.3s;
 }
-.feedback__label{
-    position: relative;
-    z-index: 1;
-    right: 35px;
-}
-.feedback__label img{
-    background-color: #151515;
-    width: 35px;
-    height: 35px;
-    border-radius: 0 0 0 7px;
-    padding: 0 0 2px 2px;
+/*.feedback__label{*/
+/*    position: relative;*/
+/*    z-index: 1;*/
+/*    right: 35px;*/
+/*}*/
+/*.feedback__label img{*/
+/*    width: 35px;*/
+/*    height: 35px;*/
+/*    border-radius: 0 0 0 10px;*/
+/*}*/
 
-}
 .profile-info{
-
+    background-color: #000000;
+    background-image: url("/static/img/profile-bg.png");
+    background-size: cover;
+    padding: 1.5rem;
+    border-radius: 10px;
 }
 .profile-user-avatar img{
     height: 250px;
     width: 250px;
     object-fit: cover;
+    border-radius: 1000px;
+    border: solid rgba(21, 21, 21, 0.7) 10px;
+}
+.orders-list {
+  border: none;
 }
 .profile-info .form-control{
-    height: 30px;
-    line-height: 30px;
-    background-color: #151515;
+    height: 40px;
+    line-height: 40px;
     border: none;
+    border-radius: 10px;
+    color: #FFFFFF;
+    background-color: rgba(21, 21, 21, 0.7);
+    margin-bottom: 1rem;
+}
+.profile-info-btn-save{
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+.profile-info-btn-save:hover{
+    background-color: rgba(255, 255, 255, 0.85);
+    transition: background-color 0.3s;
+}
+.profile-info .form-label, .profile-info-password{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+.profile-info-password a:hover{
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s;
+}
+.profile-table-info{
     color: #FFFFFF;
 }
-.profile-info .form-label{
-    height: 30px;
-    line-height: 30px;
-    color: #B3B3B3;
-}
-.accordion-item{
-    background-color: #1D1D1D;
-    border: none;
+.profile-table-info td{
+    height: 40px;
+    padding: 5px;
 }
 @media (max-width: 1200px) {
     .cart-table td{

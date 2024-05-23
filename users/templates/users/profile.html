@@ -5,13 +5,13 @@
 {% endblock header %}
 
 {% block content %}
-    <div class="container mt-3">
-        <div class="d-flex flex-column">
-            <h2 class="block-title">{{ title }} користувача {{ form.username.value }}</h2>
+    <div class="container mt-3 main">
+        <h2 class="block-title">{{ title }} користувача {{ form.username.value }}</h2>
+        <div class="d-flex">
             <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data"
-                  class="profile-info d-flex">
+                  class="profile-info d-flex flex-column me-3">
                 {% csrf_token %}
-                <div class="col-3">
+                <div class="d-flex">
                     {% if form.image.errors %}
                         <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                             <span class="form-error-1 text-center">{{ form.image.errors }}</span>
@@ -21,14 +21,12 @@
                     {% endif %}
 
                     <div class="d-flex">
-                        <div class="text-center mb-3 profile-user-avatar">
-                            <img src="
-
-                                    {% if user.image %}{{ user.image.url }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
-                                 alt="Фото користувача" class="">
-                        </div>
                         <label for="file" class="feedback__label">
-                            <img src="{% static 'img/edit-ico.svg' %}" alt="edit">
+{#                            <img src="{% static 'img/edit-ico.svg' %}" alt="edit">#}
+                            <div class="text-center mb-3 profile-user-avatar">
+                                <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
+                                     alt="Фото користувача" class="">
+                            </div>
                         </label>
                         <input type="file" id="file" class="form-control feedback__file" name="image"
                                value="{{ form.image.value }}"
@@ -36,81 +34,86 @@
                     </div>
 
                 </div>
-                <div class="d-flex flex-column col-3">
-                    <label for="id_username" class="form-label">Нікнейм:</label>
-                    <label for="id_first_name" class="form-label">Ім'я:</label>
-                    <label for="id_last_name" class="form-label">Прізвище:</label>
-                    <label for="id_email" class="form-label">E-mail:</label>
-                    <label for="id_phone_number" class="form-label">Номер телефону:</label>
-                    <div class="d-flex justify-content-between">
-                        <button type="submit" class="cart-footer-btn me-3 px-3">Зберегти</button>
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-column">
+                        {# login #}
+                        <div class="d-flex flex-column">
+                            <label for="id_username" class="form-label mb-1">Нікнейм:</label>
+                            {% if form.username.errors %}
+                                <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                    <span class="form-error-1 text-center">{{ form.username.errors }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            <input type="text" class="form-control" name="username" value="{{ form.username.value }}"
+                                   id="id_username"
+                                   placeholder="Введіть ваш нік">
+                        </div>
+                        {# name #}
+                        <div class="d-flex flex-column">
+                            <label for="id_first_name" class="form-label mb-1">Ім'я:</label>
+                            {% if form.first_name.errors %}
+                                <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                    <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            <input type="text" class="form-control" name="first_name"
+                                   value="{{ form.first_name.value }}"
+                                   id="id_first_name"
+                                   placeholder="Введіть ваше ім'я">
+                        </div>
+                        {# surname #}
+                        <div class="d-flex flex-column">
+                            <label for="id_last_name" class="form-label mb-1">Прізвище:</label>
+                            {% if form.last_name.errors %}
+                                <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                    <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            <input type="text" class="form-control" name="last_name" value="{{ form.last_name.value }}"
+                                   id="id_last_name"
+                                   placeholder="Введіть ваше прізвище">
+                        </div>
+                        {# E-mail #}
+                        <div class="d-flex flex-column">
+                            <label for="id_email" class="form-label mb-1">E-mail:</label>
+                            {% if form.email.errors %}
+                                <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                    <div class="form-error-1 text-center">{{ form.email.errors }}</div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            <input type="email" class="form-control" name="email" value="{{ form.email.value }}"
+                                   id="id_email"
+                                   placeholder="Введіть вашу пошту">
+                        </div>
+                        {# phone #}
+                        <div class="d-flex flex-column">
+                            <label for="id_phone_number" class="form-label mb-1">Тел.:</label>
+                            {% if form.phone_number.errors %}
+                                <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                                    <span class="form-error-1 text-center">{{ form.phone_number.errors }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            <input type="text" class="form-control" name="phone_number"
+                                   value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
+                                   id="id_phone_number"
+                                   placeholder="Введіть ваш номер телефону">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <a href="{% url 'users:password_change' %}" class="a-blue">Змінити пароль</a>
-                    </div>
-                </div>
-                <div class="mb-3 col-3">
-                    <div class="d-flex justify-content-between">
-                        {% if form.username.errors %}
-                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                                <span class="form-error-1 text-center">{{ form.username.errors }}</span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        <input type="text" class="form-control" name="username" value="{{ form.username.value }}"
-                               id="id_username"
-                               placeholder="Введіть ваш нік">
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        {% if form.first_name.errors %}
-                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                                <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        <input type="text" class="form-control" name="first_name"
-                               value="{{ form.first_name.value }}"
-                               id="id_first_name"
-                               placeholder="Введіть ваше ім'я">
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        {% if form.last_name.errors %}
-                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                                <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        <input type="text" class="form-control" name="last_name" value="{{ form.last_name.value }}"
-                               id="id_last_name"
-                               placeholder="Введіть ваше прізвище">
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        {% if form.email.errors %}
-                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                                <div class="form-error-1 text-center">{{ form.email.errors }}</div>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        <input type="email" class="form-control" name="email" value="{{ form.email.value }}"
-                               id="id_email"
-                               placeholder="Введіть вашу пошту">
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        {% if form.phone_number.errors %}
-                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                                <span class="form-error-1 text-center">{{ form.phone_number.errors }}</span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        <input type="text" class="form-control" name="phone_number"
-                               value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
-                               id="id_phone_number"
-                               placeholder="Введіть ваш номер телефону">
+                    <div class="d-flex flex-column">
+                        <button type="submit" class="profile-info-btn-save mb-4">Зберегти зміни</button>
+                        <div class="profile-info-password">
+                            <a href="{% url 'users:password_change' %}" class="a-blue">Змінити пароль</a>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -119,7 +122,6 @@
                      {% include 'includes/orders_list.html' %}
                 {% endif %}
             </div>
-
         </div>
     </div>
 {% endblock content %}
