@@ -1,44 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block header %}
 {% endblock header %}
 
-
 {% block content %}
     <div class="container mt-3">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-5 sign-form-info">
-                <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
-                    <h2 class="text-center">{{ title }}</h2>
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        {% if form.image.errors %}
-                            <div class="alert alert-danger alert-dismissible pb-0" role="alert">
-                                <span class="form-error-1 text-center">{{ form.image.errors }}</span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        {% if user.image %}
-                            <div class="text-center mb-3">
-                                <img src="{{ user.image.url }}" alt="Фото користувача" class="img-fluid rounded-3"
-                                     style="max-width: 150px">
-                            </div>
-                        {% endif %}
+        <div class="d-flex flex-column">
+            <h2 class="block-title">{{ title }} користувача {{ form.username.value }}</h2>
+            <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data"
+                  class="profile-info d-flex">
+                {% csrf_token %}
+                <div class="col-3">
+                    {% if form.image.errors %}
+                        <div class="alert alert-danger alert-dismissible pb-0" role="alert">
+                            <span class="form-error-1 text-center">{{ form.image.errors }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                    {% endif %}
 
+                    <div class="d-flex">
+                        <div class="text-center mb-3 profile-user-avatar">
+                            <img src="
+
+                                    {% if user.image %}{{ user.image.url }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
+                                 alt="Фото користувача" class="">
+                        </div>
                         <label for="file" class="feedback__label">
-                            <input type="file" id="file" class="form-control feedback__file" name="image"
-                                   value="{{ form.image.value }}"
-                                   accept="image/*" onchange="displayFileName()">
-
+                            <img src="{% static 'img/edit-ico.svg' %}" alt="edit">
                         </label>
-                        <p id="fileName"></p>
+                        <input type="file" id="file" class="form-control feedback__file" name="image"
+                               value="{{ form.image.value }}"
+                               accept="image/*" onchange="displayFileName()" hidden>
+                    </div>
+
+                </div>
+                <div class="d-flex flex-column col-3">
+                    <label for="id_username" class="form-label">Нікнейм:</label>
+                    <label for="id_first_name" class="form-label">Ім'я:</label>
+                    <label for="id_last_name" class="form-label">Прізвище:</label>
+                    <label for="id_email" class="form-label">E-mail:</label>
+                    <label for="id_phone_number" class="form-label">Номер телефону:</label>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="cart-footer-btn me-3 px-3">Зберегти</button>
                     </div>
                     <div class="mb-3">
-                        <label for="id_username" class="form-label">Нік або email</label>
+                        <a href="{% url 'users:password_change' %}" class="a-blue">Змінити пароль</a>
+                    </div>
+                </div>
+                <div class="mb-3 col-3">
+                    <div class="d-flex justify-content-between">
                         {% if form.username.errors %}
                             <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                 <span class="form-error-1 text-center">{{ form.username.errors }}</span>
@@ -50,8 +62,7 @@
                                id="id_username"
                                placeholder="Введіть ваш нік">
                     </div>
-                    <div class="mb-3">
-                        <label for="id_first_name" class="form-label">Ім'я</label>
+                    <div class="d-flex justify-content-between">
                         {% if form.first_name.errors %}
                             <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                 <span class="form-error-1 text-center">{{ form.first_name.errors }}</span>
@@ -59,14 +70,12 @@
                                         aria-label="Close"></button>
                             </div>
                         {% endif %}
-                        <input type="text" class="form-control" name="first_name" value="{{ form.first_name.value }}"
+                        <input type="text" class="form-control" name="first_name"
+                               value="{{ form.first_name.value }}"
                                id="id_first_name"
                                placeholder="Введіть ваше ім'я">
                     </div>
-
-
-                    <div class="mb-3">
-                        <label for="id_last_name" class="form-label">Прізвище</label>
+                    <div class="d-flex justify-content-between">
                         {% if form.last_name.errors %}
                             <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                 <span class="form-error-1 text-center">{{ form.last_name.errors }}</span>
@@ -78,10 +87,7 @@
                                id="id_last_name"
                                placeholder="Введіть ваше прізвище">
                     </div>
-
-
-                    <div class="mb-3">
-                        <label for="id_email" class="form-label">Пошта</label>
+                    <div class="d-flex justify-content-between">
                         {% if form.email.errors %}
                             <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                 <div class="form-error-1 text-center">{{ form.email.errors }}</div>
@@ -93,9 +99,7 @@
                                id="id_email"
                                placeholder="Введіть вашу пошту">
                     </div>
-
-                    <div class="mb-3">
-                        <label for="id_phone_number" class="form-label">Номер телефону</label>
+                    <div class="d-flex justify-content-between">
                         {% if form.phone_number.errors %}
                             <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                                 <span class="form-error-1 text-center">{{ form.phone_number.errors }}</span>
@@ -108,28 +112,14 @@
                                id="id_phone_number"
                                placeholder="Введіть ваш номер телефону">
                     </div>
-
-
-
-                    <div class="d-flex justify-content-around align-items-baseline">
-                        <button type="submit" class="cart-footer-btn me-3 px-3">Зберегти</button>
-                        <div class="mb-3">
-                        <a href="{% url 'users:password_change' %}" class="a-blue">Змінити пароль</a>
-                    </div>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="col-md-7">
-                <div class="container cart-items-container">
-                    {% include 'carts/includes/included_cart.html' %}
                 </div>
+            </form>
+            <div class="">
+                {% if orders %}
+                     {% include 'includes/orders_list.html' %}
+                {% endif %}
             </div>
 
-            {% if orders %}
-                 {% include 'includes/orders_list.html' %}
-            {% endif %}
         </div>
     </div>
 {% endblock content %}
