@@ -5,13 +5,13 @@
 {% endblock header %}
 
 {% block content %}
-    <div class="container mt-3 main">
-        <h2 class="block-title">{{ title }} користувача {{ form.username.value }}</h2>
-        <div class="d-flex">
+    <div class="container main">
+        <h2 class="block-title my-3">{{ title }} користувача {{ form.username.value }}</h2>
+        <div class="d-flex row">
             <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data"
-                  class="profile-info d-flex flex-column me-3">
+                  class="profile-info d-flex flex-column mb-3 col-4">
                 {% csrf_token %}
-                <div class="d-flex">
+                <div class="d-flex justify-content-center">
                     {% if form.image.errors %}
                         <div class="alert alert-danger alert-dismissible pb-0" role="alert">
                             <span class="form-error-1 text-center">{{ form.image.errors }}</span>
@@ -117,9 +117,9 @@
                     </div>
                 </div>
             </form>
-            <div class="">
+            <div class="col-8">
                 {% if orders %}
-                     {% include 'includes/orders_list.html' %}
+                    {% include 'includes/orders_list.html' %}
                 {% endif %}
             </div>
         </div>
