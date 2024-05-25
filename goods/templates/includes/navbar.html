@@ -76,58 +76,51 @@
 
 <div class="modal fade" id="profile-modal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content bg-dark">
+        <div class="modal-content modal-profile">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1">Швидкі посилання</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body modal-profile-body">
                 <!-- Строки с ссылками -->
                 <div class="row mb-2">
                     <div class="col">
-                        <a class="a-light" href="#">Ссылка 1</a>
+                        <a class="a-light" href="#">Про нас</a>
                     </div>
                 </div>
-                <hr class="my-1"> <!-- Серая полоса разделения -->
+                <hr class="my-2"> <!-- Серая полоса разделения -->
                 <div class="row mb-2">
                     <div class="col">
-                        <a class="a-light" href="#">Ссылка 2</a>
+                        <a class="a-light" href="#">Доставка та оплата</a>
                     </div>
                 </div>
-                <hr class="my-1">
+                <hr class="my-2">
                 <div class="row mb-2">
                     <div class="col">
-                        <a class="a-light" href="#">Ссылка 3</a>
+                        <a class="a-light" href="#">Контакти</a>
                     </div>
                 </div>
-                <hr class="my-1">
-                <div class="row mb-2">
-                    <div class="col">
-                        <a class="a-light" href="#">Ссылка 4</a>
-                    </div>
-                </div>
-
-                <hr class="my-1">
+                <hr class="my-2">
                 <div class="container">
                     <div class="row ">
 
                         {% if request.user.is_authenticated %}
                             <div class="col  d-flex justify-content-center">
-                                <a class="btn btn-light" href="{% url 'user:profile' %}"
+                                <a class="btn btn-light modal-profile-btn" href="{% url 'user:profile' %}"
                                    role="button">Кабінет</a>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-light" href="{% url 'user:logout' %}"
+                                <a class="btn btn-light modal-profile-btn" href="{% url 'user:logout' %}"
                                    role="button">Вийти</a>
                             </div>
                         {% else %}
                             <div class="col pt-2 d-flex justify-content-center">
-                                <a class="btn btn-light" href="{% url 'user:login' %}" role="button">Вхід</a>
+                                <a class="btn btn-light modal-profile-btn" href="{% url 'user:login' %}" role="button">Вхід</a>
                             </div>
                             <div class="row pt-2">
-                                <div class="col text-center">
-                                    Нема аккаунта?
-                                    <a href="{% url 'user:register' %}">Регістрація</a>
+                                <div class="col d-flex justify-content-center">
+                                    <p style="color:#dcdcdc; margin-right: 1rem;">Немає акаунту?</p>
+                                    <a href="{% url 'user:register' %}">Зареєструватись</a>
                                 </div>
                             </div>
 
