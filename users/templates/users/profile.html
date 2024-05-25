@@ -8,8 +8,7 @@
     <div class="container-fluid container-xl main px-3">
         <h2 class="block-title my-3">{{ title }} користувача {{ form.username.value }}</h2>
         <div class="d-flex row">
-            <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data"
-                  class="profile-info d-flex flex-column mb-3 col-4">
+            <form class="profile-info d-flex flex-column mb-3 col-xxl-3 col-md-4" action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="d-flex justify-content-center">
                     {% if form.image.errors %}
@@ -116,7 +115,7 @@
                     </div>
                 </div>
             </form>
-            <div class="col-8 ps-3">
+            <div class="col-xxl-9 col-md-8 ps-3 pe-0">
                 {% if orders %}
                     {% include 'includes/orders_list.html' %}
                 {% endif %}
