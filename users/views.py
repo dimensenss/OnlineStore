@@ -134,6 +134,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import UpdateView
 
 from carts.models import Cart
+from goods.models import Wish
 from goods.utils import DataMixin
 from orders.models import Order, OrderItem
 from users.forms import UserPasswordChangeForm, RegisterUserForm, LoginUserForm, ProfileUserForm
@@ -154,6 +155,8 @@ def register_user(request):
 
             if session_key:
                 Cart.objects.filter(session_key=session_key).update(user=user)
+                Wish.objects.filter(session_key=session_key).update(user=user)
+
                 existing_orders = Order.objects.filter(session=session_key)
 
                 if existing_orders:
@@ -193,6 +196,8 @@ def login_user(request):
 
                 if session_key:
                     Cart.objects.filter(session_key=session_key).update(user=user)
+                    #тут баг может быть два одинаковых
+                    Wish.objects.filter(session_key=session_key).update(user=user)
 
                 redirect_page = request.POST.get('next', None)
                 if redirect_page and redirect_page != reverse('users:logout'):

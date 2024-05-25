@@ -5,10 +5,12 @@
 
 
 {% block content %}
+
+
     <aside class="d-none d-lg-flex d-xl-flex d-xxl-flex">
         <div class="sidebar">
 
-            <form method="get" class="offcanvas-body py-0">
+            <form method="get" class="py-0">
 
 
                 <div class="d-flex flex-column">
@@ -31,21 +33,12 @@
                                 <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
                                        value="
                                                {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
-
-
-                                {#                        <span>Minimum Price</span>#}
-                                {#                        <input type="number"#}
-                                {#                               class="min-input"#}
-                                {#                               value="2500">#}
                             </div>
                             <div class="price-field">
                                 <input type="number" name="price__lte" step="any" class="max-input " id="id_price__lte"
                                        value="
                                                {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
-                                {#                        <span>Maximum Price</span>#}
-                                {#                        <input type="number"#}
-                                {#                               class="max-input"#}
-                                {#                               value="8500">#}
+
                             </div>
                         </div>
                         <div class="slider-container">
@@ -97,6 +90,16 @@
         </div>
     </aside>
     <div class="d-flex flex-column container-fluid container-xl main">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <p class="fs-4">{% if request.GET.title_search %}Результати пошуку "
+                    <span class="text-success">{{ request.GET.title_search }}</span>"&nbsp;{% endif %}</p>
+
+                {% if not products_qs %}
+                    <p class="fs-4">Нічого не знайдено</p>
+                {% endif %}
+            </div>
+        </div>
         <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1 mx-0 mt-4">
             {% for product in products_qs %}
                 {% if product.is_published %}
@@ -108,15 +111,15 @@
                                         <p>Код: {{ product.display_id }}</p>
                                     </div>
                                     <a href="{{ product.get_absolute_url }}">
-                                         <div class="item-img">
+                                        <div class="item-img">
                                             {% if product.preview %}
                                                 <img src="{% get_media_prefix %}{{ product.preview }}"
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
                                             {% else %}
-                                                 <img class="mg-fluid w-100"
-                                                 src="{% static 'img/not_found.png' %}"
-                                                 alt="{{ product.title }}"/>
+                                                <img class="mg-fluid w-100"
+                                                     src="{% static 'img/not_found.png' %}"
+                                                     alt="{{ product.title }}"/>
                                             {% endif %}
                                         </div>
                                         <div class="product-card-name text-center mt-4">
@@ -124,7 +127,7 @@
                                         </div>
                                     </a>
                                 </div>
-                            <div class="d-flex flex-row pt-4">
+                                <div class="d-flex flex-row pt-4">
                                     {% with rate=product.calculate_rate %}
                                         {% if rate == 0 %}
                                             <i class="fa-regular fa-star"></i>
@@ -161,6 +164,11 @@
                                                 {{ product.price }} ₴
                                             </p>
                                         {% endif %}
+                                        <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                           data-product-id= {{ product.id }}>
+                                            {% csrf_token %}
+                                            <i class="fa-regular fa-heart"></i>
+                                        </a>
                                     </div>
                                     {% if product.quantity > 0 %}
                                         <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
@@ -169,7 +177,8 @@
                                             До кошика
                                         </a>
                                     {% else %}
-                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на складі
+                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на
+                                            складі
                                         </button>
 
                                     {% endif %}

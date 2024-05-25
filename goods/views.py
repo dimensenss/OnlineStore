@@ -7,8 +7,8 @@ from django.views.generic.edit import FormMixin
 
 from OnlineStore.settings import MAX_RECENT_VIEWED_PRODUCTS
 from goods.forms import ReviewForm
-from goods.models import Product, ProductImage, Category, Review
-from goods.utils import DataMixin, ProductFilter
+from goods.models import Product, ProductImage, Category, Review, Wish
+from goods.utils import DataMixin, ProductFilter, get_user_wishes, get_product_from_wishes
 
 
 class MainPage(DataMixin, ListView):
@@ -159,3 +159,45 @@ def recently_viewed(request, product_slug):
 
 def contacts(request):
     return render(request, 'goods/contacts.html')
+
+
+def add_to_wish_list(request):
+    product_id = request.POST.get('product_id')
+    product = Product.objects.get(id=product_id)
+
+    if request.user.is_authenticated:
+        wish, created = Wish.objects.get_or_create(user=request.user, product=product)
+    else:
+        session_key = request.session.session_key
+        if not session_key:
+            request.session.save()  # Ensure the session is created
+            session_key = request.session.session_key
+        wish, created = Wish.objects.get_or_create(session_key=session_key, product=product)
+
+    if not created:
+        wish.delete()
+        message = 'Товар видалено зі списку побажань'
+        change_value = -1
+    else:
+        message = 'Товар додано у список побажань'
+        change_value = 1
+
+    user_wishes = get_product_from_wishes(request)
+
+    wish_list_container = render_to_string(
+        'includes/wish_list_included.html', {'wishes': user_wishes}, request=request
+    )
+    response_data = {
+        'message': message,
+        'change_value': change_value,
+        'wish_list_container': wish_list_container,
+    }
+
+    return JsonResponse(response_data)
+
+
+
+
+def wish_list(request):
+    products_in_wishlist = get_product_from_wishes(request)
+    return render(request, 'goods/wish_list.html', {'wishes': products_in_wishlist})

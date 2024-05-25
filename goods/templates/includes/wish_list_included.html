@@ -1,0 +1,92 @@
+{% load static %}
+<div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1 mx-0 mt-4">
+{% for product in wishes %}
+    {% if product.is_published %}
+        <div class="col mb-4">
+            <div class="card product-card">
+                <div class="product-card-content d-flex flex-column justify-content-between">
+                    <div class="d-flex flex-column pt-4">
+                        <div class="product-card-id">
+                            <p>Код: {{ product.display_id }}</p>
+                        </div>
+                        <a href="{{ product.get_absolute_url }}">
+                            <div class="item-img">
+                                {% if product.preview %}
+                                    <img src="{% get_media_prefix %}{{ product.preview }}"
+                                         class="img-fluid w-100"
+                                         alt="{{ product.title }}">
+                                {% else %}
+                                    <img class="mg-fluid w-100"
+                                         src="{% static 'img/not_found.png' %}"
+                                         alt="{{ product.title }}"/>
+                                {% endif %}
+                            </div>
+                            <div class="product-card-name text-center mt-4">
+                                {{ product.title|truncatechars:100 }}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-row pt-4">
+                        {% with rate=product.calculate_rate %}
+                            {% if rate == 0 %}
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            {% else %}
+                                {% for _ in 'x'|rjust:rate %}
+                                    <span class="readonly-star">★</span>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="d-flex flex-column pb-4">
+                        <div class="d-flex flex-column justify-content-end mb-4">
+                            {% if product.discount %}
+                                <div class="d-flex flex-row align-items-end">
+                                    <p class="product-card-price-title me-2">
+                                        Ціна
+                                    </p>
+                                    <p class="product-card-price">
+                                        {{ product.price }} ₴
+                                    </p>
+                                </div>
+                                <p class="product-card-discount">
+                                    {{ product.discount }} ₴
+                                </p>
+                            {% else %}
+                                <p class="product-card-price-title me-2">
+                                    Ціна
+                                </p>
+                                <p class="product-card-discount">
+                                    {{ product.price }} ₴
+                                </p>
+                            {% endif %}
+                            <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                               data-product-id= {{ product.id }}>
+                                {% csrf_token %}
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
+                        </div>
+                        {% if product.quantity > 0 %}
+                            <a href="{% url 'carts:cart_add' %}"
+                               class="small-btn-add-to-cart add-to-cart"
+                               data-product-id= {{ product.id }}>
+                                {% csrf_token %}
+                                До кошика
+                            </a>
+                        {% else %}
+                            <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає
+                                на
+                                складі
+                            </button>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>

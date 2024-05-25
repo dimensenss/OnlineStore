@@ -1,8 +1,8 @@
 from django import template
-from django.db.models import Min, Max
+from django.db.models import Min, Max, F
 
-from goods.models import Product
-from goods.utils import DataMixin
+from goods.models import Product, Wish
+from goods.utils import DataMixin, get_user_wishes
 
 register = template.Library()
 
@@ -40,8 +40,8 @@ def get_prices(context):
     min_price = int(aggregate_data['min_price']) if aggregate_data['min_price'] is not None else None
     max_price = int(aggregate_data['max_price']) if aggregate_data['max_price'] is not None else None
 
-    context['min_price'] = str(min_price)
-    context['max_price'] = str(max_price)
+    context['min_price'] = min_price
+    context['max_price'] = max_price
 
     return ''
 
@@ -53,3 +53,8 @@ def get_recently_viewed_products(context):
             slug__in=context['request'].session.get("recently_viewed",
                                                     []))))
     return recently_viewed_qs
+
+
+@register.simple_tag(name='user_wishes')
+def user_wishes(request):
+    return get_user_wishes(request)

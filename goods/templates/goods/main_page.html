@@ -113,7 +113,15 @@
                                                 {{ product.price }} ₴
                                             </p>
                                         {% endif %}
+
+                                    <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                       data-product-id= {{ product.id }}>
+                                        {% csrf_token %}
+                                        <i class="fa-regular fa-heart"></i>
+                                    </a>
+
                                     </div>
+
                                     {% if product.quantity > 0 %}
                                         <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
                                            data-product-id= {{ product.id }}>
@@ -126,6 +134,7 @@
                                         </button>
 
                                     {% endif %}
+
                                 </div>
                             </div>
                         </div>
