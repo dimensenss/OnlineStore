@@ -25,12 +25,12 @@
                     </button>
                 </h2>
                 <div id="collapse{{ order.id }}"
-                     class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %} p-3"
+                     class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %} p-2 p-md-3 "
                      aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
+                    <div class="accordion-body p-0">
 
                         <div class="d-flex flex-column">
-                            <div class="d-flex">
+                            <div class="d-flex orders-list-info">
                                 <div class="d-flex flex-column orders-list-info me-4">
                                     <p class="order-tile__label mb-2">Контактна інформація</p>
                                     <p class="mb-2">{{ order.user.last_name }} {{ order.user.first_name }}</p>
