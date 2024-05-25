@@ -156,12 +156,12 @@ def register_user(request):
                 Cart.objects.filter(session_key=session_key).update(user=user)
                 existing_orders = Order.objects.filter(session=session_key)
 
-                # удалить временного пользователя
-                User.objects.get(username=existing_orders[0].user.username).delete()
-
                 if existing_orders:
+                    User.objects.get(username=existing_orders[0].user.username).delete()
                     for order in existing_orders:
-                        order.update(user=user)
+                        order.user = user
+                        order.save()
+
 
             messages.success(request, f"Ваш акаунт {user.username} зареєстровано")
             return HttpResponseRedirect(reverse('goods:main'))

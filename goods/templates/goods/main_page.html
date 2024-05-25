@@ -53,12 +53,13 @@
                         <div class="card product-card">
                             <div class="product-card-content d-flex flex-column justify-content-between">
                                 <div class="d-flex flex-column pt-4">
-                                   <div class="product-card-id">
+                                    <div class="product-card-id">
                                         <p>Код: {{ product.display_id }}</p>
                                     </div>
                                     <a href="{{ product.get_absolute_url }}">
                                         <div class="item-img">
-                                            <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
+                                            <img src="{% get_media_prefix %}{{ product.preview }}"
+                                                 class="img-fluid w-100"
                                                  alt="{{ product.title }}">
                                         </div>
                                         <div class="product-card-name text-center mt-4">
@@ -89,12 +90,17 @@
                                             </p>
                                         {% endif %}
                                     </div>
-                                    <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
-                                       data-product-id= '{{ product.id }}'
-                                       data-is-order = 'false'>
-                                        {% csrf_token %}
-                                        До кошика
-                                    </a>
+                                    {% if product.quantity > 0 %}
+                                        <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
+                                           data-product-id= {{ product.id }}>
+                                            {% csrf_token %}
+                                            До кошика
+                                        </a>
+                                    {% else %}
+                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на складі
+                                        </button>
+
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -115,7 +121,10 @@
                             <p class="card-youtube-title mt-3">Порівняння двох ТОП ігрових мишок від Hator та Razer.</p>
                         </a>
                         <p class="card-youtube-text mt-2">
-                         Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus. Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus. Etiam vitae nibh non leo aliquet aliquet.
+                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu
+                            condimentum. Pellentesque accumsan erat eu mattis dapibus. Maecenas eu nisl bibendum,
+                            iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque
+                            accumsan erat eu mattis dapibus. Etiam vitae nibh non leo aliquet aliquet.
                         </p>
                     </div>
                 </div>
@@ -126,7 +135,8 @@
                             <p class="card-youtube-title mt-3">Зручність двох моніторів під час геймінгу</p>
                         </a>
                         <p class="card-youtube-text mt-2">
-                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus.
+                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu
+                            condimentum. Pellentesque accumsan erat eu mattis dapibus.
                         </p>
                     </div>
                 </div>
@@ -134,10 +144,14 @@
                     <div class="card youtube-card">
                         <a class="card-youtube-link" href="https://www.youtube.com" target="_blank">
                             <img src="{% static 'img/youtube-preview3.jpg' %}" alt="..." class="card-youtube-img">
-                            <p class="card-youtube-title mt-3">Огляд на нову модель безпровідних навушників Hator DJ940-98</p>
+                            <p class="card-youtube-title mt-3">Огляд на нову модель безпровідних навушників Hator
+                                DJ940-98</p>
                         </a>
                         <p class="card-youtube-text mt-2">
-                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus. Duis porttitor sit amet lorem eu condimentum. Pellentesque accumsan erat eu mattis dapibus.
+                            Maecenas eu nisl bibendum, iaculis orci sed, aliquet ante. Maecenas eu nisl bibendum,
+                            iaculis orci sed, aliquet ante. Duis porttitor sit amet lorem eu condimentum. Pellentesque
+                            accumsan erat eu mattis dapibus. Duis porttitor sit amet lorem eu condimentum. Pellentesque
+                            accumsan erat eu mattis dapibus.
                         </p>
                     </div>
                 </div>
@@ -148,10 +162,10 @@
                 </a>
             </div>
         </div>
-            <!-- end YouTube links -->
-        </div>
+        <!-- end YouTube links -->
+    </div>
 
-        <!-- end content -->
+    <!-- end content -->
 
 {% endblock content %}
 

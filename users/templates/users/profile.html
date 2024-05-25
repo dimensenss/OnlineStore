@@ -24,7 +24,10 @@
                             <div class="text-center mb-3 profile-user-avatar">
                                 <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
                                      alt="Фото користувача" class="">
+
+                            <p class="fw-light text-secondary">Натисніть і збережіть щоб змінити</p>
                             </div>
+
                         </label>
                         <input type="file" id="file" class="form-control feedback__file" name="image"
                                value="{{ form.image.value }}"
