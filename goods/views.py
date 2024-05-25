@@ -40,7 +40,7 @@ class ProductView(FormMixin, DataMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        preview = self.object.images.first()
+        preview = self.object.load_preview()
         reviews_qs = self.object.reviews.all().prefetch_related('user').order_by('-date')
         mixin_context = self.get_user_context(title='Головна сторінка', preview=preview, reviews_qs=reviews_qs)
         context.update({'form': self.get_form()})
