@@ -1,6 +1,7 @@
 from email.mime.image import MIMEImage
 
 from django.contrib import messages, auth
+from django.contrib.auth import login
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.db import transaction
@@ -107,7 +108,8 @@ def create_order(request):
                         messages.success(request, 'Замовлення оформлено!')
 
                         if form.cleaned_data['requires_registration'] == '1':
-                            auth.login(request, user)
+                            user.backend = 'users.authentication.EmailAuthBackend'
+                            login(request, user, backend='users.authentication.EmailAuthBackend')
 
                         if request.user.is_authenticated:
                             return redirect('user:profile')
