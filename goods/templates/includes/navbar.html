@@ -8,7 +8,7 @@
     <nav class="d-flex flex-wrap flex-column">
         <div class="nav d-flex align-items-center">
             <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
-                <div class="d-flex col-10 col-sm-11 align-items-center justify-content-between">
+                <div class="d-flex col align-items-center justify-content-between">
                     <a href="{% url 'goods:main' %}">
                         <img src="{% static 'img/NEXUS.svg' %}" alt="" class="img-fluid w-100">
                     </a>
@@ -18,39 +18,40 @@
                     <a href="" class="d-none d-sm-flex">
                         Про нас
                     </a>
-                    <a href="" class="d-none d-sm-flex">
+                    <a href="" class="d-none d-md-flex">
                         Доставка та оплата
                     </a>
                     <a href="" class="d-none d-sm-flex">
                         Контакти
                     </a>
-                      <form method="get"  action="{% url 'goods:search' %}" class="search-input d-flex col-4 col-sm-3 me-2 lg-me-4 px-2 justify-content-between align-items-center">
-                            <input type="text" name="title_search" class="col-10"
-                                   placeholder="Пошук"
-                                   value="{{ request.GET.title_search }}">
-                            <button class="col-2 d-flex justify-content-end" id="btn-search">
-                                <img src="{% static 'img/search-btn.svg' %}" alt="search">
-                            </button>
+                    <form method="get" action="{% url 'goods:search' %}"
+                          class="search-input d-flex col-4 col-sm-2 col-lg-3 px-2 justify-content-between align-items-center">
+                        <input type="text" name="title_search" class="col-10"
+                               placeholder="Пошук"
+                               value="{{ request.GET.title_search }}">
+                        <button class="col-2 d-flex justify-content-end" id="btn-search">
+                            <img src="{% static 'img/search-btn.svg' %}" alt="search">
+                        </button>
 
-                        </form>
-                </div>
-      {% user_carts request as carts %}
-                <div class="d-flex col-2 col-sm-1 justify-content-between">
-                    <a href="" class="" data-bs-toggle="modal"
-                       data-bs-target="#profile-modal">
-                        <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="img-fluid w-100">
-                    </a>
-                    <a type="button" data-bs-toggle="modal"
-                       data-bs-target="#cart-modal" class="d-flex nav-cart-link">
-                        <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="img-fluid w-100">
-                        <span class="nav-cart-quantity">38</span>
-                    </a>
-                    <a type="button" data-bs-toggle="modal"
-                       data-bs-target="#cart-modal" class="d-flex nav-cart-link">
-                        <img src="{% static 'img/cart-fill.svg' %}" alt="cart" class="img-fluid w-100">
-                        <span class="goods-in-cart-count nav-cart-quantity">{{ carts.total_quantity }}</span>
-                    </a>
-{#                    <span class="badge bg-secondary text-white ms-1 rounded-pill goods-in-cart-count">{{ carts.total_quantity }}</span>#}
+                    </form>
+                    {% user_carts request as carts %}
+                    <div class="d-flex">
+                        <a href="" class=" me-xl-4 me-ld-3 me-sm-2 me-1" data-bs-toggle="modal"
+                           data-bs-target="#profile-modal">
+                            <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="img-fluid w-100">
+                        </a>
+                        <a type="button" data-bs-toggle="modal"
+                           data-bs-target="#cart-modal" class="d-flex nav-cart-link me-xl-4 me-lg-3 me-sm-2 me-1">
+                            <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="img-fluid w-100">
+                            <span class="nav-cart-quantity ms-xl-1 ms-0">38</span>
+                        </a>
+                        <a type="button" data-bs-toggle="modal"
+                           data-bs-target="#cart-modal" class="d-flex nav-cart-link">
+                            <img src="{% static 'img/cart-fill.svg' %}" alt="cart" class="img-fluid w-100">
+                            <span class="goods-in-cart-count nav-cart-quantity ms-xl-1 ms-0">{{ carts.total_quantity }}</span>
+                        </a>
+                        {#                    <span class="badge bg-secondary text-white ms-1 rounded-pill goods-in-cart-count">{{ carts.total_quantity }}</span>#}
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,7 +65,8 @@
         <div class="modal-content cart-modal">
             <div class="modal-header cart-header d-flex justify-content-between mx-3">
                 <h5 class="modal-title modal-cart-title" id="exampleModalLabel2">Кошик</h5>
-                <button type="button" style="color:#FFFFFF; background-color: #1D1D1D" data-bs-dismiss="modal" aria-label="Close"><img
+                <button type="button" style="color:#FFFFFF; background-color: #1D1D1D" data-bs-dismiss="modal"
+                        aria-label="Close"><img
                         src="{% static 'img/x-icon.svg' %}" alt="close"></button>
             </div>
             <div class="modal-body pt-0">
@@ -82,7 +84,8 @@
         <div class="modal-content modal-profile">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1">Швидкі посилання</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
             </div>
             <div class="modal-body modal-profile-body">
                 <!-- Строки с ссылками -->
