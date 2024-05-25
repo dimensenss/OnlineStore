@@ -504,6 +504,9 @@ a:hover{
 .orders-list{
     background-color: #252525;
 }
+.orders-list-info{
+    font-size: 16px;
+}
 .orders-list-header button, .accordion-button:not(.collapsed){
     background-color: #FFFFFF;
     border-bottom: solid 2px #151515;
@@ -574,6 +577,12 @@ a:hover{
         width: 200px;
         height: 200px;
     }
+    .orders-list-info{
+        font-size: 14px;
+    }
+    .orders-list-header button{
+        font-size: 14px;
+    }
     /* footer */
     .footer-title {
         font-size: 16px;
@@ -623,6 +632,13 @@ a:hover{
     }
     .cart-img{
         max-width: 100px;
+    }
+    /* profile */
+    .orders-list-info{
+        font-size: 12px;
+    }
+    .orders-list-header button{
+        font-size: 14px;
     }
 }
 
