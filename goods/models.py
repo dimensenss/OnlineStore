@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 from django.db.models import Avg
 from django.templatetags.static import static
@@ -25,6 +26,7 @@ class Product(models.Model):
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name="Час оновлення")
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано')
+    is_available = models.BooleanField(default=True, verbose_name='В наявності')
     cat = models.ForeignKey('Category', models.SET_DEFAULT, default=0, related_name='products',
                             verbose_name='Категорія')
     sell_price = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, verbose_name='Актуальна ціна')
@@ -47,6 +49,7 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
 
+    @admin.display(description="Прев'ю")
     def get_html_image(self):
         first_image = self.images.first()
         if first_image and first_image.image:
@@ -55,11 +58,14 @@ class Product(models.Model):
             image_url = static('img/NEXUS.svg')
             return mark_safe(f"<img src='{image_url}' width='100' />")
 
+
+
     def display_id(self):
         return self.sku if self.sku else f"{self.id:05}"
 
     def save(self, *args, **kwargs):
         self.sell_price = self.calculate_sell_price()
+        self.is_available = self.quantity > 0
         super().save(*args, **kwargs)
 
     class Meta:

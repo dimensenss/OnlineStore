@@ -4,81 +4,95 @@
     <div class="d-flex flex-column">
         {# write review #}
         {% if request.user.is_authenticated %}
-            <div class="add-review mt-5">
+            <div class="add-review my-2 col-md-6">
                 <div class="half-star-ratings" data-rateyo-half-star="true"></div>
-                <form id="review_form" class="form-group" method="post" enctype="multipart/form-data">
+                <form id="review_form" class="form-group" method="post"
+                      enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    <label for="id_text">Ваші враження від товару:</label>
-                    <textarea name="text" cols="40" rows="10" maxlength="500" required=""
-                              id="id_text"></textarea>
-
-                    <label for="id_rate">Оцінка:</label>
-
-                    <div class="rating">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
+                    <div class="mb-3">
+                        <label class ='fs-4 mb-3' for="id_text">Коментар</label>
+                        <textarea class="form-control" name="text" required=""
+                                  id="id_text" placeholder="Ваші враження від товару"></textarea>
                     </div>
-                    <select name="rate" required="" id="id_rate" style="display: none">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div class="d-flex align-items-baseline mb-3 justify-content-between">
+                        <label class ='fs-4 ' for="id_rate">Оцінка:</label>
+
+                        <div class="rating">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <select name="rate" required="" id="id_rate" style="display: none">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
 
                     <button type="submit" name="submit"
                             class="btn-add-review">Залишити відгук
                     </button>
+
                 </form>
+
             </div>
+        {% else %}
+            Зареєструйтеся щоб залишити відгук
         {% endif %}
+
+
         {# end write review #}
 
         {# start review #}
-    {% if not reviews_qs %}
-        <div class="d-flex flex-column product-tab-review">
-            На данний товар поки що немає відгуків, станьте першим!
-        </div>
-    {% else %}
-        {% for review in reviews_qs %}
+        {% if not reviews_qs %}
             <div class="d-flex flex-column product-tab-review">
-                <div class="d-flex flex-row">
-                    <div class="review-user-avatar me-4">
-                        <img src="{% if review.user.image %}{% get_media_prefix %}{{ review.user.image }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
-                             alt="review">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between">
-                        <p class="review-user-name">{{ review.user }}</p>
-                        <div class="review-user-rating">
-                            {% for _ in 'x'|rjust:review.rate %}
-                                <span class="readonly-star">★</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                </div>
-                {% if request.user == review.user or request.user.is_superuser %}
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" name="submit"
-                                class="btn-delete-review"
-                                style="background-color: #151515"
-                                data-review_id='{{ review.id }}'
-                                data-product_id='{{ product.id }}'
-                                data-view_url="{% url 'goods:remove_review' %}"
-                        ><i class="fa-solid fa-trash" style="color: #ff0000;" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                {% endif %}
-                <p class="review-text mt-3">
-                    {{ review.text }}
-                </p>
-                {{ review.date }}
+            <hr>
+                На данний товар поки що немає відгуків, станьте першим!
             </div>
-        {% endfor %}
-     {% endif %}
+        {% else %}
+            {% for review in reviews_qs %}
+                <hr>
+                <div class="d-flex flex-column product-tab-review">
+                    <div class="d-flex flex-row">
+                        <div class="review-user-avatar me-4">
+                            <img src="
+
+                                    {% if review.user.image %}{% get_media_prefix %}{{ review.user.image }}{% else %}{% static 'img/non-avatar.svg' %}{% endif %}"
+                                 alt="review">
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <p class="review-user-name">{{ review.user }}</p>
+                            <div class="review-user-rating">
+                                {% for _ in 'x'|rjust:review.rate %}
+                                    <span class="readonly-star">★</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                    {% if request.user == review.user or request.user.is_superuser %}
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" name="submit"
+                                    class="btn-delete-review"
+                                    style="background-color: #151515"
+                                    data-review_id='{{ review.id }}'
+                                    data-product_id='{{ product.id }}'
+                                    data-view_url="{% url 'goods:remove_review' %}"
+                            ><i class="fa-solid fa-trash" style="color: #ff0000;" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    {% endif %}
+                    <p class="review-text mt-3">
+                        {{ review.text }}
+                    </p>
+                    {{ review.date }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>

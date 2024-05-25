@@ -66,6 +66,22 @@
                                             {{ product.title|truncatechars:100 }}
                                         </div>
                                     </a>
+
+                                </div>
+                                <div class="d-flex flex-row pt-4">
+                                    {% with rate=product.calculate_rate %}
+                                        {% if rate == 0 %}
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        {% else %}
+                                            {% for _ in 'x'|rjust:rate %}
+                                                <span class="readonly-star">★</span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
                                 </div>
                                 <div class="d-flex flex-column pb-4">
                                     <div class="d-flex flex-column justify-content-end mb-4">
@@ -97,7 +113,8 @@
                                             До кошика
                                         </a>
                                     {% else %}
-                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на складі
+                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на
+                                            складі
                                         </button>
 
                                     {% endif %}
