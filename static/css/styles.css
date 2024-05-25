@@ -47,7 +47,6 @@ button {
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 50px;
 }
-
 .search-input, .search-input input {
     height: 40px;
     line-height: 40px;
@@ -543,6 +542,12 @@ a:hover{
   border-top-right-radius: 10px;
 }
 @media (max-width: 1200px) {
+    .nav{
+        font-size: 14px;
+    }
+    .header img {
+        scale: 0.8;
+    }
     .cart-table td{
         font-size: 14px;
     }
@@ -556,7 +561,9 @@ a:hover{
     .nav {
         font-size: 12px;
     }
-
+    .nav-cart-quantity{
+        font-size: 8px;
+    }
     .header img {
         scale: 0.7;
     }
