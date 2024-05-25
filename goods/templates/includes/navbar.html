@@ -40,14 +40,17 @@
                        data-bs-target="#profile-modal">
                         <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="img-fluid w-100">
                     </a>
-
                     <a type="button" data-bs-toggle="modal"
-                       data-bs-target="#cart-modal">
-                        <img src="{% static 'img/cart-fill.svg' %}" alt="cart" class="img-fluid w-100">
+                       data-bs-target="#cart-modal" class="d-flex nav-cart-link">
+                        <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="img-fluid w-100">
+                        <span class="nav-cart-quantity">38</span>
                     </a>
-                    <span class="badge bg-secondary text-white ms-1 rounded-pill goods-in-cart-count">{{ carts.total_quantity }}</span>
-
-
+                    <a type="button" data-bs-toggle="modal"
+                       data-bs-target="#cart-modal" class="d-flex nav-cart-link">
+                        <img src="{% static 'img/cart-fill.svg' %}" alt="cart" class="img-fluid w-100">
+                        <span class="goods-in-cart-count nav-cart-quantity">{{ carts.total_quantity }}</span>
+                    </a>
+{#                    <span class="badge bg-secondary text-white ms-1 rounded-pill goods-in-cart-count">{{ carts.total_quantity }}</span>#}
                 </div>
             </div>
         </div>

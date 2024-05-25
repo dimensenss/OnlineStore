@@ -37,7 +37,12 @@ button {
     background: rgb(92, 39, 254);
     background: linear-gradient(90deg, rgba(92, 39, 254, 1) 0%, rgba(193, 101, 221, 1) 100%);
 }
-
+.nav-cart-quantity{
+    font-size: 10px;
+}
+.nav-cart-link:hover{
+    color: #FFFFFF;
+}
 .search-input {
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 50px;
