@@ -366,6 +366,23 @@ a:hover{
     font-size: 20px;
     font-weight: 600;
 }
+.modal-profile{
+    background-color: #1D1D1D;
+    border-radius: 10px;
+}
+.modal-profile-btn{
+    color: #CF2EFF;
+    background-color: #FFFFFF;
+    width: 100%;
+    border: none;
+    font-weight: 600;
+    border-radius: 50px;
+}
+.modal-profile-btn:hover{
+    background-color: #CF2EFF;
+    color: #FFFFFF;
+    transition: all 0.3s;
+}
 .create-order-btn{
     width: 100%;
     height: 40px;
