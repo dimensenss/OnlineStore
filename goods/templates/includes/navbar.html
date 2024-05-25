@@ -42,8 +42,7 @@
                            data-bs-target="#profile-modal">
                             <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="img-fluid w-100">
                         </a>
-                        <a type="button" data-bs-toggle="modal"
-                           data-bs-target="#cart-modal" class="d-flex nav-cart-link me-xl-4 me-lg-3 me-sm-2 me-1">
+                        <a href="{% url 'goods:wish_list' %}"  class="d-flex nav-cart-link me-xl-4 me-lg-3 me-sm-2 me-1">
                             <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="img-fluid w-100">
                             <span class="nav-cart-quantity ms-xl-1 ms-0">{{ wishes|length }}</span>
                         </a>
