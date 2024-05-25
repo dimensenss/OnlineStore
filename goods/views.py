@@ -40,7 +40,7 @@ class ProductView(FormMixin, DataMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        preview = self.object.load_preview()
+        preview = self.object.images.first()
         reviews_qs = self.object.reviews.all().prefetch_related('user').order_by('-date')
         mixin_context = self.get_user_context(title='Головна сторінка', preview=preview, reviews_qs=reviews_qs)
         context.update({'form': self.get_form()})
@@ -155,3 +155,7 @@ def recently_viewed(request, product_slug):
         if len(request.session["recently_viewed"]) > MAX_RECENT_VIEWED_PRODUCTS:
             del request.session["recently_viewed"][MAX_RECENT_VIEWED_PRODUCTS - 1]
     request.session.modified = True
+
+
+def contacts(request):
+    return render(request, 'goods/contacts.html')
