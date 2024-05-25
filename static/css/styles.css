@@ -554,11 +554,25 @@ a:hover{
         font-size: 14px;
     }
     .order-form-info input[type='radio']{
-    height: 18px;
-    width: 18px;
+        height: 18px;
+        width: 18px;
     }
     .block-title{
         font-size: 20px;
+    }
+    /*profile*/
+    .profile-info .form-control, .profile-info-btn-save{
+        font-size: 14px;
+        height: 35px;
+        line-height: 35px;
+        margin-bottom: 5px;
+    }
+    .profile-info .form-label, .profile-info-password{
+        font-size: 12px;
+    }
+    .profile-user-avatar img{
+        width: 200px;
+        height: 200px;
     }
     /* footer */
     .footer-title {
