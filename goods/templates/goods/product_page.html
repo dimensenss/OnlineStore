@@ -119,11 +119,16 @@
                                 </p>
                             {% endif %}
                         </div>
+                    {% if product.quantity > 0 %}
                         <a href="{% url 'carts:cart_add' %}" class="big-btn-add-to-cart add-to-cart"
                            data-product-id= {{ product.id }}>
                             {% csrf_token %}
                             До кошика
                         </a>
+                        {% else %}
+                        <button type="button" class="big-btn-add-to-cart-disabled" disabled>До кошика</button>
+
+                    {% endif %}
                     </div>
                 </div>
             </div>

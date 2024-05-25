@@ -6,93 +6,96 @@
 
 {% block content %}
     <aside class="d-none d-lg-flex d-xl-flex d-xxl-flex">
-                <div class="sidebar">
+        <div class="sidebar">
 
-                    <form method="get" class="offcanvas-body py-0">
-
-
-                        <div class="d-flex flex-column">
+            <form method="get" class="offcanvas-body py-0">
 
 
-                            <div class="d-flex flex-column py-2">
-                                <label for="order_by">Оберіть сортування</label>
-                                {{ filter.form.order_by }}
-                            </div>
-                            <div class="d-flex flex-column py-2">
-                                <label for="order_by">Оберіть Бренди</label>
-                                {{ filter.form.brand}}
-                            </div>
-
-            {% get_min_max_prices %}
-
-             <div class="price-input-container">
-                <div class="price-input">
-                    <div class="price-field">
-                        <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
-                               value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
+                <div class="d-flex flex-column">
 
 
-{#                        <span>Minimum Price</span>#}
-{#                        <input type="number"#}
-{#                               class="min-input"#}
-{#                               value="2500">#}
+                    <div class="d-flex flex-column py-2">
+                        <label for="order_by">Оберіть сортування</label>
+                        {{ filter.form.order_by }}
                     </div>
-                    <div class="price-field">
-                        <input type="number" name="price__lte" step="any" class="max-input " id="id_price__lte"
-                               value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
-{#                        <span>Maximum Price</span>#}
-{#                        <input type="number"#}
-{#                               class="max-input"#}
-{#                               value="8500">#}
+                    <div class="d-flex flex-column py-2">
+                        <label for="order_by">Оберіть Бренди</label>
+                        {{ filter.form.brand }}
                     </div>
-                </div>
-                <div class="slider-container">
-                    <div class="price-slider">
-                    </div>
-                </div>
-            </div>
 
-            <!-- Slider -->
-            <div class="range-input">
-                <input type="range"
-                       class="min-range"
-                       min="0"
-                       max="{{ max_price }}"
-                       value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
-                       step="1">
-                <input type="range"
-                       class="max-range"
-                       min="0"
-                       max="{{ max_price }}"
-                       value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
-                       step="1">
-            </div>
+                    {% get_min_max_prices %}
+
+                    <div class="price-input-container">
+                        <div class="price-input">
+                            <div class="price-field">
+                                <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
+                                       value="
+                                               {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
 
 
-
-                            <div>
-                                <div class="d-flex flex-row justify-content-center align-items-center">
-
-
-                                    <button type="submit" class="btn btn-secondary mb-2">
-                                        Ок
-                                    </button>
-                                </div>
-
+                                {#                        <span>Minimum Price</span>#}
+                                {#                        <input type="number"#}
+                                {#                               class="min-input"#}
+                                {#                               value="2500">#}
                             </div>
-
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary mb-2">
-                                    Примінити фільтри
-                                </button>
+                            <div class="price-field">
+                                <input type="number" name="price__lte" step="any" class="max-input " id="id_price__lte"
+                                       value="
+                                               {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
+                                {#                        <span>Maximum Price</span>#}
+                                {#                        <input type="number"#}
+                                {#                               class="max-input"#}
+                                {#                               value="8500">#}
                             </div>
                         </div>
+                        <div class="slider-container">
+                            <div class="price-slider">
+                            </div>
+                        </div>
+                    </div>
 
-                    </form>
+                    <!-- Slider -->
+                    <div class="range-input">
+                        <input type="range"
+                               class="min-range"
+                               min="0"
+                               max="{{ max_price }}"
+                               value="
+                                       {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
+                               step="1">
+                        <input type="range"
+                               class="max-range"
+                               min="0"
+                               max="{{ max_price }}"
+                               value="
+                                       {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
+                               step="1">
+                    </div>
 
 
+                    <div>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+
+
+                            <button type="submit" class="btn btn-secondary mb-2">
+                                Ок
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mb-2">
+                            Примінити фільтри
+                        </button>
+                    </div>
                 </div>
-            </aside>
+
+            </form>
+
+
+        </div>
+    </aside>
     <div class="d-flex flex-column container-fluid container-xl main">
         <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1 mx-0 mt-4">
             {% for product in products_qs %}
@@ -101,12 +104,13 @@
                         <div class="card product-card">
                             <div class="product-card-content d-flex flex-column justify-content-between">
                                 <div class="d-flex flex-column pt-4">
-                                   <div class="product-card-id">
+                                    <div class="product-card-id">
                                         <p>Код: {{ product.display_id }}</p>
                                     </div>
                                     <a href="{{ product.get_absolute_url }}">
                                         <div class="item-img">
-                                            <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
+                                            <img src="{% get_media_prefix %}{{ product.preview }}"
+                                                 class="img-fluid w-100"
                                                  alt="{{ product.title }}">
                                         </div>
                                         <div class="product-card-name text-center mt-4">
@@ -137,12 +141,17 @@
                                             </p>
                                         {% endif %}
                                     </div>
-                                    <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
-                                       data-product-id= '{{ product.id }}'
-                                       data-is-order = 'false'>
-                                        {% csrf_token %}
-                                        До кошика
-                                    </a>
+                                    {% if product.quantity > 0 %}
+                                        <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
+                                           data-product-id= {{ product.id }}>
+                                            {% csrf_token %}
+                                            До кошика
+                                        </a>
+                                    {% else %}
+                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на складі
+                                        </button>
+
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -150,9 +159,9 @@
                 {% endif %}
             {% endfor %}
         </div>
-     {% include 'includes/recently_viewed.html' %}
+        {% include 'includes/recently_viewed.html' %}
     </div>
-    
+
 {% endblock content %}
 
 {% block paginator %}
