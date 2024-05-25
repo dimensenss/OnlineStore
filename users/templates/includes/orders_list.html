@@ -12,8 +12,8 @@
                             aria-controls="collapse{{ order.id }}"
                             aria-expanded="{% if order == orders.0 %}true{% else %}false{% endif %}">
                         <div class="d-flex flex-column">
-                            <p class="text-secondary">Замовлення №{{ order.id }} </p>
-                            <p class="text-secondary">{{ order.created_timestamp }}</p>
+                            <p class="text-white">Замовлення №{{ order.id }} </p>
+                            <p class="text-white">{{ order.created_timestamp }}</p>
                             {% if order.status != 'Скасовано' %}
                                 <strong class="text-success">{{ order.status }}</strong>
                             {% else %}

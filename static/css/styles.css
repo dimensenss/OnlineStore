@@ -872,7 +872,10 @@ a:hover{
 .accordion-collapse {
     transition: height 0.118s ease-in-out;
 }
-
+.orders-list-header button, .accordion-button:not(.collapsed) {
+    background-color: #1510155c;
+    border-bottom: solid 2px #151515;
+}
 .order-tile__options {
     display: flex;
     flex-direction: row;
@@ -924,6 +927,7 @@ a:hover{
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    justify-content: start;
 }
 
 #simple-scroll {

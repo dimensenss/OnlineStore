@@ -43,21 +43,22 @@ class ProductAdminForm(forms.ModelForm):
         }
 
 
+
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
     inlines = [ProductAttributeInline, ProductImagesInline]
-    list_display = ('id', 'get_html_image', 'title', 'cat', 'time_create', 'is_published')
+    list_display = ('id', 'get_html_image', 'title', 'cat', 'time_create', 'is_published', 'is_available')
     list_display_links = ('id', 'title')
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('id', 'title', 'content')
     list_editable = ('is_published',)
-    list_filter = ('is_published', 'time_create',)
+    list_filter = ('is_published', 'time_create', 'cat', 'is_available')
     readonly_fields = ('get_html_image',)
     fieldsets = [
-        (None, {'fields': ['get_html_image', 'title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity', 'guarantee', 'cat', 'brand',
+        (None, {'fields': ['get_html_image', 'title', 'sku', 'slug', 'content', 'price', 'discount', 'quantity',
+                           'guarantee', 'cat', 'brand',
                            'is_published']})
     ]
-
 
 
 
@@ -101,6 +102,7 @@ class ReviewAdmin(admin.ModelAdmin):
 @admin.register(AttributesValues)
 class AttributesValuesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name',)
+
 
 @admin.register(AttributesNames)
 class AttributesNamesAdmin(admin.ModelAdmin):
