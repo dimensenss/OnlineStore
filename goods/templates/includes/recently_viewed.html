@@ -15,8 +15,15 @@
                             </div>
                             <a href="{{ product.get_absolute_url }}">
                                 <div class="item-img">
-                                    <img src="{% get_media_prefix %}{{ product.preview }}" class="img-fluid w-100"
-                                         alt="{{ product.title }}">
+                                    {% if product.preview %}
+                                        <img src="{% get_media_prefix %}{{ product.preview }}"
+                                             class="img-fluid w-100"
+                                             alt="{{ product.title }}">
+                                    {% else %}
+                                        <img class="img-fluid w-100"
+                                             src="{% static 'img/not_found.png' %}"
+                                             alt="{{ product.title }}"/>
+                                    {% endif %}
                                 </div>
                                 <div class="small-product-card-name text-center mt-4">
                                     {{ product.title|truncatechars:100 }}

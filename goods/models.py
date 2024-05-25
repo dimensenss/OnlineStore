@@ -35,7 +35,11 @@ class Product(models.Model):
         return self.discount if self.discount else self.price
 
     def load_preview(self):
-        return self.images.first().image.url
+        first_image = self.images.first()
+        if first_image and first_image.image:
+            return first_image.image.url
+        else:
+            return static('img/not_found.png')
 
     def calculate_rate(self):
         average_rating = self.reviews.aggregate(Avg('rate'))['rate__avg']
