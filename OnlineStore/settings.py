@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 import dotenv
+import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,7 +20,7 @@ DEBUG = True
 #
 # SITE_ID = 1
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 DEBUG_TOOLBAR_CONFIG = {
 
 }
@@ -169,8 +171,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-# LOGIN_REDIRECT_URL = '/'
-# MAX_RECENT_VIEWED_PRODUCTS = 20
 
 LANGUAGE_CODE = 'uk'
 
@@ -281,3 +281,5 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 MAX_RECENT_VIEWED_PRODUCTS = 20
+
+django_heroku.settings(locals())
