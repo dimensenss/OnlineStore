@@ -49,6 +49,14 @@ def get_product_from_wishes(request):
         return DataMixin().get_products_with_previews(
             Product.objects.filter(wish__session_key=session_key))
 
+def get_product_list_from_wishes(request):
+    if request.user.is_authenticated:
+        return Product.objects.filter(wish__user=request.user)
+    else:
+        session_key = request.session.session_key
+        return Product.objects.filter(wish__session_key=session_key)
+
+
 class BrandsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Brand.objects.all()

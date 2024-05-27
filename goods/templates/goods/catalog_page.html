@@ -5,7 +5,7 @@
 
 
 {% block content %}
-
+{% products_in_wishes_list request as products_in_wishes_list %}
 
     <aside class="d-none d-lg-flex d-xl-flex d-xxl-flex">
         <div class="sidebar">
@@ -165,9 +165,13 @@
                                             </p>
                                         {% endif %}
                                         <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
-                                           data-product-id= {{ product.id }}>
+                                           data-product-id="{{ product.id }}">
                                             {% csrf_token %}
-                                            <i class="fa-regular fa-heart"></i>
+                                            {% if product in products_in_wishes_list %}
+                                                <i class="fa-solid fa-heart wish-icon"></i>
+                                            {% else %}
+                                                <i class="fa-regular fa-heart wish-icon"></i>
+                                            {% endif %}
                                         </a>
                                     </div>
                                     {% if product.quantity > 0 %}

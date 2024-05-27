@@ -234,9 +234,6 @@ $(document).ready(function ($) {
     });
 
 
-
-
-
     $(document).on("click", ".btn-delete-review", function (e) {
         e.preventDefault();
 
@@ -271,43 +268,69 @@ $(document).ready(function ($) {
             },
         });
     });
-      $(document).on("click", ".add-to-wish-list", function (e) {
-        e.preventDefault();
+    $(document).on("click", ".add-to-wish-list", function (e) {
+  e.preventDefault();
 
-        var goodsInWishListCount = $(".product_in_wish_list_count");
-        var wishCount = parseInt(goodsInWishListCount.first().text() || 0);
+  var goodsInWishListCount = $(".product_in_wish_list_count");
+  var wishCount = parseInt(goodsInWishListCount.first().text() || 0);
 
-        var product_id = $(this).data("product-id");
-        var add_to_wish_list_url = $(this).attr("href");
+  var $this = $(this);
+  var product_id = $this.data("product-id");
+  var add_to_wish_list_url = $this.attr("href");
 
-        $.ajax({
-            type: "POST",
-            url: add_to_wish_list_url,
-            data: {
-                product_id: product_id,
-                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
-            },
-            success: function (data) {
-                successMessage.html(data.message);
-                successMessage.fadeIn(400);
-                setTimeout(function () {
-                    successMessage.fadeOut(400);
-                }, 1500);
+  $.ajax({
+    type: "POST",
+    url: add_to_wish_list_url,
+    data: {
+      product_id: product_id,
+      csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+    },
+    success: function (data) {
+      successMessage.html(data.message);
+      successMessage.fadeIn(400);
+      setTimeout(function () {
+        successMessage.fadeOut(400);
+      }, 1500);
 
-                wishCount = data.change_value + wishCount;
-                goodsInWishListCount.text(wishCount);
+      wishCount = data.change_value + wishCount;
+      goodsInWishListCount.text(wishCount);
 
-                var WishListContainer = $(".wish-list-container");
-                if (WishListContainer.length > 0) {
-                    console.log('1')
-                    WishListContainer.html(data.wish_list_container);
-                }
-            },
+      var WishListContainer = $(".wish-list-container");
+      if (WishListContainer.length > 0) {
+        WishListContainer.html(data.wish_list_container);
+      }
 
-            error: function (data) {
-                console.log("Помилка при додаванні побажання");
-            },
-        });
-    });
+      // Обновляем класс иконки сердца и текст, если параграф существует
+      var wishIcon = $this.find('.wish-icon');
+      var parentParagraph = $this.closest('p.product-base-info');
+      if (parentParagraph.length > 0) {
+        if (wishIcon.hasClass('fa-regular')) {
+          wishIcon.removeClass('fa-regular fa-heart').addClass('fa-solid fa-heart');
+          parentParagraph.contents().filter(function() {
+            return this.nodeType === 3; // Узел текста
+          }).first().replaceWith('Видалити з бажаного ');
+        } else {
+          wishIcon.removeClass('fa-solid fa-heart').addClass('fa-regular fa-heart');
+          parentParagraph.contents().filter(function() {
+            return this.nodeType === 3; // Узел текста
+          }).first().replaceWith('Додати в бажання &nbsp; ');
+        }
+      } else {
+        // Только переключаем иконку сердца, если параграфа нет
+        if (wishIcon.hasClass('fa-regular')) {
+          wishIcon.removeClass('fa-regular fa-heart').addClass('fa-solid fa-heart');
+        } else {
+          wishIcon.removeClass('fa-solid fa-heart').addClass('fa-regular fa-heart');
+        }
+      }
+    },
+
+    error: function (data) {
+      console.log("Ошибка при добавлении в список желаний");
+    },
+  });
+});
+
+
 
 });

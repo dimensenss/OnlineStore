@@ -3,6 +3,7 @@
 {% load goods_tags %}
 
 {% block content %}
+    {% products_in_wishes_list request as products_in_wishes_list %}
     <div class="d-flex flex-column container-fluid container-xl main">
         {% get_breadcrumbs product.cat %}
         <section id="selling-product" class="single-product">
@@ -92,12 +93,22 @@
                     {% endif %}
                     <hr/>
                     <div class="d-flex flex-row align-items-center mt-3">
-                        <p class="product-base-info">Додати в бажання &nbsp; <a
-                                href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
-                                data-product-id= {{ product.id }}>
-                            {% csrf_token %}
-                            <i class="fa-regular fa-heart"></i>
-                        </a></p>
+                        {% if product in products_in_wishes_list %}
+                            <p class="product-base-info">Видалити з бажаного<a
+                                    href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                    data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <i class="fa-solid fa-heart wish-icon"></i>
+                            </a></p>
+                        {% else %}
+                            <p class="product-base-info">Додати в бажання &nbsp <a
+                                    href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                    data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <i class="fa-regular fa-heart wish-icon"></i>
+                            </a></p>
+                        {% endif %}
+
 
                     </div>
                     <div class="d-flex flex-row align-items-center mt-3">

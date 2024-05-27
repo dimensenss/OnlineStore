@@ -5,7 +5,7 @@
 
 
 {% block content %}
-
+    {% products_in_wishes_list request as products_in_wishes_list %}
     <!-- start content -->
 
     <!-- start slider -->
@@ -64,9 +64,9 @@
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
                                             {% else %}
-                                                 <img class="img-fluid w-100"
-                                                 src="{% static 'img/not_found.png' %}"
-                                                 alt="{{ product.title }}"/>
+                                                <img class="img-fluid w-100"
+                                                     src="{% static 'img/not_found.png' %}"
+                                                     alt="{{ product.title }}"/>
                                             {% endif %}
                                         </div>
 
@@ -114,11 +114,15 @@
                                             </p>
                                         {% endif %}
 
-                                    <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
-                                       data-product-id= {{ product.id }}>
-                                        {% csrf_token %}
-                                        <i class="fa-regular fa-heart"></i>
-                                    </a>
+                                        <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                           data-product-id="{{ product.id }}">
+                                            {% csrf_token %}
+                                            {% if product in products_in_wishes_list %}
+                                                <i class="fa-solid fa-heart wish-icon"></i>
+                                            {% else %}
+                                                <i class="fa-regular fa-heart wish-icon"></i>
+                                            {% endif %}
+                                        </a>
 
                                     </div>
 

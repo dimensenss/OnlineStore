@@ -2,7 +2,7 @@ from django import template
 from django.db.models import Min, Max, F
 
 from goods.models import Product, Wish
-from goods.utils import DataMixin, get_user_wishes
+from goods.utils import DataMixin, get_user_wishes, get_product_list_from_wishes
 
 register = template.Library()
 
@@ -58,3 +58,9 @@ def get_recently_viewed_products(context):
 @register.simple_tag(name='user_wishes')
 def user_wishes(request):
     return get_user_wishes(request)
+
+
+@register.simple_tag(name='products_in_wishes_list')
+def user_wishes(request):
+    return get_product_list_from_wishes(request)
+
