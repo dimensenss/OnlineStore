@@ -31,13 +31,11 @@
                         <div class="price-input">
                             <div class="price-field">
                                 <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
-                                       value="
-                                               {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
+                                       value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
                             </div>
                             <div class="price-field">
                                 <input type="number" name="price__lte" step="any" class="max-input " id="id_price__lte"
-                                       value="
-                                               {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
+                                       value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
 
                             </div>
                         </div>
@@ -53,15 +51,13 @@
                                class="min-range"
                                min="0"
                                max="{{ max_price }}"
-                               value="
-                                       {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
+                               value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
                                step="1">
                         <input type="range"
                                class="max-range"
                                min="0"
                                max="{{ max_price }}"
-                               value="
-                                       {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
+                               value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
                                step="1">
                     </div>
 
