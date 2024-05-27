@@ -59,7 +59,7 @@ class Product(models.Model):
         if first_image and first_image.image:
             return mark_safe(f"<img src='{first_image.image.url}' width='100' />")
         else:
-            image_url = static('img/NEXUS.svg')
+            image_url = static('img/not_found.png')
             return mark_safe(f"<img src='{image_url}' width='100' />")
 
 
@@ -205,3 +205,28 @@ class Review(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class WishQuerySet(models.QuerySet):
+    def total_count(self):
+        return self.count()
+
+
+class Wish(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Користувач")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
+    session_key = models.CharField(max_length=32, null=True, blank=True)
+    created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата додавання")
+
+    class Meta:
+        db_table = 'wish'
+        verbose_name = "Побажання"
+        verbose_name_plural = "Побажання"
+        unique_together = ('user', 'product', 'session_key')
+
+    objects = models.Manager()  # Remove custom manager if not needed
+
+    def __str__(self):
+        if self.user:
+            return f"Бажання користувача {self.user.username} | Товар {self.product.title}"
+        return f"Анонімне бажання | Товар {self.product.title}"

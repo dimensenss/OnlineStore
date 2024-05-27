@@ -1,3 +1,4 @@
+{% load goods_tags %}
 {% load static %}
 {% load carts_tags %}
 
@@ -21,7 +22,7 @@
                     <a href="" class="d-none d-md-flex">
                         Доставка та оплата
                     </a>
-                    <a href="" class="d-none d-sm-flex">
+                    <a href="{% url 'goods:contacts' %}" class="d-none d-sm-flex">
                         Контакти
                     </a>
                     <form method="get" action="{% url 'goods:search' %}"
@@ -35,15 +36,15 @@
 
                     </form>
                     {% user_carts request as carts %}
+                    {% user_wishes request as wishes %}
                     <div class="d-flex">
                         <a href="" class=" me-xl-4 me-ld-3 me-sm-2 me-1" data-bs-toggle="modal"
                            data-bs-target="#profile-modal">
                             <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="img-fluid w-100">
                         </a>
-                        <a type="button" data-bs-toggle="modal"
-                           data-bs-target="#cart-modal" class="d-flex nav-cart-link me-xl-4 me-lg-3 me-sm-2 me-1">
+                        <a href="{% url 'goods:wish_list' %}"  class="d-flex nav-cart-link me-xl-4 me-lg-3 me-sm-2 me-1">
                             <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="img-fluid w-100">
-                            <span class="nav-cart-quantity ms-xl-1 ms-0">38</span>
+                            <span class="nav-cart-quantity ms-xl-1 ms-0">{{ wishes|length }}</span>
                         </a>
                         <a type="button" data-bs-toggle="modal"
                            data-bs-target="#cart-modal" class="d-flex nav-cart-link">

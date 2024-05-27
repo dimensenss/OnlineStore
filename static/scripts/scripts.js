@@ -271,6 +271,43 @@ $(document).ready(function ($) {
             },
         });
     });
+      $(document).on("click", ".add-to-wish-list", function (e) {
+        e.preventDefault();
 
+        var goodsInWishListCount = $(".product_in_wish_list_count");
+        var wishCount = parseInt(goodsInWishListCount.first().text() || 0);
+
+        var product_id = $(this).data("product-id");
+        var add_to_wish_list_url = $(this).attr("href");
+
+        $.ajax({
+            type: "POST",
+            url: add_to_wish_list_url,
+            data: {
+                product_id: product_id,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (data) {
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                setTimeout(function () {
+                    successMessage.fadeOut(400);
+                }, 1500);
+
+                wishCount = data.change_value + wishCount;
+                goodsInWishListCount.text(wishCount);
+
+                var WishListContainer = $(".wish-list-container");
+                if (WishListContainer.length > 0) {
+                    console.log('1')
+                    WishListContainer.html(data.wish_list_container);
+                }
+            },
+
+            error: function (data) {
+                console.log("Помилка при додаванні побажання");
+            },
+        });
+    });
 
 });

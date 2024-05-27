@@ -6,7 +6,8 @@ from django.db.models import OuterRef, Subquery, Count, Value, CharField, F
 from django.db.models.functions import Cast
 from django_filters import CharFilter
 
-from goods.models import ProductImage, Category, Brand, Product, ProductAttribute, AttributesValues, AttributesNames
+from goods.models import ProductImage, Category, Brand, Product, ProductAttribute, AttributesValues, AttributesNames, \
+    Wish
 
 
 class DataMixin:
@@ -26,7 +27,27 @@ class DataMixin:
         return qs
 
 
+def get_user_wishes(request):
+    if request.user.is_authenticated:
+        return Wish.objects.filter(user=request.user).order_by('id').select_related('product').annotate(
+            product_slug=F("product__slug"),
+        )
 
+    if not request.session.session_key:
+        request.session.create()
+
+    return Wish.objects.filter(
+        session_key=request.session.session_key).order_by('id').select_related('product').annotate(
+        product_slug=F("product__slug"))
+
+def get_product_from_wishes(request):
+    if request.user.is_authenticated:
+        return DataMixin().get_products_with_previews(
+            Product.objects.filter(wish__user=request.user))
+    else:
+        session_key = request.session.session_key
+        return DataMixin().get_products_with_previews(
+            Product.objects.filter(wish__session_key=session_key))
 
 class BrandsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):

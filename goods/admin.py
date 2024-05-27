@@ -1,4 +1,4 @@
-from ckeditor.widgets import CKEditorWidget
+from django_ckeditor_5.widgets import CKEditor5Widget
 from dal import autocomplete
 from django.contrib import admin
 from django.db import models
@@ -37,7 +37,7 @@ class ProductAdminForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         widgets = {
-            'content': CKEditorWidget(),
+            'content': CKEditor5Widget(),
             'cat': autocomplete.ModelSelect2(url='category-autocomplete'),
             'brand': autocomplete.ModelSelect2(url='brands-autocomplete'),
         }

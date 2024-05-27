@@ -52,7 +52,7 @@
                     <p class="product-base-info">
                         Код: {{ product.display_id }}
                     </p>
-                    {% if product.quantity > 0  %}
+                    {% if product.quantity > 0 %}
                         <p class="product-available">
                             В наявності
                         </p>
@@ -90,12 +90,16 @@
                             Гарантія: {{ product.guarantee }}
                         </p>
                     {% endif %}
-
-                    {#                    <p class="product-base-info">#}
-                    {#                        Колір: white#}
-                    {#                    </p>#}
-
                     <hr/>
+                    <div class="d-flex flex-row align-items-center mt-3">
+                        <p class="product-base-info">Додати в бажання &nbsp; <a
+                                href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                data-product-id= {{ product.id }}>
+                            {% csrf_token %}
+                            <i class="fa-regular fa-heart"></i>
+                        </a></p>
+
+                    </div>
                     <div class="d-flex flex-row align-items-center mt-3">
                         <div class="d-flex flex-column me-4">
                             {% if product.discount %}
@@ -119,18 +123,23 @@
                                 </p>
                             {% endif %}
                         </div>
-                    {% if product.quantity > 0  %}
-                        <a href="{% url 'carts:cart_add' %}" class="big-btn-add-to-cart add-to-cart"
-                           data-product-id= {{ product.id }}>
-                            {% csrf_token %}
-                            До кошика
-                        </a>
-                        {% else %}
-                        <button type="button" class="big-btn-add-to-cart-disabled" disabled>До кошика</button>
 
-                    {% endif %}
+                        {% if product.quantity > 0 %}
+                            <a href="{% url 'carts:cart_add' %}" class="big-btn-add-to-cart add-to-cart"
+                               data-product-id= {{ product.id }}>
+                                {% csrf_token %}
+                                До кошика
+                            </a>
+                        {% else %}
+                            <button type="button" class="big-btn-add-to-cart-disabled" disabled>До кошика</button>
+
+                        {% endif %}
+
                     </div>
+
                 </div>
+
+
             </div>
         </section>
         <ul class="nav-pills d-flex flex-row my-3" id="pills-tab" role="tablist">
@@ -165,14 +174,15 @@
                         <div class="d-flex flex-column">
                             <div class="mb-3 product-tab-features d-flex justify-content-between">
                                 <p class="product-tab-features-prop">Виробник</p>
-                                <p class="product-tab-features-value">{% if product.brand %}{{ product.brand }}{% else %}Немає інформації{% endif %}</p>
+                                <p class="product-tab-features-value">
+                                    {% if product.brand %}{{ product.brand }}{% else %}Немає інформації{% endif %}</p>
                             </div>
                             {% for attr in product.attributes.all %}
-                            <div class="mb-3 product-tab-features d-flex justify-content-between">
+                                <div class="mb-3 product-tab-features d-flex justify-content-between">
 
-                                <p class="product-tab-features-prop">{{ attr.atr_name }}</p>
-                                <p class="product-tab-features-value">{{ attr.value }}</p>
-                            </div>
+                                    <p class="product-tab-features-prop">{{ attr.atr_name }}</p>
+                                    <p class="product-tab-features-value">{{ attr.value }}</p>
+                                </div>
                             {% endfor %}
 
                         </div>
@@ -262,35 +272,35 @@
                 <!-- end top-products -->
             </div>
         </div>
-     {% include 'includes/recently_viewed.html' %}
+        {% include 'includes/recently_viewed.html' %}
 
     </div>
     <script>
-    const stars = document.querySelectorAll('.star');
-    const select = document.getElementById('id_rate');
+        const stars = document.querySelectorAll('.star');
+        const select = document.getElementById('id_rate');
 
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            const value = parseInt(star.getAttribute('data-value'));
-            select.value = value.toString();
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = parseInt(star.getAttribute('data-value'));
+                select.value = value.toString();
+                highlightStars(value);
+            });
+        });
+
+        function highlightStars(value) {
+            stars.forEach((star, index) => {
+                if (index < value) {
+                    star.style.color = 'gold';
+                } else {
+                    star.style.color = 'grey';
+                }
+            });
+        }
+
+        select.addEventListener('change', () => {
+            const value = parseInt(select.value);
             highlightStars(value);
         });
-    });
-
-    function highlightStars(value) {
-        stars.forEach((star, index) => {
-            if (index < value) {
-                star.style.color = 'gold';
-            } else {
-                star.style.color = 'grey';
-            }
-        });
-    }
-
-    select.addEventListener('change', () => {
-        const value = parseInt(select.value);
-        highlightStars(value);
-    });
-</script>
+    </script>
 {% endblock %}
 
