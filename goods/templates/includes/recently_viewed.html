@@ -1,9 +1,12 @@
 {% load static %}
 {% load goods_tags %}
 
-<p class="fs-4 my-2 py-2">Переглянуті товари</p>
+{% get_recently_viewed_products as recently_viewed_qs %}
+{% if recently_viewed_qs|length > 0 %}
+    <p class="fs-4 my-2 py-2">Переглянуті товари</p>
+{% endif %}
+
 <div id="simple-scroll" class="scrolling-wrapper-flexbox">
-    {% get_recently_viewed_products as recently_viewed_qs %}
     {% for product in recently_viewed_qs %}
         {% if product.is_published %}
             <div class="col mb-4 ">

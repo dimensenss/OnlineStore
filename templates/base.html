@@ -28,7 +28,16 @@
     {#    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}"/>#}
     {#    <link href="{% static 'magicsuggest/magicsuggest.css' %}" rel="stylesheet">#}
 </head>
+<script type="text/javascript">
+  window.helpcrunchSettings = {
+    organization: 'nexusstore',
+    appId: 'a00015e2-402b-4dda-a4b8-a042e4e986a4',
+  };
+</script>
 
+<script type="text/javascript">
+  (function(w,d){var hS=w.helpcrunchSettings;if(!hS||!hS.organization){return;}var widgetSrc='https://embed.widget.helpcrunch.com/sdk.js';w.HelpCrunch=function(){w.HelpCrunch.q.push(arguments)};w.HelpCrunch.q=[];function r(){if (d.querySelector('script[src="' + widgetSrc + '"')) { return; }var s=d.createElement('script');s.async=1;s.type='text/javascript';s.src=widgetSrc;(d.body||d.head).appendChild(s);}if(d.readyState === 'complete'||hS.loadImmediately){r();} else if(w.attachEvent){w.attachEvent('onload',r)}else{w.addEventListener('load',r,false)}})(window, document)
+</script>
 <body>
 <div id="loader-wrapper">
     <div class="spinner-border text-secondary" style="width: 3rem; height: 3rem;" role="status">
