@@ -10,8 +10,8 @@
         <div class="nav d-flex align-items-center">
             <div class="container-fluid container-xl d-flex flex-wrap align-items-center justify-content-between">
                 <div class="d-flex col align-items-center justify-content-between">
-                    <a href="{% url 'goods:main' %}">
-                        <img src="{% static 'img/NEXUS.svg' %}" alt="" class="img-fluid w-100">
+                    <a href="{% url 'goods:main' %}" class="nav-logo">
+                        <img src="{% static 'img/NEXUS.svg' %}" alt="" class="">
                     </a>
                     {% block catalog %}
                         {% include 'includes/catalog.html' %}
@@ -30,25 +30,25 @@
                         <input type="text" name="title_search" class="col-10"
                                placeholder="Пошук"
                                value="{{ request.GET.title_search }}">
-                        <button class="col-2 d-flex justify-content-end" id="btn-search">
+                        <button class="col-2 d-flex justify-content-end nav-btn-search" id="btn-search">
                             <img src="{% static 'img/search-btn.svg' %}" alt="search">
                         </button>
 
                     </form>
                     {% user_carts request as carts %}
                     {% user_wishes request as wishes %}
-                    <div class="d-flex">
-                        <a href="" class=" me-xl-4 me-ld-3 me-sm-2 me-1" data-bs-toggle="modal"
+                    <div class="d-flex nav-icons">
+                        <a href="" class=" me-lg-4 me-sm-2 me-1" data-bs-toggle="modal"
                            data-bs-target="#profile-modal">
-                            <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="img-fluid w-100">
+                            <img src="{% static 'img/user-profile.svg' %}" alt="profile" class="">
                         </a>
-                        <a href="{% url 'goods:wish_list' %}"  class="d-flex nav-cart-link me-xl-4 me-lg-3 me-sm-2 me-1">
-                            <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="img-fluid w-100">
+                        <a href="{% url 'goods:wish_list' %}"  class="d-flex nav-cart-link me-lg-4 me-sm-2 me-1">
+                            <img src="{% static 'img/wish-list-ico.svg' %}" alt="wish list" class="">
                             <span class="nav-cart-quantity ms-xl-1 ms-0">{{ wishes|length }}</span>
                         </a>
                         <a type="button" data-bs-toggle="modal"
                            data-bs-target="#cart-modal" class="d-flex nav-cart-link">
-                            <img src="{% static 'img/cart-fill.svg' %}" alt="cart" class="img-fluid w-100">
+                            <img src="{% static 'img/cart-fill.svg' %}" alt="cart" class="">
                             <span class="goods-in-cart-count nav-cart-quantity ms-xl-1 ms-0">{{ carts.total_quantity }}</span>
                         </a>
                         {#                    <span class="badge bg-secondary text-white ms-1 rounded-pill goods-in-cart-count">{{ carts.total_quantity }}</span>#}

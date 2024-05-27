@@ -549,8 +549,13 @@ a:hover{
     .nav{
         font-size: 14px;
     }
+    .cd-dropdown-wrapper a,
+    .cd-dropdown-content .cd-secondary-dropdown > .see-all a, .cd-dropdown-content .cd-dropdown-gallery > .see-all a, .cd-dropdown-content .cd-dropdown-icons > .see-all a,
+    .cd-dropdown-content a, .cd-dropdown-content ul a{
+        font-size: 14px;
+    }
     .header img {
-        scale: 0.8;
+
     }
     .cart-table td{
         font-size: 14px;
@@ -563,15 +568,20 @@ a:hover{
 @media (max-width: 991px) {
     /* header */
     .nav {
-        font-size: 12px;
+        font-size: 14px;
     }
     .nav-cart-quantity{
         font-size: 8px;
     }
-    .header img {
-        scale: 0.7;
+    .nav-icons img {
+        width: 18px;
     }
-
+    .nav-logo img{
+        width: 60px;
+    }
+    .nav-btn-search img{
+        width: 12px;
+    }
     .search-input, .search-input input {
         height: 30px;
         line-height: 30px;
@@ -632,17 +642,13 @@ a:hover{
         font-size: 12px;
     }
 
-    .header img {
-        scale: 0.6;
-    }
-
     /* footer */
     .footer-title {
         font-size: 14px;
     }
 
     .footer img {
-        scale: 0.7;
+
     }
 
     .footer-links {
@@ -678,6 +684,12 @@ a:hover{
 @media (max-width: 575px) {
     /* header */
 
+    .nav-icons img {
+        width: 15px;
+    }
+    .nav-logo img{
+        width: 55px;
+    }
     /*cart-form*/
     .cart-table td{
         font-size: 10px;
@@ -703,15 +715,16 @@ a:hover{
     }
     /* footer */
     .footer-title {
-        font-size: 12px;
+        font-size: 16px;
     }
 
     .footer img {
-        scale: 0.6;
+        height: 30px;
+        width: 30px;
     }
 
     .footer-links {
-        font-size: 10px;
+        font-size: 14px;
     }
     .cart-btn-inc, .cart-btn-dec{
         font-size: 10px;

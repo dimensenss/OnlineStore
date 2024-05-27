@@ -347,7 +347,6 @@ Primary style
     padding-top: 60px;
   }
   .cd-dropdown-content a, .cd-dropdown-content ul a {
-    font-size: 16px;
     font-family: "Montserrat", sans-serif;
   }
 }
@@ -360,7 +359,6 @@ Primary style
     color: #FFF;
     height: 50px;
     line-height: 50px;
-    font-size: 16px;
     font-family: "Montserrat", sans-serif;
   }
   .cd-dropdown-content .cd-divider, .cd-dropdown-content ul .cd-divider {
@@ -593,7 +591,6 @@ Primary style
   .cd-dropdown-content .cd-secondary-dropdown a {
     line-height: 25px;
     height: 25px;
-    font-size: 16px;
     font-family: "Montserrat", sans-serif;
     padding-left: 0;
   }
