@@ -28,6 +28,7 @@ Primary style
 }
 .cd-dropdown-trigger::before, .cd-dropdown-trigger::after {
   /* this is the arrow inside the dropdown trigger*/
+  visibility: hidden;
   content: '';
   position: absolute;
   top: 50%;

@@ -40,6 +40,10 @@ button {
 .nav-cart-quantity{
     font-size: 10px;
 }
+.nav a:hover {
+    color: rgb(255, 255, 255);
+    transition: all 0.3s;
+}
 .nav-cart-link:hover{
     color: #FFFFFF;
 }
