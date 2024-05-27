@@ -6,85 +6,6 @@
 
 {% block content %}
 {% products_in_wishes_list request as products_in_wishes_list %}
-
-    <aside class="d-none d-lg-flex d-xl-flex d-xxl-flex">
-        <div class="sidebar">
-
-            <form method="get" class="py-0">
-
-
-                <div class="d-flex flex-column">
-
-
-                    <div class="d-flex flex-column py-2">
-                        <label for="order_by">Оберіть сортування</label>
-                        {{ filter.form.order_by }}
-                    </div>
-                    <div class="d-flex flex-column py-2">
-                        <label for="order_by">Оберіть Бренди</label>
-                        {{ filter.form.brand }}
-                    </div>
-
-                    {% get_min_max_prices %}
-
-                    <div class="price-input-container">
-                        <div class="price-input">
-                            <div class="price-field">
-                                <input type="number" name="price__gte" step="any" class="min-input " id="id_price__gte"
-                                       value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
-                            </div>
-                            <div class="price-field">
-                                <input type="number" name="price__lte" step="any" class="max-input " id="id_price__lte"
-                                       value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
-
-                            </div>
-                        </div>
-                        <div class="slider-container">
-                            <div class="price-slider">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slider -->
-                    <div class="range-input">
-                        <input type="range"
-                               class="min-range"
-                               min="0"
-                               max="{{ max_price }}"
-                               value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
-                               step="1">
-                        <input type="range"
-                               class="max-range"
-                               min="0"
-                               max="{{ max_price }}"
-                               value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
-                               step="1">
-                    </div>
-
-
-                    <div>
-                        <div class="d-flex flex-row justify-content-center align-items-center">
-
-
-                            <button type="submit" class="btn btn-secondary mb-2">
-                                Ок
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mb-2">
-                            Примінити фільтри
-                        </button>
-                    </div>
-                </div>
-
-            </form>
-
-
-        </div>
-    </aside>
     <div class="d-flex flex-column container-fluid container-xl main">
         <div class="row">
             <div class="d-flex justify-content-center">
@@ -96,7 +17,82 @@
                 {% endif %}
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1 mx-0 mt-4">
+
+        <div class="d-flex flex-row-reverse">
+            <button class="btn btn-primary catalog-btn-filter mt-4 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">
+                <p class="me-2">Фільтри</p>
+                <img src="{% static 'img/filter-ico.png' %}" alt="">
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                 aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel" style="color: #CF2EFF;">Фільтри</h5>
+                    <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form method="get" class="py-0">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex flex-column py-0">
+                                <label for="order_by" class="mb-2" style="color: #dcdcdc;">Сортування</label>
+                                {{ filter.form.order_by }}
+                            </div>
+                            <div class="d-flex flex-column py-0 mt-4">
+                                <label for="order_by" class="mb-2" style="color: #dcdcdc;">Виробник</label>
+                                {{ filter.form.brand }}
+                            </div>
+                            {% get_min_max_prices %}
+                            <div class="price-input-container mt-4">
+                                <div class="mb-2" style="color: #dcdcdc;">Ціна</div>
+                                <div class="price-input d-flex justify-content-between">
+                                    <div class="price-field me-3">
+                                        <input type="number" name="price__gte" step="any" class="min-input text-start"
+                                               id="id_price__gte"
+                                               value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}">
+                                    </div>
+                                    <div class="price-field">
+                                        <input type="number" name="price__lte" step="any" class="max-input text-end"
+                                               id="id_price__lte"
+                                               value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="slider-container">
+                                    <div class="price-slider">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slider -->
+                            <div class="range-input">
+                                <input type="range"
+                                       class="min-range"
+                                       min="0"
+                                       max="{{ max_price }}"
+                                       value="
+                                               {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
+                                       step="1">
+                                <input type="range"
+                                       class="max-range"
+                                       min="0"
+                                       max="{{ max_price }}"
+                                       value="
+                                               {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
+                                       step="1">
+                            </div>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button type="submit" class="btn btn-primary catalog-btn-use-filters mb-2">
+                                    Застосувати фільтри
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-3 g-1 mx-0 mt-4">
             {% for product in products_qs %}
                 {% if product.is_published %}
                     <div class="col mb-4">
@@ -189,7 +185,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-        {% include 'includes/recently_viewed.html' %}
+{#        {% include 'includes/recently_viewed.html' %}#}
     </div>
 
 {% endblock content %}

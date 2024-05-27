@@ -156,6 +156,6 @@ class ProductFilter(django_filters.FilterSet):
     def __init__(self, *args, **kwargs):
         super(ProductFilter, self).__init__(*args, **kwargs)
         self.filters['title_search'].field.widget.attrs.update({'class': 'custom-form-control mb-2'})
-        self.filters['order_by'].field.widget.attrs.update({'class': 'custom-form-control mb-2'})
-        self.filters['price__gte'].field.widget.attrs.update({'class': 'custom-form-control mb-2 price_input'})
-        self.filters['price__lte'].field.widget.attrs.update({'class': 'custom-form-control mb-2 price_input'})
+        self.filters['order_by'].field.widget.attrs.update({'class': 'custom-form-control catalog-filter-orderby'})
+        self.filters['price__gte'].field.widget.attrs.update({'class': 'custom-form-control price_input catalog-filter-price'})
+        self.filters['price__lte'].field.widget.attrs.update({'class': 'custom-form-control price_input catalog-filter-price'})

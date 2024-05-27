@@ -537,6 +537,12 @@ a:hover{
     border-bottom: solid 2px #151515;
 
 }
+.dropdown-filters li:active{
+    background-color: #FFFFFF;
+}
+.price-field input{
+    width: 100%;
+}
 .accordion-item:last-of-type .accordion-button.collapsed, .accordion-item:last-of-type {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -544,6 +550,42 @@ a:hover{
 .accordion-item:first-of-type .accordion-button, .accordion-item:first-of-type {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+.offcanvas{
+    visibility: visible;
+    background-color: #202020;
+}
+.catalog-btn-filter{
+    height: 34px;
+    line-height: 34px;
+    background-color: #6e6e6e;
+    border-radius: 50px;
+    border: none;
+    padding: 0 2rem;
+}
+.catalog-btn-filter:hover{
+    background-color: #606060;
+}
+.catalog-filter-orderby{
+    width: 100%;
+    border: none;
+    height: 35px;
+    line-height: 35px;
+}
+.catalog-btn-filter img{
+    width: 22px;
+    height: 22px;
+}
+.catalog-btn-use-filters{
+    border: none;
+    border-radius: 8px;
+    background-color: #CF2EFF;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+.catalog-btn-use-filters:hover{
+    color: #CF2EFF;
+    background-color: #FFFFFF;
 }
 @media (max-width: 1200px) {
     .nav{
