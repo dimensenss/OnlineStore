@@ -64,3 +64,4 @@ def user_wishes(request):
 def user_wishes(request):
     return get_product_list_from_wishes(request)
 
+

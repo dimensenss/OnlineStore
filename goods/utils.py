@@ -109,24 +109,11 @@ class AttributeValueAutocomplete(autocomplete.Select2QuerySetView):
 
 
 class ProductFilter(django_filters.FilterSet):
-    title_search = CharFilter(method='title_content_filter', label='Назва складається з', )
-
-    price__gte = django_filters.NumberFilter(
-        field_name='sell_price',
-        lookup_expr='gte',
-        label='Ціна від:',
-    )
-
-    price__lte = django_filters.NumberFilter(
-        field_name='sell_price',
-        lookup_expr='lte',
-        label='Ціна до:',
-    )
-
+    title_search = django_filters.CharFilter(method='title_content_filter', label='Назва складається з')
+    price__gte = django_filters.NumberFilter(field_name='sell_price', lookup_expr='gte', label='Ціна від:')
+    price__lte = django_filters.NumberFilter(field_name='sell_price', lookup_expr='lte', label='Ціна до:')
     order_by = django_filters.OrderingFilter(
-        fields=(
-            ('sell_price', 'sell_price'),
-        ),
+        fields=(('sell_price', 'sell_price'),),
         field_labels={
             'sell_price': 'Від дешевих до дорогих',
             '-sell_price': 'Від дорогих до дешевих',
@@ -148,14 +135,23 @@ class ProductFilter(django_filters.FilterSet):
         return queryset.annotate(rank=SearchRank(vector, query, normalization=normalization)).filter(
             rank__gt=0).order_by("-rank")
 
+
+
+        vector = SearchVector('title', 'content')
+        query = SearchQuery(value)
+        normalization = Value(2).bitor(Value(4))
+        return queryset.annotate(rank=SearchRank(vector, query, normalization=normalization)).filter(
+            rank__gt=0).order_by("-rank")
+
     class Meta:
         model = Product
-        fields = {
-        }
+        fields = []
 
     def __init__(self, *args, **kwargs):
         super(ProductFilter, self).__init__(*args, **kwargs)
         self.filters['title_search'].field.widget.attrs.update({'class': 'custom-form-control mb-2'})
         self.filters['order_by'].field.widget.attrs.update({'class': 'custom-form-control catalog-filter-orderby'})
-        self.filters['price__gte'].field.widget.attrs.update({'class': 'custom-form-control price_input catalog-filter-price'})
-        self.filters['price__lte'].field.widget.attrs.update({'class': 'custom-form-control price_input catalog-filter-price'})
+        self.filters['price__gte'].field.widget.attrs.update(
+            {'class': 'custom-form-control price_input catalog-filter-price'})
+        self.filters['price__lte'].field.widget.attrs.update(
+            {'class': 'custom-form-control price_input catalog-filter-price'})

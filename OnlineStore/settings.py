@@ -18,7 +18,7 @@ SECRET_KEY = "django-insecure-7kp^sa5dsh_$qcex%(x_pu^9(d6y@g$eupiwwg)jtm-0i6wxep
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #
-SITE_ID = 1
+# SITE_ID = 1
 
 ALLOWED_HOSTS = ['*']
 DEBUG_TOOLBAR_CONFIG = {
@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -183,17 +184,36 @@ USE_I18N = True
 
 USE_TZ = True
 
+# AWS #S Settings
+
+AWS_ACCESS_KEY_ID = 'AKIA47CR2MMGZFJHX6GF'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'nexusstore-s3-bucket'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400'
+}
+AWS_LOCATION = 'static'
+AWS_QUERYSTRING_AUTH = False
+AWS_HEADERS = {
+    'Access-Control-Allow-Origin': '*',
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = '/static/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_FILES_STORAGE = 'storages.backends.s3boto3.S3Static3Storage'
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 customColorPalette = [
