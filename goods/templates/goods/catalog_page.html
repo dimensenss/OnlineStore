@@ -104,7 +104,7 @@
                                     <a href="{{ product.get_absolute_url }}">
                                         <div class="item-img">
                                             {% if product.preview %}
-                                                <img src="{{ product.preview }}"
+                                                <img src="{% get_static_prefix %}{{ product.preview }}"
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
                                             {% else %}
