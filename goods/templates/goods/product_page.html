@@ -4,11 +4,11 @@
 
 {% block content %}
     {% products_in_wishes_list request as products_in_wishes_list %}
-    <div class="d-flex flex-column container-fluid container-xl main">
+    <div class="d-flex flex-column container-fluid container-xxl main">
         {% get_breadcrumbs product.cat %}
         <section id="selling-product" class="single-product">
             <div class="row">
-                <div class="col-5 flex-column">
+                <div class="col-12 col-md-5">
                     <div id="carousel-product" class="carousel slide col-12" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -46,7 +46,7 @@
                     </div>
 
                 </div>
-                <div class="col-7 d-flex flex-column">
+                <div class="col-12 col-md-7 d-flex flex-column">
                     <p class="product-title">
                         {{ product.title }}
                     </p>
@@ -149,19 +149,18 @@
                     </div>
 
                 </div>
-
-
             </div>
         </section>
-        <ul class="nav-pills d-flex flex-row my-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
+        <hr class="d-flex d-md-none my-3"/>
+        <ul class="nav-pills d-flex flex-column flex-sm-row mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item me-4" role="presentation">
                 <button class="nav-link active" id="pills-description-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description"
                         aria-selected="true">
                     Опис та характеристики
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item me-4" role="presentation">
                 <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews"
                         type="button" role="tab" aria-controls="pills-reviews" aria-selected="false">
                     Відгуки
@@ -175,10 +174,10 @@
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-            <div class=" tab-pane fade show active" id="pills-description" role="tabpanel"
+            <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
                  aria-labelledby="pills-description-tab">
-                <div class="d-flex flex-row row g-5">
-                    <div class="col-6">
+                <div class="d-flex flex-row row gx-3 gx-xl-5">
+                    <div class="col-12 col-md-6">
                         <div class="product-tab-title mb-4">
                             Характеристики
                         </div>
@@ -198,7 +197,7 @@
 
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <div class="product-tab-title mb-4">
                             Опис товару
                         </div>
@@ -215,75 +214,111 @@
                     </div>
                 </div>
             </div>
-            <div class=" tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+            <div class="tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
                 {% include 'includes/review_block.html' %}
             </div>
-
-
-            <div class=" tab-pane fade" id="pills-similar" role="tabpanel" aria-labelledby="pills-similar-tab">
-                <div class="col-6 product-tab-title mb-4">
+            <div class="tab-pane fade" id="pills-similar" role="tabpanel" aria-labelledby="pills-similar-tab">
+                <div class="col-12 col-md-7 col-xxl-6 product-tab-title mb-4">
                     Товари, що можуть вас зацікавити
                 </div>
                 <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
                     {% load_same_products product.cat_id product.id as same_products %}
                     {% for product in same_products %}
                         <div class="col mb-4">
-                            <div class="card product-card">
-                                <div class="product-card-content d-flex flex-column justify-content-between">
-                                    <div class="d-flex flex-column pt-4">
-                                        <div class="product-card-id">
-                                            <p>Код: {{ product.display_id }}</p>
-                                        </div>
-                                        <a href="{{ product.get_absolute_url }}">
-                                            <div class="item-img">
+                        <div class="card product-card">
+                            <div class="product-card-content d-flex flex-column justify-content-between">
+                                <div class="d-flex flex-column pt-4">
+                                    <div class="product-card-id">
+                                        <p>Код: {{ product.display_id }}</p>
+                                    </div>
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <div class="item-img">
+                                            {% if product.preview %}
                                                 <img src="{% get_media_prefix %}{{ product.preview }}"
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
-                                            </div>
-                                            <div class="product-card-name text-center mt-4">
-                                                {{ product.title|truncatechars:100 }}
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="d-flex flex-column pb-4">
-                                        <div class="d-flex flex-column justify-content-end mb-4">
-                                            {% if product.discount %}
-                                                <div class="d-flex flex-row align-items-end">
-                                                    <p class="product-card-price-title me-2">
-                                                        Ціна
-                                                    </p>
-                                                    <p class="product-card-price">
-                                                        {{ product.price }} ₴
-                                                    </p>
-                                                </div>
-                                                <p class="product-card-discount">
-                                                    {{ product.discount }} ₴
-                                                </p>
                                             {% else %}
+                                                <img class="mg-fluid w-100"
+                                                     src="{% static 'img/not_found.png' %}"
+                                                     alt="{{ product.title }}"/>
+                                            {% endif %}
+                                        </div>
+                                        <div class="product-card-name text-center mt-4">
+                                            {{ product.title|truncatechars:100 }}
+                                        </div>
+                                    </a>
+                                    <div class="d-flex flex-row justify-content-center mt-3">
+                                    {% with rate=product.calculate_rate %}
+                                        {% if rate == 0 %}
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        {% else %}
+                                            {% for _ in 'x'|rjust:rate %}
+                                                <span class="readonly-star">★</span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                                </div>
+                                <div class="d-flex flex-column pb-4">
+                                    <div class="d-flex justify-content-between align-items-end mb-4">
+                                        <div class="d-flex flex-column justify-content-end">
+                                        {% if product.discount %}
+                                            <div class="d-flex flex-row align-items-end">
                                                 <p class="product-card-price-title me-2">
                                                     Ціна
                                                 </p>
-                                                <p class="product-card-discount">
+                                                <p class="product-card-price">
                                                     {{ product.price }} ₴
                                                 </p>
+                                            </div>
+                                            <p class="product-card-discount">
+                                                {{ product.discount }} ₴
+                                            </p>
+                                        {% else %}
+                                            <p class="product-card-price-title me-2">
+                                                Ціна
+                                            </p>
+                                            <p class="product-card-discount">
+                                                {{ product.price }} ₴
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                        <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
+                                           data-product-id="{{ product.id }}">
+                                            {% csrf_token %}
+                                            {% if product in products_in_wishes_list %}
+                                                <i class="fa-solid fa-heart wish-icon"></i>
+                                            {% else %}
+                                                <i class="fa-regular fa-heart wish-icon"></i>
                                             {% endif %}
-                                        </div>
+                                        </a>
+                                    </div>
+                                    {% if product.quantity > 0 %}
                                         <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
-                                           data-product-id='{{ product.id }}'
-                                           data-is-order='false'>
+                                           data-product-id= {{ product.id }}>
                                             {% csrf_token %}
                                             До кошика
                                         </a>
-                                    </div>
+                                    {% else %}
+                                        <button type="button" class="small-btn-add-to-car-disabled" disabled>Немає на
+                                            складі
+                                        </button>
+
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
                 <!-- end top-products -->
             </div>
         </div>
-        {% include 'includes/recently_viewed.html' %}
+{#        {% include 'includes/recently_viewed.html' %}#}
 
     </div>
     <script>
