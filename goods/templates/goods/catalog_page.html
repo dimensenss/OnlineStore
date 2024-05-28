@@ -18,8 +18,8 @@
             </div>
         </div>
 
-        <div class="d-flex flex-row-reverse">
-            <button class="btn btn-primary catalog-btn-filter mt-4 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        <div class="d-flex flex-row-reverse my-3">
+            <button class="btn btn-primary catalog-btn-filter d-flex align-items-center me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight">
                 <p class="me-2">Фільтри</p>
                 <img src="{% static 'img/filter-ico.png' %}" alt="">
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-3 g-1 mx-0 mt-4">
+        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 g-1">
             {% for product in products_qs %}
                 {% if product.is_published %}
                     <div class="col mb-4">
@@ -117,8 +117,7 @@
                                             {{ product.title|truncatechars:100 }}
                                         </div>
                                     </a>
-                                </div>
-                                <div class="d-flex flex-row pt-4">
+                                    <div class="d-flex flex-row justify-content-center mt-3">
                                     {% with rate=product.calculate_rate %}
                                         {% if rate == 0 %}
                                             <i class="fa-regular fa-star"></i>
@@ -133,8 +132,10 @@
                                         {% endif %}
                                     {% endwith %}
                                 </div>
+                                </div>
                                 <div class="d-flex flex-column pb-4">
-                                    <div class="d-flex flex-column justify-content-end mb-4">
+                                    <div class="d-flex justify-content-between align-items-end mb-4">
+                                        <div class="d-flex flex-column justify-content-end">
                                         {% if product.discount %}
                                             <div class="d-flex flex-row align-items-end">
                                                 <p class="product-card-price-title me-2">
@@ -155,6 +156,7 @@
                                                 {{ product.price }} ₴
                                             </p>
                                         {% endif %}
+                                    </div>
                                         <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
                                            data-product-id="{{ product.id }}">
                                             {% csrf_token %}

@@ -75,7 +75,7 @@ button {
 }
 
 .product-card {
-    height: 450px;
+    height: 480px;
     /*max-width: 305px;*/
     background-color: #000;
     border: #CF2EFF solid 1px;
@@ -563,7 +563,7 @@ a:hover{
     border: none;
     padding: 0 2rem;
 }
-.catalog-btn-filter:hover{
+.catalog-btn-filter:hover, .catalog-btn-filter:focus{
     background-color: #606060;
 }
 .catalog-filter-orderby{

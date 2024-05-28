@@ -56,7 +56,6 @@
                                     <div class="product-card-id">
                                         <p>Код: {{ product.display_id }}</p>
                                     </div>
-
                                     <a href="{{ product.get_absolute_url }}">
                                         <div class="item-img">
                                             {% if product.preview %}
@@ -64,19 +63,16 @@
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
                                             {% else %}
-                                                <img class="img-fluid w-100"
+                                                <img class="mg-fluid w-100"
                                                      src="{% static 'img/not_found.png' %}"
                                                      alt="{{ product.title }}"/>
                                             {% endif %}
                                         </div>
-
                                         <div class="product-card-name text-center mt-4">
                                             {{ product.title|truncatechars:100 }}
                                         </div>
                                     </a>
-
-                                </div>
-                                <div class="d-flex flex-row pt-4">
+                                    <div class="d-flex flex-row justify-content-center mt-3">
                                     {% with rate=product.calculate_rate %}
                                         {% if rate == 0 %}
                                             <i class="fa-regular fa-star"></i>
@@ -91,8 +87,10 @@
                                         {% endif %}
                                     {% endwith %}
                                 </div>
+                                </div>
                                 <div class="d-flex flex-column pb-4">
-                                    <div class="d-flex flex-column justify-content-end mb-4">
+                                    <div class="d-flex justify-content-between align-items-end mb-4">
+                                        <div class="d-flex flex-column justify-content-end">
                                         {% if product.discount %}
                                             <div class="d-flex flex-row align-items-end">
                                                 <p class="product-card-price-title me-2">
@@ -113,7 +111,7 @@
                                                 {{ product.price }} ₴
                                             </p>
                                         {% endif %}
-
+                                    </div>
                                         <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
                                            data-product-id="{{ product.id }}">
                                             {% csrf_token %}
@@ -123,9 +121,7 @@
                                                 <i class="fa-regular fa-heart wish-icon"></i>
                                             {% endif %}
                                         </a>
-
                                     </div>
-
                                     {% if product.quantity > 0 %}
                                         <a href="{% url 'carts:cart_add' %}" class="small-btn-add-to-cart add-to-cart"
                                            data-product-id= {{ product.id }}>
@@ -138,7 +134,6 @@
                                         </button>
 
                                     {% endif %}
-
                                 </div>
                             </div>
                         </div>

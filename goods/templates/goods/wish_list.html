@@ -2,18 +2,18 @@
 {% load goods_tags %}
 {% load static %}
 
-
-
 {% block content %}
-
     <div class="d-flex flex-column container-fluid container-xl main">
         <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb" class="my-3">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="{% url 'goods:main' %}"><img
                         src="{% static 'img/Nexus-gray.svg' %}" alt=""></a></li>
                 <li class="breadcrumb-item active"><a>Бажані товари</a></li>
             </ol>
         </nav>
+        <div class="block-title ">
+            Бажані товари
+        </div>
         <div class="wish-list-container">
             {% include 'includes/wish_list_included.html' %}
         </div>
