@@ -194,7 +194,7 @@ AWS_DEFAULT_ACL = 'public-read'
 AWS_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
-AWS_LOCATION = 'static'
+AWS_LOCATION = 'media'
 AWS_QUERYSTRING_AUTH = False
 AWS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
