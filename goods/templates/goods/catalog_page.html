@@ -70,15 +70,13 @@
                                        class="min-range"
                                        min="0"
                                        max="{{ max_price }}"
-                                       value="
-                                               {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
+                                       value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
                                        step="1">
                                 <input type="range"
                                        class="max-range"
                                        min="0"
                                        max="{{ max_price }}"
-                                       value="
-                                               {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
+                                       value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
                                        step="1">
                             </div>
                             <div class="d-flex justify-content-center mt-4">
@@ -106,7 +104,7 @@
                                     <a href="{{ product.get_absolute_url }}">
                                         <div class="item-img">
                                             {% if product.preview %}
-                                                <img src="{% get_media_prefix %}{{ product.preview }}"
+                                                <img src="{{ product.preview }}"
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
                                             {% else %}

@@ -204,6 +204,8 @@ AWS_HEADERS = {
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_FILES_STORAGE = 'storages.backends.s3boto3.S3Static3Storage'
+
+
 # STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 # STATICFILES_DIRS = [BASE_DIR / 'static']
