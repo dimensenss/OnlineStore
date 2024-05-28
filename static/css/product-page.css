@@ -89,6 +89,8 @@ hr{
     color: #FFFFFF;
     text-transform: uppercase;
     font-size: 24px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .nav-link:hover{
     color: #FFFFFF;
@@ -108,6 +110,7 @@ hr{
     text-align: center;
     border-radius: 50px;
 }
+
 .product-tab-features-prop{
     color: #b3b3b3;
     font-size: 16px;
@@ -155,4 +158,105 @@ hr{
 }
 .review-text{
     font-size: 20px;
+}
+
+@media (max-width: 1200px) {
+    .breadcrumb-item a{
+        font-size: 14px;
+    }
+    /* product */
+    .product-title, .product-discount{
+        font-size: 28px;
+    }
+    .product-base-info, .product-available, .product-not-available, .product-price, .product-price-title{
+    font-size: 18px;
+    }
+    .big-btn-add-to-cart, .big-btn-add-to-cart-disabled{
+    width: 200px;
+    font-size: 18px;
+    }
+    .carousel-control-prev img, .carousel-control-next img{
+        width: 40px;
+    }
+    /* tab */
+    .product-tab-title, .nav-link{
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 991px) {
+    /* product */
+    .product-title, .product-discount{
+        font-size: 24px;
+    }
+    .product-base-info, .product-available, .product-not-available, .product-price, .product-price-title{
+    font-size: 16px;
+    }
+    .big-btn-add-to-cart, .big-btn-add-to-cart-disabled{
+    width: 180px;
+    font-size: 16px;
+    }
+    .carousel-control-prev img, .carousel-control-next img{
+        width: 40px;
+    }
+    /* tab */
+    .product-tab-title, .nav-link{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    /* product */
+    .product-title, .product-discount{
+        font-size: 24px;
+    }
+    .product-base-info, .product-available, .product-not-available, .product-price, .product-price-title, .btn-add-review{
+    font-size: 16px;
+    }
+    .big-btn-add-to-cart, .big-btn-add-to-cart-disabled{
+    width: 180px;
+    font-size: 16px;
+    }
+    /* tab */
+    .product-tab-title, .nav-link{
+        font-size: 18px;
+    }
+    .product-tab-title, .btn-add-review{
+        height: 40px;
+        line-height: 40px;
+    }
+    .carousel{
+        max-width: 550px;
+        margin: 0 auto;
+    }
+    .carousel-inner img{
+
+    }
+}
+
+@media (max-width: 575px) {
+    /* product */
+    .product-title, .product-discount{
+        font-size: 20px;
+    }
+    .product-base-info, .product-available, .product-not-available, .product-price, .product-price-title, .btn-add-review, .product-tab-features-value, .product-tab-features-prop, .review-textarea{
+    font-size: 14px;
+    }
+    .big-btn-add-to-cart, .big-btn-add-to-cart-disabled{
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    }
+    /* tab */
+    .nav-link{
+        font-size: 16px;
+    }
+    .product-tab-title{
+        font-size: 14px;
+    }
+    .product-tab-title, .btn-add-review{
+        height: 40px;
+        line-height: 40px;
+    }
 }

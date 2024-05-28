@@ -587,6 +587,10 @@ a:hover{
     color: #CF2EFF;
     background-color: #FFFFFF;
 }
+@media (max-width: 1400px){
+
+}
+
 @media (max-width: 1200px) {
     .nav{
         font-size: 14px;

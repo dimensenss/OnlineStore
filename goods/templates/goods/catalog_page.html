@@ -6,7 +6,7 @@
 
 {% block content %}
 {% products_in_wishes_list request as products_in_wishes_list %}
-    <div class="d-flex flex-column container-fluid container-xl main">
+    <div class="d-flex flex-column container-fluid container-xxl main">
         <div class="row">
             <div class="d-flex justify-content-center">
                 <p class="fs-4">{% if request.GET.title_search %}Результати пошуку "
@@ -109,7 +109,7 @@
                                                      class="img-fluid w-100"
                                                      alt="{{ product.title }}">
                                             {% else %}
-                                                <img class="mg-fluid w-100"
+                                                <img class="img-fluid w-100"
                                                      src="{% static 'img/not_found.png' %}"
                                                      alt="{{ product.title }}"/>
                                             {% endif %}
