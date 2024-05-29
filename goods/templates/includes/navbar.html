@@ -16,10 +16,10 @@
                     {% block catalog %}
                         {% include 'includes/catalog.html' %}
                     {% endblock catalog %}
-                    <a href="" class="d-none d-sm-flex">
+                    <a href="{% url 'goods:info' %}" class="d-none d-sm-flex">
                         Про нас
                     </a>
-                    <a href="" class="d-none d-md-flex">
+                    <a href="{% url 'goods:delivery_info' %}#delivery_info" class="d-none d-md-flex">
                         Доставка та оплата
                     </a>
                     <a href="{% url 'goods:contacts' %}" class="d-none d-sm-flex">

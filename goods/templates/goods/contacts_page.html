@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid container-xxl main d-flex flex-column">
+        <div class="d-flex flex-column info-about-us">
+            <div class="block-title my-3">
+                Контакти
+            </div>
+            <div class="">
+                <p class="mb-3" style="color: #b3b3b3;">
+                    Ласкаво просимо до нашого інтернет-магазину геймерських товарів! Ми раді вітати вас у світі, де
+                    захоплення ігровими пригодами перетворюється на реальність завдяки якісному обладнанню та
+                    аксесуарам.
+                </p>
+                <h1 class="mb-2">
+                    Гаряча лінія
+                </h1>
+                <p class="mb-3">
+                    +380688935000
+                </p>
+                <p class="mb-3">
+                    +380686556000
+                </p>
+                <h1 class="mb-2">
+                    Ми у соціальних мережах
+                </h1>
+                <a class="d-flex mb-3 align-items-center">
+                    <img src="{% static 'img/inst-ico.svg' %}" alt="" class="me-3">
+                    <p>@NexusGaming</p>
+                </a>
+                <a class="d-flex mb-3 align-items-center">
+                    <img src="{% static 'img/youtube-ico.svg' %}" alt="" class="me-3">
+                    <p>@Nexus_Gaming</p>
+                </a>
+                <a class="d-flex mb-3 align-items-center">
+                    <img src="{% static 'img/facebook-ico.svg' %}" alt="" class="me-3">
+                    <p>@NexusStore</p>
+                </a>
+                <h1 class="mb-2">
+                    E-mail адреса
+                </h1>
+                <p class="mb-3">
+                    NexusGamingStore@gmail.com
+                </p>
+                <p class="mb-3" style="color: #b3b3b3;">Дякуємо, що обрали наш магазин. Ми завжди раді вітати нових клієнтів і готові зробити все
+                    можливе, щоб ваш ігровий досвід був на найвищому рівні. Ласкаво просимо у світ геймінгу разом з
+                    нами!</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -10,9 +10,13 @@ urlpatterns = [
     re_path(r'^catalog/(?P<cat_slug>[-\w/]+)/$', CatalogPage.as_view(), name='catalog'),
     path('search/', SearchPage.as_view(), name='search'),
     path('remove_review/', remove_review, name='remove_review'),
-    path('info/', contacts, name='contacts'),
+
     path('add-wish-list/', add_to_wish_list, name='add_to_wish_list'),
     path('wish-list/', wish_list, name='wish_list'),
+
+    path('info/', info, name='info'),
+    path('contacts/', contacts, name='contacts'),
+    path('delivery-info/', delivery_info, name='delivery_info'),
 
     # redirect social auth
     path('accounts/social/signup/', signup_redirect, name='signup_redirect'),

@@ -589,17 +589,19 @@ a:hover{
 }
 /* info */
 .info-about-us p{
+    color: #d8d8d8;
     font-size: 20px;
     line-height: 1.5;
 }
 .info-about-us ul{
+    color: #d8d8d8;
     font-size: 20px;
     line-height: 2;
 }
 .info-about-us h1{
     font-weight: 600;
     font-size: 24px;
-    color: #d853ff;
+    color: #d341ff;
 }
 .info-about-us li{
     list-style: disc;

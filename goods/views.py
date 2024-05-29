@@ -157,9 +157,13 @@ def recently_viewed(request, product_slug):
     request.session.modified = True
 
 
-def contacts(request):
+def info(request):
     return render(request, 'goods/info_page.html')
+def contacts(request):
+    return render(request, 'goods/contacts_page.html')
 
+def delivery_info(request):
+    return render(request, 'goods/delivery_info_page.html')
 
 def add_to_wish_list(request):
     product_id = request.POST.get('product_id')
