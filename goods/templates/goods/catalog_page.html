@@ -9,7 +9,7 @@
     <div class="d-flex flex-column container-fluid container-xxl main">
         <div class="row">
             <div class="d-flex justify-content-center">
-                <p class="fs-4">{% if request.GET.title_search %}Результати пошуку "
+                <p class="fs-4 mt-3">{% if request.GET.title_search %}Результати пошуку "
                     <span class="text-success">{{ request.GET.title_search }}</span>"&nbsp;{% endif %}</p>
 
                 {% if not products_qs %}
