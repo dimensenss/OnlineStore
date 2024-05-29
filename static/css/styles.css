@@ -587,10 +587,40 @@ a:hover{
     color: #CF2EFF;
     background-color: #FFFFFF;
 }
-@media (max-width: 1400px){
+/* info */
+.info-about-us p{
+    font-size: 20px;
+    line-height: 1.5;
+}
+.info-about-us ul{
+    font-size: 20px;
+    line-height: 2;
+}
+.info-about-us h1{
+    font-weight: 600;
+    font-size: 24px;
+    color: #d853ff;
+}
+.info-about-us li{
+    list-style: disc;
+    margin-left: 1rem;
+}
+.info-about-us-category img{
+    max-width: 150px;
+    border-radius: 100px;
+}
+.info-about-us-category img:hover{
+    scale: 0.95;
+    transition: all 0.3s;
+}
+    @media (max-width: 1400px){
 
 }
-
+@media (max-width: 1400px) {
+    .info-about-us-category img{
+        max-width: 130px;
+    }
+}
 @media (max-width: 1200px) {
     .nav{
         font-size: 14px;
@@ -608,6 +638,9 @@ a:hover{
     }
     .cart-table img{
     max-width: 80px;
+    }
+    .info-about-us-category img{
+        max-width: 120px;
     }
 }
 
@@ -672,6 +705,23 @@ a:hover{
     .orders-list-header button{
         font-size: 14px;
     }
+
+    .info-about-us-category img{
+        max-width: 90px;
+    }
+    .info-about-us p {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .info-about-us ul {
+        font-size: 18px;
+        line-height: 2;
+    }
+
+    .info-about-us h1 {
+        font-size: 20px;
+    }
     /* footer */
     .footer-title {
         font-size: 16px;
@@ -724,6 +774,23 @@ a:hover{
     }
     .orders-list-header button{
         font-size: 14px;
+    }
+    /* info */
+    .info-about-us-category img{
+        max-width: 180px;
+    }
+    .info-about-us p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .info-about-us ul {
+        font-size: 16px;
+        line-height: 2;
+    }
+
+    .info-about-us h1 {
+        font-size: 18px;
     }
 }
 
@@ -796,7 +863,23 @@ a:hover{
     .cart-btn-dec{
         border-radius: 5px 0 0 5px;
     }
+    /* info */
+    .info-about-us-category img{
 
+    }
+    .info-about-us p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .info-about-us ul {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .info-about-us h1 {
+        font-size: 16px;
+    }
 }
 
 #loader-wrapper {

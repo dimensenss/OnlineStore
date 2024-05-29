@@ -158,7 +158,7 @@ def recently_viewed(request, product_slug):
 
 
 def contacts(request):
-    return render(request, 'goods/contacts.html')
+    return render(request, 'goods/info_page.html')
 
 
 def add_to_wish_list(request):
