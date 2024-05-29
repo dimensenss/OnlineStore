@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid container-xxl main d-flex flex-column">
+        <div class="d-flex flex-column info-about-us">
+            <div class="block-title my-3">
+                Про нас
+            </div>
+            <img src="{% static 'img/info-about-us-main-pic.jpg' %}" alt="">
+            <div class="mt-3">
+                <p class="mb-3" style="color: #b3b3b3;">
+                    Ласкаво просимо до нашого інтернет-магазину геймерських товарів! Ми раді вітати вас у світі, де
+                    захоплення ігровими пригодами перетворюється на реальність завдяки якісному обладнанню та
+                    аксесуарам.
+                </p>
+                <h1 class="mb-2">
+                    Хто ми?
+                </h1>
+                <p class="mb-3">
+                    Наш шлях розпочався з мрії створити місце, де кожен геймер може знайти все необхідне для комфортного і захоплюючого геймінгу. Спираючись на наш власний досвід і багаторічну пристрасть до ігор, ми вирішили об'єднати зусилля і створити інтернет-магазин, який би відповідав найвищим стандартам якості та обслуговування.
+                </p>
+                <p>І ось вже на сьогодні ми маємо:</p>
+                <ul>
+                    <li>3 місце у топ 10 магазинів геймерських товарів</li>
+                    <li>Більше 5000 задоволених клієнтів</li>
+                    <li>Товари з лімітованих колекцій для справжніх цінителів геймінгу</li>
+                    <li>Велику команду професіоналів</li>
+                </ul>
+                <h1 class="mb-2">
+                    Асортимент
+                </h1>
+                <p class="mb-3">
+                    У нашому асортименті ви знайдете широкий вибір товарів, які допоможуть вам стати ще краще в
+                    улюблених іграх:
+                </p>
+                <div class="info-about-us-category my-3 d-md-flex justify-content-between d-none">
+                    <img src="{% static 'img/category-mouses.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-headphones.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-armchairs.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-monitors.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-keyboards.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-speakers.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-mouse-pads.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'img/category-gamepads.png' %}" alt="" class="img-fluid">
+                </div>
+                <div class="info-about-us-category my-3 d-md-none d-flex flex-column">
+                    <div class="d-flex justify-content-between row gx-3">
+                        <img src="{% static 'img/category-mouses.png' %}" alt="" class="img-fluid col-3">
+                        <img src="{% static 'img/category-headphones.png' %}" alt="" class="img-fluid col-3">
+                        <img src="{% static 'img/category-armchairs.png' %}" alt="" class="img-fluid col-3">
+                        <img src="{% static 'img/category-monitors.png' %}" alt="" class="img-fluid col-3">
+                    </div>
+                    <div class="d-flex justify-content-between mt-3 row gx-3">
+                        <img src="{% static 'img/category-keyboards.png' %}" alt="" class="img-fluid col-3">
+                        <img src="{% static 'img/category-speakers.png' %}" alt="" class="img-fluid col-3">
+                        <img src="{% static 'img/category-mouse-pads.png' %}" alt="" class="img-fluid col-3">
+                        <img src="{% static 'img/category-gamepads.png' %}" alt="" class="img-fluid col-3">
+                    </div>
+                </div>
+                <h1 class="mb-2">Наші цінності</h1>
+                <ul class="mb-3">
+                    <li>Якість — ми пропонуємо лише найкращі товари.</li>
+                    <li>Клієнтоорієнтованість — ваш комфорт і задоволення є нашими пріоритетами.</li>
+                    <li>Інновації — слідкуємо за новинками та постійно оновлюємо асортимент.</li>
+                </ul>
+                <p class="mb-3" style="color: #b3b3b3;">Дякуємо, що обрали наш магазин. Ми завжди раді вітати нових клієнтів і готові зробити все
+                    можливе, щоб ваш ігровий досвід був на найвищому рівні. Ласкаво просимо у світ геймінгу разом з
+                    нами!</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
