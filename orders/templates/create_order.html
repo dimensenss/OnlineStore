@@ -73,7 +73,7 @@
                                        value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
                                        required>
                             </div>
-                        {% if not request.user.is_authenticated %}
+
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between">
                                     <label for="requires_registration" class="form-label">Зареєструватися?</label>
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endif %}
+
 
                             <div class="mb-3" id="passwordField">
                                 <div id="passwordFieldsContainer"
