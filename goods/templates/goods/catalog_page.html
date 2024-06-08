@@ -9,11 +9,11 @@
     <div class="d-flex flex-column container-fluid container-xxl main">
         <div class="row">
             <div class="d-flex justify-content-center">
-                <p class="fs-4">{% if request.GET.title_search %}Результати пошуку "
+                <p class="fs-4 mt-3">{% if request.GET.title_search %}Результати пошуку "
                     <span class="text-success">{{ request.GET.title_search }}</span>"&nbsp;{% endif %}</p>
 
                 {% if not products_qs %}
-                    <p class="fs-4">Нічого не знайдено</p>
+                    <p class="fs-4 mt-3">Нічого не знайдено</p>
                 {% endif %}
             </div>
         </div>
@@ -42,6 +42,7 @@
                                 <label for="order_by" class="mb-2" style="color: #dcdcdc;">Виробник</label>
                                 {{ filter.form.brand }}
                             </div>
+
                             {% get_min_max_prices %}
                             <div class="price-input-container mt-4">
                                 <div class="mb-2" style="color: #dcdcdc;">Ціна</div>
@@ -69,15 +70,13 @@
                                        class="min-range"
                                        min="0"
                                        max="{{ max_price }}"
-                                       value="
-                                               {% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
+                                       value="{% if request.GET.price__gte %}{{ request.GET.price__gte }}{% else %}{{ min_price }}{% endif %}"
                                        step="1">
                                 <input type="range"
                                        class="max-range"
                                        min="0"
                                        max="{{ max_price }}"
-                                       value="
-                                               {% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
+                                       value="{% if request.GET.price__lte %}{{ request.GET.price__lte }}{% else %}{{ max_price }}{% endif %}"
                                        step="1">
                             </div>
                             <div class="d-flex justify-content-center mt-4">

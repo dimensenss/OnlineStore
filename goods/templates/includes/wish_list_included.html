@@ -68,11 +68,7 @@
                                         <a href="{% url 'goods:add_to_wish_list' %}" class="add-to-wish-list"
                                            data-product-id="{{ product.id }}">
                                             {% csrf_token %}
-                                            {% if product in products_in_wishes_list %}
-                                                <i class="fa-solid fa-heart wish-icon"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-heart wish-icon"></i>
-                                            {% endif %}
+                                            <i class="fa-solid fa-heart wish-icon"></i>
                                         </a>
                                     </div>
                                     {% if product.quantity > 0 %}
